@@ -4,15 +4,13 @@
 #include <iostream>
 using namespace std;
 
-class Meja {
+class Meja: public InventoryHolder {
     private:
-        kartu[5] kartuMeja;
+        kartu[5] kartuMeja; // disesuaikan nanti
         int neff;
     
     public:
-        Meja() {
-
-        }
-}
+        Meja();
+};
 
 #endif
