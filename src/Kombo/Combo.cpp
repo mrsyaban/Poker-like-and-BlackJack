@@ -46,10 +46,9 @@ void Combo::highCard() {
             max = this->cards[i].value();
             temp.insert(temp.begin(), this->cards[i]);
             this->setScore(max);
+            this->combo = temp;
         }
     }
-
-    this->combo = temp;
 }
 
 void Combo::pair() {
@@ -66,12 +65,10 @@ void Combo::pair() {
             temp.insert(temp.end(), this->cards[i+1]);
 
             this->setScore(max);
+            this->combo = temp;
         }
         i++;
     }
-
-    this->combo.insert(combo.end(), temp[temp.size() - 1]);
-    this->combo.insert(combo.end(), temp[temp.size() - 2]);
 }
 
 void Combo::twoPair() {
@@ -88,12 +85,13 @@ void Combo::twoPair() {
         if (count[i] == 2) {
             pairs.push_back(this->cards[i]);
             pairs.push_back(this->cards[i+1]);
+
+            max += pairs[i].value() + pairs[i+1].value();
+
+            this->setScore(max);
+            this->combo = pairs;
         }
     }
-
-    this->combo = pairs;
-
-    this->setScore(max);
 }
 
 void Combo::threeOfAKind() {
@@ -111,11 +109,10 @@ void Combo::threeOfAKind() {
             temp.insert(temp.end(), this->cards[i-1]);
 
             this->setScore(max);
+            this->combo = temp;
         }
         i++;
     }
-
-    this->combo = temp;
 }
 
 void Combo::straight() {
@@ -140,12 +137,11 @@ void Combo::straight() {
                 temp.insert(temp.end(), this->cards[i+4]);
 
                 this->setScore(max);
+                this->combo = temp;
             }
         }
         i++;
     }
-
-    this->combo = temp;
 }
 
 void Combo::flush() {
@@ -165,7 +161,11 @@ void Combo::flush() {
             }
 
             if (count == 5) {
+                for (auto x : temp) {
+                    max += x.value();
+                }
                 this->combo = temp;
+                this->setScore(max);
             }
             j++;
         }
@@ -184,18 +184,22 @@ void Combo::fullHouse() {
             temp.insert(temp.end(), this->cards[i]);
             temp.insert(temp.end(), this->cards[i+1]);
             temp.insert(temp.end(), this->cards[i+2]);
+
+            max += this->cards[i].value() + this->cards[i+1].value() + this->cards[i+2].value();
+
             copyCards.erase(copyCards.begin() + i, copyCards.begin() + i + 3);
 
             for (int j = 0; j < copyCards.size(); j++) {
                 if (cards[j] == cards[j+1]) {
                     temp.insert(temp.end(), this->cards[j]);
                     temp.insert(temp.end(), this->cards[j+1]);
+
+                    max += this->cards[j].value() + this->cards[j+1].value();
+                    this->combo = temp;
                 }
             }
         }
     }
-
-    this->combo = temp;
 }
 
 void Combo::fourOfKind() {
@@ -214,11 +218,11 @@ void Combo::fourOfKind() {
             temp.insert(temp.end(), this->cards[i+3]);
 
             this->setScore(max);
+            this->combo = temp;
         }
         i++;
     }
 
-    this->combo = temp;
 }
 
 void Combo::straightFlush() {
@@ -248,13 +252,13 @@ void Combo::straightFlush() {
                     temp.insert(temp.end(), this->cards[i+4]);
 
                     this->setScore(max);
+                    this->combo = temp;
                 }
             }
         }
         i++;
     }
 
-    this->combo = temp;
 }
 
 void Combo::checkCombo() {
