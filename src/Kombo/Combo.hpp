@@ -1,15 +1,26 @@
-#ifdef _COMBO_HPP_
+#ifndef _COMBO_HPP_
 #define _COMBO_HPP_
 
-class Combo {
+#include <vector>
+#include <algorithm>
+#include "./Card/Card.hpp"
+#include "./ObjectWithValue/ObjectWithValue.hpp"
+
+class Combo : public ObjectWithValue<double> {
     private:
-        float score;
+        double score;
+        vector<Card> cards;
+        vector<Card> combo;
     public:
         Combo(); // constructor
         ~Combo(); // destructor
 
         void setScore(float number); // Setter
-        float getScore(); // Getter
+        float getScore(); // Score Getter
+        vector<Card> getCombo(); // Combo Getter
+
+        int length(); // Length of Hand Card and Table Card
+        vector<Card> sortCards();
         
         void highCard(); 
         void pair();
@@ -22,6 +33,6 @@ class Combo {
         void straightFlush();
 
         void checkCombo();
-}
+};
 
 #endif
