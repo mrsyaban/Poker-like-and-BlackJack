@@ -2,18 +2,20 @@
 #define _INVENTORYHOLDER_HPP_
 
 #include "../Card/Card.hpp"
+#include <vector>
+#include <algorithm>
 
 class InventoryHolder
 {
 protected:
     int cardsLength;
-    Card *cards;
+    vector<Card> cards;
 
 public:
-    InventoryHolder();  // ctor
-    ~InventoryHolder(); // dtor
-    virtual InventoryHolder operator+(const Card &);
-    virtual InventoryHolder operator-(const Card &);
+    InventoryHolder();          // ctor
+    virtual ~InventoryHolder(); // dtor
+    InventoryHolder operator+(const Card &);
+    InventoryHolder operator-(const Card &);
 };
 
 #endif
