@@ -4,18 +4,19 @@
 #include "../Card/Card.hpp"
 #include <vector>
 #include <algorithm>
+using namespace std;
 
 class InventoryHolder
 {
 protected:
-    int cardsLength;
     vector<Card> cards;
 
 public:
     InventoryHolder();          // ctor
     virtual ~InventoryHolder(); // dtor
-    InventoryHolder operator+(const Card &);
-    InventoryHolder operator-(const Card &);
+    void addCard(const Card&);
+    virtual InventoryHolder& operator+(const Card &) = 0;
+    //friend vector<Card> operator-(vector<Card>, const Card &);
 };
 
 #endif

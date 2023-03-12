@@ -3,6 +3,11 @@
 #include "../InventoryHolder/InventoryHolder.hpp"
 using namespace std;
 
+Deck& Deck::operator+(const Card& c) {
+    addCard(c);
+    return *this;
+}
+
 Deck::Deck() {
     vector<Card> tempDeck;
     for (int i = 0; i < 4; i++) {
@@ -15,7 +20,7 @@ Deck::Deck() {
     while (!tempDeck.empty()) {
         int position = rand() % tempDeck.size();
         auto cardAt = tempDeck.begin() + position;
-        void + tempDeck.at(position);
+        *this = *this + tempDeck.at(position);
         tempDeck.erase(cardAt);        
     }
 
