@@ -5,34 +5,32 @@ using namespace std;
 InventoryHolder::InventoryHolder()
 {
     this->cardsLength = 0;
-    this->cards = new Card[cardsLength];
 }
 
 InventoryHolder::~InventoryHolder()
 {
-    delete[] cards;
+    while (!cards.empty())
+    {
+        cards.pop_back();
+    }
+    cout << "vector cards telah dikosongkan" << endl;
 }
 
 InventoryHolder InventoryHolder::operator+(const Card &c)
 {
-    Card *temp = new Card[cardsLength];
-    for (int i = 0; i < cardsLength; i++)
-    {
-        temp[i] = cards[i];
-    }
-    delete[] cards;
-
+    cards.push_back(c);
     this->cardsLength++;
-    this->cards = new Card[cardsLength];
-    for (int i = 0; i < cardsLength - 1; i++)
-    {
-        cards[i] = temp[i];
-    }
-    delete[] temp;
-    cards[cardsLength - 1] = c;
-    return *this;
 }
 
 InventoryHolder InventoryHolder::operator-(const Card &c)
 {
+    if (find(cards.begin(), cards.end(), c) != cards.end())
+    {
+        cards.erase(std::remove(cards.begin(), cards.end(), c), cards.end());
+        this->cardsLength--;
+    }
+    else
+    {
+        // exception card not found??;
+    }
 }
