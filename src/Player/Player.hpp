@@ -4,33 +4,38 @@
 #include "../InventoryHolder/InventoryHolder.hpp"
 #include "../Card/Card.hpp"
 #include "../Ability/Ability.hpp"
+#include "../Combo/Combo.hpp"
+#include <string>
 
-class Player : public InventoryHolder {
+
+class Player : public InventoryHolder<Card> {
     private:
-        Card** handCard;
-        Ability handAbility; // TO BE CONFIRMED
+        string nickName;
+        Ability& handAbility;
         int handPoint;
-        float highestCombo;
+        Combo highestCombo;
 
     public:
-        /*
-        Assume:
-        cardList in inventory holder is static with protected specifier
-        */
-        Player(); //ctor
+        Player(); // ctor
+
+        /* Operator Overloading*/
+        friend bool operator<(const Player& p1, const Player& p2);
+        friend bool operator>(const Player& p1, const Player& p2);
+        InventoryHolder<Card>& operator+(const Card &);
+        InventoryHolder<Card>& operator-(const Card &);
+        InventoryHolder<Card>& operator=(InventoryHolder &);
 
         /* Accessor */
-        Card* getCard();
-        Ability getAbility();
-        int getPoint();
+        Card getCard(int) const;
+        int getPoint() const;
+        Combo getHighestCombo() const;
 
         /* Setter */
-        void setRandomCard();
-        void setRandomAbility();
-        void setHighestCombo(float );
+        void setHighestCombo(Combo );
 
         /* Utility Function*/
         void addPoint(int );
+
 };
 
 #endif

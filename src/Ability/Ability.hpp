@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace std;
 
-class Ability {
+class Ability { 
     private:
         bool available;
         // static int& playerTurn;

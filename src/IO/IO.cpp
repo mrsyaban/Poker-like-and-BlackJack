@@ -1,6 +1,7 @@
 #include "IO.hpp"
 
-void IO::print_splash_screen(){
+void IO::printSplashScreen(){
     string splash = "WELKAMM";
     cout << splash << endl;
 }
+

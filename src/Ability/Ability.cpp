@@ -10,7 +10,7 @@ Ability::~Ability() {
 
 }
 
-ReRoll::ReRoll(): Ability() {
+ReRoll::ReRoll() {
     
 }
 

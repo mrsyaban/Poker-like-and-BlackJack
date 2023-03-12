@@ -9,17 +9,17 @@ using namespace std;
 template <class T>
 class InventoryHolder
 {
-private:
-    vector<T> items;
+    protected:
+        vector<T> items;
 
-public:
-    virtual ~InventoryHolder(); // dtor
-    void addCard(const T&);
-    void delCard(const T&);
-    // Rencana: pure virtual nya bakal info
-    virtual InventoryHolder& operator+(const Card&);
-    virtual InventoryHolder& operator-(const Card&);
-    virtual InventoryHolder& operator=(const InventoryHolder&);
+    public:
+        virtual ~InventoryHolder(); // dtor
+        void addCard(const T&);
+        void delCard(const T&);
+        // Rencana: pure virtual nya bakal info
+        virtual InventoryHolder& operator+(const Card&);
+        virtual InventoryHolder& operator-(const Card&);
+        virtual InventoryHolder& operator=(const InventoryHolder&);
 };
 
 #endif

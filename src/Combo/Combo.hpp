@@ -13,13 +13,13 @@ class Combo : public ObjectWithValue<double> {
         double score;
         vector<Card> cards;
         vector<Card> combo;
+
     public:
         Combo(); // ctor
         Combo(Player player, Table table); // constructor
         ~Combo(); // destructor
 
-
-        double value(); // Score Getter
+        double value() const; // Score Getter
         void setScore(double number); // Setter
         vector<Card> getCombo(); // Combo Getter
         void setCombo(vector<Card>); // Combo Getter
