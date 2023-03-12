@@ -13,6 +13,15 @@ using namespace std;
 //         cout << x << " ";
 //     }
 // }
+void printBool(bool con){
+    if (con) {
+        cout << "true";
+    } else {
+        cout << "false";
+    }
+
+    cout << endl;
+}
 
 int main() {
     vector<Card> cards;
@@ -23,6 +32,16 @@ int main() {
     Card card5(Yellow, 1);
     Card card6(Red, 1);
     Card card7(Blue, 1);
+
+    printBool(card3 == card6);
+    printBool(card3 > card6);
+    printBool(card3 < card6);
+    printBool(card1 == card5);
+    printBool(card1 > card5);
+    printBool(card1 < card5);
+    printBool(card2 == card7);
+    printBool(card2 > card7);
+    printBool(card2 < card7);
 
     return 0;
 }

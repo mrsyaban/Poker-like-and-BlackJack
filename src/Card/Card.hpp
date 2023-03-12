@@ -7,6 +7,21 @@
 
 #include "../ObjectWithValue/ObjectWithValue.hpp"
 
+enum CardColor {
+/*
+    Green: 0,
+    Blue: 1,
+    Yellow: 2,
+    Red: 3
+
+    since Red > Yellow > Blue > Green
+*/
+    Green = 0,
+    Blue = 1,
+    Yellow = 2,
+    Red = 3
+};
+
 class Card : public ObjectWithValue<double> {
     private:
         CardColor color;
@@ -31,22 +46,6 @@ class Card : public ObjectWithValue<double> {
         /* Setter */
         void setNumber(int);
         void setColor(CardColor);
-};
-
-enum CardColor {
-/*
-    *Order matters*
-    Green: 0,
-    Blue: 1,
-    Yellow: 2,
-    Red: 3
-
-    since Red > Yellow > Blue > Green
-*/
-    Green,
-    Blue,
-    Yellow,
-    Red
 };
 
 #endif
