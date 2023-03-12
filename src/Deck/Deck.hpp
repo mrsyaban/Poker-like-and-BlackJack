@@ -13,7 +13,7 @@ class Deck: public InventoryHolder {
 
     public:
         Deck();
-        InventoryHolder& operator=(const InventoryHolder&);
+        InventoryHolder& operator=(InventoryHolder&);
         InventoryHolder& operator+(const Card&);
         InventoryHolder& operator-(const Card&);
 };

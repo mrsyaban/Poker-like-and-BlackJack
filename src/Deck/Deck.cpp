@@ -13,8 +13,9 @@ InventoryHolder& Deck::operator-(const Card& c) {
     return *this;
 }
 
-InventoryHolder& Deck::operator=(const InventoryHolder& other) {
-    this->cards = other.cards;
+InventoryHolder& Deck::operator=(InventoryHolder& other) {
+    this->cards = other.getCards();
+    return *this;
 }
 
 Deck::Deck() {

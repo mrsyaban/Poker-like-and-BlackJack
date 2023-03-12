@@ -19,3 +19,7 @@ void InventoryHolder::delCard(const Card& c) {
     auto cardAt = this->cards.begin();
     this->cards.erase(cardAt);
 }
+
+vector<Card>& InventoryHolder::getCards() {
+    return this->cards;
+}
