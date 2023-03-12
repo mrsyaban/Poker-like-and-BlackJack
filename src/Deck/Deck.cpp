@@ -3,9 +3,18 @@
 #include "../InventoryHolder/InventoryHolder.hpp"
 using namespace std;
 
-Deck& Deck::operator+(const Card& c) {
+InventoryHolder& Deck::operator+(const Card& c) {
     addCard(c);
     return *this;
+}
+
+InventoryHolder& Deck::operator-(const Card& c) {
+    addCard(c);
+    return *this;
+}
+
+InventoryHolder& Deck::operator=(const InventoryHolder& other) {
+    this->cards = other.cards;
 }
 
 Deck::Deck() {
