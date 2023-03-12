@@ -2,17 +2,17 @@
 #define TABLE_HPP
 
 #include <iostream>
+#include <stdlib.h>
+#include "../InventoryHolder/InventoryHolder.hpp"
 using namespace std;
 
-class Table {
+class Table: public InventoryHolder {
     private:
-        Card[5] kartuMeja; // disesuaikan nanti
         int neff;
     
     public:
-        Table() {
+        Table();
 
-        }
-}
+};
 
 #endif
