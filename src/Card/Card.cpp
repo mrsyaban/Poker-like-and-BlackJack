@@ -6,14 +6,14 @@
 
 //ctor
 Card::Card(CardColor color, int num){
-    this->color = color;
-    this->number = num;
+    this->cardInfo.first = color;
+    this->cardInfo.second = num;
 }
 
 //cctor
 Card::Card(const Card& other){
-    this->color = other.color;
-    this->number = other.number;
+    this->cardInfo.first = other.cardInfo.first;
+    this->cardInfo.second = other.cardInfo.second;
 } 
 
 //destructor
@@ -22,15 +22,15 @@ Card::~Card(){}
 //assignment op.
 Card& Card::operator=(const Card& other){
     if (this != &other) {
-        this->color = other.color;
-        this->number = other.number;
+        this->cardInfo.first = other.cardInfo.first;
+        this->cardInfo.second = other.cardInfo.second;
     }
     return *this;
 }
 
 /* Operator Overload */
 bool operator==(Card& a, Card& b){
-    return a.number == b.number && a.color == b.color;
+    return a.cardInfo.second == b.cardInfo.second && a.cardInfo.first == b.cardInfo.first;
 }
 
 bool operator>(Card& a, Card& b){
@@ -43,24 +43,24 @@ bool operator<(Card& a, Card& b){
 
 /* Accessor */
 CardColor Card::getColor(){
-    return this->color;
+    return this->cardInfo.first;
 }
 
 int Card::getNumber(){
-    return this->number;
+    return this->cardInfo.second;
 }
 
 // inherited from ObjectWithValue<dpuble>
 double Card::value(){
     //color will be implicitly casted to int from enum (check the enum CardColor definition in Card.hpp)
-    return number * 0.1 + color * 0.03;
+    return cardInfo.second * 0.1 + cardInfo.first * 0.03;
 } 
 
 /* Setter */
 void Card::setNumber(int val){
-    this->number = val;
+    this->cardInfo.second = val;
 }
 
 void Card::setColor(CardColor clr){
-    this->color = clr;
+    this->cardInfo.first = clr;
 }

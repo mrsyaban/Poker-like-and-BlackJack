@@ -6,6 +6,8 @@
 #define _CARD_HPP_
 
 #include "../ObjectWithValue/ObjectWithValue.hpp"
+#include <utility>
+using namespace std;
 
 enum CardColor {
 /*
@@ -24,8 +26,7 @@ enum CardColor {
 
 class Card : public ObjectWithValue<double> {
     private:
-        CardColor color;
-        int number;
+        pair<CardColor, int> cardInfo;
         // TO BE ASKED : map for mapping card color to int, instead of implicit def. from enum (?)
     public:
         Card(CardColor, int); 
