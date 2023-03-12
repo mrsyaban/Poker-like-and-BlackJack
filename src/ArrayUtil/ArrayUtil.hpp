@@ -5,7 +5,7 @@
 template <class T>
 
 // signature for array
-T GetHighest(T * buffer, int size) {
+T getHighest(T * buffer, int size) {
     if (size == 1) {
         return T[0];
     } else {
@@ -17,7 +17,7 @@ T GetHighest(T * buffer, int size) {
 
 template <class T>
 // signature for vector
-T GetHighest(vector<T> buffer) {
+T getHighest(vector<T> buffer) {
     return GetHighest(buffer.data(), buffer.size());
 };
 
