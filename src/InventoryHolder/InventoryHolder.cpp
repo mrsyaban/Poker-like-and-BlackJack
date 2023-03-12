@@ -16,13 +16,14 @@ InventoryHolder::~InventoryHolder()
     cout << "vector cards telah dikosongkan" << endl;
 }
 
-InventoryHolder InventoryHolder::operator+(const Card &c)
+vector<Card> InventoryHolder::operator+(const Card &c)
 {
     cards.push_back(c);
     this->cardsLength++;
+    return cards;
 }
 
-InventoryHolder InventoryHolder::operator-(const Card &c)
+vector<Card> InventoryHolder::operator-(const Card &c)
 {
     if (find(cards.begin(), cards.end(), c) != cards.end())
     {
@@ -33,4 +34,5 @@ InventoryHolder InventoryHolder::operator-(const Card &c)
     {
         // exception card not found??;
     }
+    return cards;
 }

@@ -14,8 +14,8 @@ protected:
 public:
     InventoryHolder();          // ctor
     virtual ~InventoryHolder(); // dtor
-    InventoryHolder operator+(const Card &);
-    InventoryHolder operator-(const Card &);
+    vector<Card> operator+(const Card &);
+    vector<Card> operator-(const Card &);
 };
 
 #endif
