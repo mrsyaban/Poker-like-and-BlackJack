@@ -1,24 +1,35 @@
 #include <iostream>
-#include "./Card/Card.hpp"
+#include "../Card/Card.hpp"
 #include "Combo.hpp"
 using namespace std;
 
-Combo::Combo() {
+Combo::Combo() : score(0) {}
+
+Combo::Combo(Player player, Table table) {
+    this->cards.push_back(player.getCard()[0]);
+    this->cards.push_back(player.getCard()[1]);
+
+    // for (int i = 0; i < 5; i++) {
+    //     this->cards.push_back(table.kartuMeja[i]);
+    // }
+
     this->sortCards();
     this->score = 0;
 }
 
 Combo::~Combo() {}
 
-void Combo::setScore(float number) {
-    this->score = number;
-}
+double Combo::value() {return this->score;}
 
-float Combo::getScore() {
-    return this->score;
-}
+void Combo::setScore(double number) {this->score = number;}
 
 vector<Card> Combo::getCombo() {return this->combo;}
+
+void Combo::setCombo(vector<Card> combo) {this->combo = combo;}
+
+vector<Card> Combo::getCards() {return this->cards;}
+
+void Combo::setCards(vector<Card> cards) {this->cards = cards;}
 
 int Combo::length() {
     return cards.size();
