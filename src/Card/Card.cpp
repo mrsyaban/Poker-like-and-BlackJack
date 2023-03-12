@@ -29,29 +29,29 @@ Card& Card::operator=(const Card& other){
 }
 
 /* Operator Overload */
-bool operator==(Card& a, Card& b){
+bool operator==(const Card& a, const Card& b){
     return a.cardInfo.second == b.cardInfo.second && a.cardInfo.first == b.cardInfo.first;
 }
 
-bool operator>(Card& a, Card& b){
+bool operator>(const Card& a, const Card& b){
     return a.value() > b.value();
 }
 
-bool operator<(Card& a, Card& b){
+bool operator<(const Card& a, const Card& b){
     return a.value() < b.value();
 }
 
 /* Accessor */
-CardColor Card::getColor(){
+CardColor Card::getColor() const{
     return this->cardInfo.first;
 }
 
-int Card::getNumber(){
+int Card::getNumber() const{
     return this->cardInfo.second;
 }
 
 // inherited from ObjectWithValue<dpuble>
-double Card::value(){
+double Card::value() const{
     //color will be implicitly casted to int from enum (check the enum CardColor definition in Card.hpp)
     return cardInfo.second * 0.1 + cardInfo.first * 0.03;
 } 

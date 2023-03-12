@@ -35,14 +35,14 @@ class Card : public ObjectWithValue<double> {
         Card& operator=(const Card&); //assignment op.
         
         /* Operator Overload */
-        friend bool operator==(Card&, Card&);
-        friend bool operator>(Card&, Card&);
-        friend bool operator<(Card&, Card&);
+        friend bool operator==(const Card&, const Card&);
+        friend bool operator>(const Card&, const Card&);
+        friend bool operator<(const Card&, const Card&);
 
         /* Accessor */
-        CardColor getColor();
-        int getNumber();
-        double value(); // inherited from ObjectWithValue<double>
+        CardColor getColor() const;
+        int getNumber() const;
+        double value() const; // inherited from ObjectWithValue<double>
 
         /* Setter */
         void setNumber(int);
