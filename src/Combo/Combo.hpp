@@ -8,7 +8,7 @@
 #include "../Table/Table.hpp"
 #include "../ObjectWithValue/ObjectWithValue.hpp"
 
-class Combo : public ObjectWithValue<double>, public Card {
+class Combo : public ObjectWithValue<double> {
     private:
         double score;
         vector<Card> cards;

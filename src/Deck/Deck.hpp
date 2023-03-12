@@ -8,14 +8,15 @@
 #include "../Card/Card.hpp"
 using namespace std;
 
-class Deck: public InventoryHolder {
+template <class T>
+class Deck: public InventoryHolder<T> {
     protected:
 
     public:
         Deck();
         InventoryHolder& operator=(const InventoryHolder&);
-        InventoryHolder& operator+(const Card&);
-        InventoryHolder& operator-(const Card&);
+        InventoryHolder& operator+(const T&);
+        InventoryHolder& operator-(const T&);
 };
 
 #endif

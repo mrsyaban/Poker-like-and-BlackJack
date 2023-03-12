@@ -6,18 +6,20 @@
 #include <algorithm>
 using namespace std;
 
+template <class T>
 class InventoryHolder
 {
 private:
-    vector<Card> cards;
+    vector<T> items;
 
 public:
     virtual ~InventoryHolder(); // dtor
-    void addCard(const Card&);
-    void delCard(const Card&);
-    virtual InventoryHolder& operator+(const Card &) = 0;
-    virtual InventoryHolder& operator-(const Card &) = 0;
-    virtual InventoryHolder& operator=(const InventoryHolder &) = 0;
+    void addCard(const T&);
+    void delCard(const T&);
+    // Rencana: pure virtual nya bakal info
+    virtual InventoryHolder& operator+(const Card&);
+    virtual InventoryHolder& operator-(const Card&);
+    virtual InventoryHolder& operator=(const InventoryHolder&);
 };
 
 #endif

@@ -2,7 +2,8 @@
 #include <iostream>
 using namespace std;
 
-InventoryHolder::~InventoryHolder()
+template <class T>
+InventoryHolder<T>::~InventoryHolder()
 {
     while (!this->cards.empty())
     {
@@ -11,11 +12,15 @@ InventoryHolder::~InventoryHolder()
     cout << "vector cards telah dikosongkan" << endl;
 }
 
-void InventoryHolder::addCard(const Card& c) {
-    this->cards.push_back(c);
-}
+// template <class T>
+// void InventoryHolder<T>::addCard(const Card& c) {
+//     this->cards.push_back(c);
+// }
 
-void InventoryHolder::delCard(const Card& c) {
-    auto cardAt = this->cards.begin();
-    this->cards.erase(cardAt);
-}
+// template <class T>
+// void InventoryHolder<T>::delCard(const Card& c) {
+//     auto cardAt = this->cards.begin();
+//     this->cards.erase(cardAt);
+// }
+
+// either : pindahin hpp atau bikin instance satu satu

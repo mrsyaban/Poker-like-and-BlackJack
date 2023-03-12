@@ -18,7 +18,7 @@ ReRoll::~ReRoll() {
     Ability::~Ability();
 }
 
-void ReRoll::executeAbility() {
+void ReRoll::Execute() {
 
 }
 
@@ -30,7 +30,7 @@ Quadruple::~Quadruple() {
     Ability::~Ability();
 }
 
-void Quadruple::executeAbility() {
+void Quadruple::Execute() {
 
 }
 
@@ -42,7 +42,7 @@ ReverseDirection::~ReverseDirection() {
     Ability::~Ability();
 }
 
-void ReverseDirection::executeAbility() {
+void ReverseDirection::Execute() {
 
 }
 
@@ -54,7 +54,7 @@ SwapCard::~SwapCard() {
     Ability::~Ability();
 }
 
-void SwapCard::executeAbility() {
+void SwapCard::Execute() {
 
 }
 
@@ -66,7 +66,7 @@ Switch::~Switch() {
     Ability::~Ability();
 }
 
-void Switch::executeAbility() {
+void Switch::Execute() {
 
 }
 
@@ -78,6 +78,6 @@ Abilityless::~Abilityless() {
     Ability::~Ability();
 }
 
-void Abilityless::executeAbility() {
+void Abilityless::Execute() {
 
 }

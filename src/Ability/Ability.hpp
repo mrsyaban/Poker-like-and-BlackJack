@@ -1,26 +1,33 @@
 #ifndef ABILITY_HPP
 #define ABILITY_HPP
 
+#include "../Game/Game.hpp"
+
 #include <iostream>
 using namespace std;
 
 class Ability {
     private:
         bool available;
-
+        // static int& playerTurn;
+        // static bool& isReversed;
+        // static Player& players[7];
+        // static Deck& deck;
+        // static Point& point;
     public:
         Ability();
         ~Ability();
-        virtual void executeAbility() = 0;
+        void initData(Game&);
+        virtual void Execute() = 0;
 };
 
 class ReRoll: public Ability {
     private:
-
+        
     public:
         ReRoll();
         ~ReRoll();
-        void executeAbility(); // lihat situasi
+        void Execute(); // lihat situasi
 };
 
 class Quadruple: public Ability {
@@ -28,7 +35,7 @@ class Quadruple: public Ability {
 
     public:
         Quadruple();
-        void executeAbility(); // lihat situasi
+        void Execute(); // lihat situasi
 };
 
 class ReverseDirection: public Ability {
@@ -36,7 +43,7 @@ class ReverseDirection: public Ability {
 
     public:
         ReverseDirection();
-        void executeAbility(); // lihat situasi
+        void Execute(); // lihat situasi
 };
 
 class SwapCard: public Ability {
@@ -44,7 +51,7 @@ class SwapCard: public Ability {
 
     public:
         SwapCard();
-        void executeAbility(); // lihat situasi
+        void Execute(); // lihat situasi
 };
 
 class Switch: public Ability {
@@ -52,7 +59,7 @@ class Switch: public Ability {
 
     public:
         Switch();
-        void executeAbility(); // lihat situasi
+        void Execute(); // lihat situasi
 };
 
 class Abilityless: public Ability {
@@ -60,7 +67,7 @@ class Abilityless: public Ability {
 
     public:
         Abilityless();
-        void executeAbility(); // lihat situasi
+        void Execute(); // lihat situasi
 };
 
 #endif
