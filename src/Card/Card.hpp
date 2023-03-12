@@ -25,7 +25,7 @@ enum CardColor {
 };
 
 class Card : public ObjectWithValue<double> {
-    public:
+    private:
         pair<CardColor, int> cardInfo;
         // TO BE ASKED : map for mapping card color to int, instead of implicit def. from enum (?)
     public:
