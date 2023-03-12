@@ -1,5 +1,5 @@
 /* 
-    __ should this be abstract or no ? __
+    __ should this be generic or no ? __
 
     Abstract class for Combo and Card 
     Has a pure virtual function for value
