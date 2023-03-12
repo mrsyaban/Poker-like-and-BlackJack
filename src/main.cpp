@@ -10,5 +10,9 @@
 
 int main(){
     IO io;
+    
     io.print_splash_screen();
+
+
+
 }
