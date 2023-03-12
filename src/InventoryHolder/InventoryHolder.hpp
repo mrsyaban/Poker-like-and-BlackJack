@@ -8,15 +8,16 @@ using namespace std;
 
 class InventoryHolder
 {
-protected:
+private:
     vector<Card> cards;
 
 public:
-    InventoryHolder();          // ctor
     virtual ~InventoryHolder(); // dtor
     void addCard(const Card&);
+    void delCard(const Card&);
     virtual InventoryHolder& operator+(const Card &) = 0;
-    //friend vector<Card> operator-(vector<Card>, const Card &);
+    virtual InventoryHolder& operator-(const Card &) = 0;
+    virtual InventoryHolder& operator=(const InventoryHolder &) = 0;
 };
 
 #endif
