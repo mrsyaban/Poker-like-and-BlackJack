@@ -14,7 +14,7 @@
 template <class T>
 class ObjectWithValue {
     public:
-        virtual T value() = 0;
+        virtual T value() const = 0;
 };
 
 #endif
