@@ -12,6 +12,8 @@ class Ability {
     private:
         bool available;
         string type;
+    protected:
+        Player& selectPlayer(Game& g);
     public:
         Ability(string);
         /* Execute, pass the game state to ability to act accordingly */
@@ -44,13 +46,13 @@ class Quarter: public Ability {
         void Execute(Game& g);
 };
 
-// class ReverseDirection: public Ability {
-//     private:
+class ReverseDirection: public Ability {
+    private:
 
-//     public:
-//         ReverseDirection();
-//         void Execute(); // lihat situasi
-// };
+    public:
+        ReverseDirection();
+        void Execute(Game& g); // lihat situasi
+};
 
 // class SwapCard: public Ability {
 //     private:

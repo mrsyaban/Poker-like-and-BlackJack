@@ -47,6 +47,10 @@ void Player::getInfo() const {
     cout << "This is "<< nickName << "'s Card" << endl;
 }
 
+string Player::getNickname() const {
+    return this->nickName;
+}
+
 /* Setter */
 void Player::setHighestCombo(Combo c){
     this->highestCombo = c;
