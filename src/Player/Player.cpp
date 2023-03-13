@@ -2,9 +2,9 @@
 #include "Player.hpp"
 
 /* default constructor*/
-// Player::Player(){
-//     this->handPoint = 0; // set point to zero
-// }
+Player::Player(string nick) : nickName(nick) {
+    this->handPoint = 0; // set point to zero
+}
 
 /* Operator Overloading */
 bool operator<(const Player& p1,const Player& p2){
@@ -51,9 +51,17 @@ string Player::getNickname() const {
     return this->nickName;
 }
 
+Ability* Player::getAbility() const {
+    return handAbility;
+}
+
 /* Setter */
 void Player::setHighestCombo(Combo c){
     this->highestCombo = c;
+}
+
+void Player::setAbility(Ability& ability){
+    handAbility = &ability;
 }
 
 /* Utility Function*/
