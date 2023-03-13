@@ -6,8 +6,8 @@ using namespace std;
 Combo::Combo() : score(0) {}
 
 Combo::Combo(Player player, Table table) {
-    this->cards.push_back(player.getCard()[0]);
-    this->cards.push_back(player.getCard()[1]);
+    // this->cards.push_back(player.getCard()[0]);
+    // this->cards.push_back(player.getCard()[1]);
 
     // for (int i = 0; i < 5; i++) {
     //     this->cards.push_back(table.kartuMeja[i]);
@@ -19,15 +19,15 @@ Combo::Combo(Player player, Table table) {
 
 Combo::~Combo() {}
 
-double Combo::value() {return this->score;}
+double Combo::value() const {return this->score;}
 
 void Combo::setScore(double number) {this->score = number;}
 
-vector<Card> Combo::getCombo() {return this->combo;}
+vector<Card> Combo::getCombo() const {return this->combo;}
 
 void Combo::setCombo(vector<Card> combo) {this->combo = combo;}
 
-vector<Card> Combo::getCards() {return this->cards;}
+vector<Card> Combo::getCards() const {return this->cards;}
 
 void Combo::setCards(vector<Card> cards) {this->cards = cards;}
 
@@ -36,30 +36,48 @@ int Combo::length() {
 }
 
 vector<Card> Combo::sortCards() {
-    for (int i = 1; i < this->cards.size(); i++) {
-        int key = this->cards[i].getNumber();
-        int j = i - 1;
-        while (j >= 0 && this->cards[j].getNumber() > key) {
-            this->cards[j+1] = this->cards[j];
-            j--;
+    for (int i = 0; i < this->cards.size() - 1; i++) {
+        int maxIndex = i;
+        for (int j = i + 1; j < this->cards.size(); j++) {
+            if (this->cards[j].getNumber() > this->cards[maxIndex].getNumber() || (this->cards[j].getNumber() == this->cards[maxIndex].getNumber() && this->cards[j].getColor() > this->cards[maxIndex].getColor())) {
+                maxIndex = j;
+            }
         }
-        this->cards[j+1].setNumber(key);
+        Card temp = this->cards[i];
+        this->cards[i] = this->cards[maxIndex];
+        this->cards[maxIndex] = temp;
+    }
+}
+
+vector<Card> Combo::sortCombo() {
+    for (int i = 0; i < this->combo.size() - 1; i++) {
+        int maxIndex = i;
+        for (int j = i + 1; j < this->combo.size(); j++) {
+            if (this->combo[j].getNumber() > this->combo[maxIndex].getNumber() || (this->combo[j].getNumber() == this->combo[maxIndex].getNumber() && this->combo[j].getColor() > this->combo[maxIndex].getColor())) {
+                maxIndex = j;
+            }
+        }
+        Card temp = this->combo[i];
+        this->combo[i] = this->combo[maxIndex];
+        this->combo[maxIndex] = temp;
     }
 }
 
 void Combo::highCard() {
     int max = 0;
 
-    vector<Card> temp;
+    Card *temp;
 
     for (int i = 0; i < length(); i++) {
         if (this->cards[i].value() > max) {
             max = this->cards[i].value();
-            temp.insert(temp.begin(), this->cards[i]);
+            temp = &this->cards[i];
             this->setScore(max);
-            this->combo = temp;
         }
     }
+    this->combo.push_back(*temp);
+
+    records.push_back(this->combo);
 }
 
 void Combo::pair() {
@@ -70,7 +88,7 @@ void Combo::pair() {
 
     while (i < this->length() - 1) {
         if (this->cards[i].getNumber() == this->cards[i+1].getNumber()) {
-            max = this->cards[i].value() + this->cards[i+1].value() + 1.39;
+            max = this->cards[i+1].value() + 1.39;
             
             temp.insert(temp.end(), this->cards[i]);
             temp.insert(temp.end(), this->cards[i+1]);
@@ -79,6 +97,10 @@ void Combo::pair() {
             this->combo = temp;
         }
         i++;
+    }
+
+    if (temp.size() > 1) {
+        records.push_back(this->combo);
     }
 }
 
@@ -108,8 +130,12 @@ void Combo::twoPair() {
 
         this->combo = temp;
 
-        max += this->combo[this->combo.size()-1].value() + this->combo[this->combo.size()-2].value() + this->combo[this->combo.size()-3].value() + this->combo[this->combo.size()-4].value() + 4.14;
+        max += this->combo[this->combo.size()-1].value() +  this->combo[this->combo.size()-3].value() + 4.14;
         this->setScore(max);
+    }
+
+    if (temp.size() > 1) {
+        records.push_back(this->combo);
     }
 }
 
@@ -140,6 +166,10 @@ void Combo::threeOfAKind() {
         max += this->combo[this->combo.size()-1].value() + this->combo[this->combo.size()-2].value() + this->combo[this->combo.size()-3].value() + 8.22;
 
         this->setScore(max);
+    }
+
+    if (temp.size() > 1) {
+        records.push_back(this->combo);
     }
 }
 
@@ -178,13 +208,19 @@ void Combo::straight() {
 
         this->combo = temp;
 
-        for (auto x : this->combo) {
-            max += x.value();
-        }
+        // for (auto x : this->combo) {
+        //     max += x.value();
+        // }
+
+        max += this->combo[this->combo.size()-1].value();
 
         max += 12.3;
 
         this->setScore(max);
+    }
+
+    if (temp.size() > 1) {
+        records.push_back(this->combo);
     }
 }
 
@@ -225,13 +261,19 @@ void Combo::flush() {
 
         this->combo = temp;
 
-        for (auto x : this->combo) {
-            max += x.value();
-        }
+        // for (auto x : this->combo) {
+        //     max += x.value();
+        // }
+
+        max += this->combo[this->combo.size()-1].value();
 
         max += 18.15;
 
         this->setScore(max);
+    }
+
+    if (temp.size() > 1) {
+        records.push_back(this->combo);
     }
 }
 
@@ -269,13 +311,19 @@ void Combo::fullHouse() {
 
         this->combo = temp;
 
-        for (auto x : this->combo) {
-            max += x.value();
-        }
+        // for (auto x : this->combo) {
+        //     max += x.value();
+        // }
+
+        max += this->combo[this->combo.size()-1].value();
 
         max += 24.04;
 
         this->setScore(max);
+    }
+
+    if (temp.size() > 1) {
+        records.push_back(this->combo);
     }
 
 }
@@ -308,15 +356,20 @@ void Combo::fourOfKind() {
 
         this->combo = temp;
 
-        for (auto x : this->combo) {
-            max += x.value();
-        }
+        // for (auto x : this->combo) {
+        //     max += x.value();
+        // }
+
+        max += this->combo[this->combo.size()-1].value();
 
         max += 30.67;
 
         this->setScore(max);
     } 
 
+    if (temp.size() > 1) {
+        records.push_back(this->combo);
+    }
 }
 
 void Combo::straightFlush() {
@@ -359,15 +412,20 @@ void Combo::straightFlush() {
 
         this->combo = straight;
 
-        for (auto x : this->combo) {
-            max += x.value();
-        }
+        // for (auto x : this->combo) {
+        //     max += x.value();
+        // }
+
+        max += this->combo[this->combo.size()-1].value();
 
         max += 36.05;
 
         this->setScore(max);
     }
 
+    if (temp.size() > 1) {
+        records.push_back(this->combo);
+    }
 }
 
 void Combo::checkCombo() {
@@ -380,4 +438,43 @@ void Combo::checkCombo() {
     this->fullHouse();
     this->fourOfKind();
     this->straightFlush();
+}
+
+bool Combo::operator<(const Combo& other) {
+    if (this->value() < other.value()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool Combo::operator>(const Combo& other) {
+    if (this->value() > other.value()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool Combo::operator==(const Combo& other) {
+    if (this->value() == other.value()) {
+        if (this->combo.size() == other.getCombo().size()) {
+            bool same = true;
+            int i = 0;
+
+            while (same && i < this->combo.size()) {
+                if (this->combo[i] == other.getCombo()[i]) {
+                    i++;
+                } else {
+                    same = false;
+                }
+            }
+
+            return same;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
 }

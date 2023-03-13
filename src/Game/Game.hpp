@@ -15,7 +15,7 @@ using namespace std;
 
 class Game {
     private:
-        map<Player&, bool> players; // idenya player bisa diakses lewat map, int adalah urutan player
+        vector<pair<Player&, bool>> players; // idenya player bisa diakses lewat map, int adalah urutan player
         Deck<Card> cardDeck;
         Deck<Ability> abilityDeck;
         Table table;
@@ -23,7 +23,7 @@ class Game {
         bool isReversed;
         int playerTurn;
         int round;
-        Player& player;
+        Player& currentPlayer;
 
     public:
         Game(); // init all needed objects;
@@ -32,7 +32,7 @@ class Game {
 
         /* Accessor, may only be called by class that act directly in the game */
         /* The returned reference may be altered */
-        map<Player&, bool>& getPlayers(){
+        vector<pair<Player&, bool>>& getPlayers(){
             return this->players;
         }
 

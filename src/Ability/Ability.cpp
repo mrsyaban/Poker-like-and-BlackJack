@@ -5,7 +5,8 @@
 
 using namespace std;
 
-Ability::Ability(string type) {
+Ability::Ability(string type)
+{
     available = true;
     this->type = type;
 }
@@ -40,29 +41,25 @@ void ReRoll::Execute(Game& g) {
     temp.add(g.getCardDeck());
 }
 
-Quadruple::Quadruple() : Ability("Quadruple"){}
+Quadruple::Quadruple() : Ability("Quadruple") {}
 
-void Quadruple::Execute(Game& g) {
+void Quadruple::Execute(Game &g)
+{
     g.getPoint().Quadruple();
 }
 
-Quarter::Quarter() : Ability("Quarter"){}
+Quarter::Quarter() : Ability("Quarter") {}
 
-void Quarter::Execute(Game& g) {
+void Quarter::Execute(Game &g)
+{
     g.getPoint().Quarter();
 }
 
-// ReverseDirection::ReverseDirection(): Ability("Reverse") {
-    
-// }
+ReverseDirection::ReverseDirection() : Ability("Reverse") {}
 
-// ReverseDirection::~ReverseDirection() {
-//     Ability::~Ability();
-// }
-
-// void ReverseDirection::Execute() {
-
-// }
+void ReverseDirection::Execute(Game &g)
+{
+}
 
 SwapCard::SwapCard(): Ability("Swap") {
     
@@ -91,9 +88,9 @@ void SwapCard::Execute(Game& g) {
     temp1.exchange(temp2);
 }
 
-Switch::Switch(): Ability("Switch") {
+// Switch::Switch(): Ability("Switch") {
     
-}
+// }
 
 void Switch::Execute(Game& g) {
     Player temp1 = selectPlayer(g);
@@ -104,7 +101,7 @@ void Switch::Execute(Game& g) {
 }
 
 // Abilityless::Abilityless(): Ability("Abilityless") {
-    
+
 // }
 
 // Abilityless::~Abilityless() {
