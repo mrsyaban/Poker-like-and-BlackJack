@@ -5,14 +5,15 @@ using namespace std;
 template <class T>
 InventoryHolder<T>::~InventoryHolder()
 {
-    while (!this->cards.empty())
+    while (!this->items.empty())
     {
-        this->cards.pop_back();
+        this->items.pop_back();
     }
     cout << "vector cards telah dikosongkan" << endl;
 }
 
-InventoryHolder<class T>& InventoryHolder<class T>::operator+(const T& other){
+template <class T>
+InventoryHolder<T>& InventoryHolder<T>::operator+(const T& other){
     items.push_back(other);
 }
 
@@ -34,38 +35,39 @@ InventoryHolder<Ability>& InventoryHolder<Ability>::operator-(const Ability& oth
     items.erase(itr);
 }
 
-InventoryHolder<class T>& InventoryHolder<class T>::operator=(InventoryHolder& other){
+template <class T>
+InventoryHolder<T>& InventoryHolder<T>::operator=(InventoryHolder<T>& other){
     this->items = other.items;
     return *this;
 }
 
 template <class T>
-void InventoryHolder<class T>::add(InventoryHolder& other) {
+void InventoryHolder<T>::add(InventoryHolder& other) {
     T temp = other.items.at(0);
-    this->items = this->items + temp;
-    other.items = other.items - temp;
+    *this = *this + temp;
+    other = other - temp;
 }   
 
 template <class T>
-void InventoryHolder<class T>::exchange(InventoryHolder& other) {
+void InventoryHolder<T>::exchange(InventoryHolder& other) {
     T temp = other.items.at(0);
     T temp2 = this->items.at(0);
-    this->items = this->items + temp;
-    this->items = this->items - temp2;
-    other.items = other.items + temp2;
-    other.items = other.items - temp;
+    *this = *this + temp;
+    *this = *this - temp2;
+    other = other + temp2;
+    other = other - temp;
 }   
 
 template <class T>
-void InventoryHolder<class T>::deleteall() {
-    this->items.clear();
+void InventoryHolder<T>::deleteall() {
+    this->deleteall();
 }
 
 template <class T>
-void InventoryHolder<class T>::puttoback() {
-    T temp = other.items.at(0);
-    this->items = this->items - temp;
-    this->items = this->items + temp;
+void InventoryHolder<T>::puttoback() {
+    T temp = this->items.at(0);
+    *this = *this - temp;
+    *this = *this + temp;
 }
 
 template class InventoryHolder<Card>;

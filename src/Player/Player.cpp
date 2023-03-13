@@ -53,6 +53,12 @@ void Player::setHighestCombo(Combo c){
     this->highestCombo = c;
 }
 
+void Player::dealToPlayer(InventoryHolder& deck) {
+    this->deleteall();
+    this->add(deck);
+    this->add(deck);
+}
+
 /* Utility Function*/
 void Player::addPoint(int point){
     this->handPoint += point;

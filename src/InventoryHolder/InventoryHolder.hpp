@@ -15,9 +15,9 @@ class InventoryHolder
 
     public:
         ~InventoryHolder(); // dtor
-        InventoryHolder<class T>& operator+(const T&);
-        InventoryHolder<class T>& operator-(const T&);
-        InventoryHolder<class T>& operator=(InventoryHolder&);
+        InventoryHolder<T>& operator+(const T&);
+        InventoryHolder<T>& operator-(const T&);
+        InventoryHolder<T>& operator=(InventoryHolder&);
         void add(InventoryHolder&);
         void exchange(InventoryHolder&);
         void deleteall();

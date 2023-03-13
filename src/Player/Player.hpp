@@ -31,6 +31,7 @@ class Player : public InventoryHolder<Card> {
 
         /* Setter */
         void setHighestCombo(Combo );
+        void dealToPlayer(InventoryHolder&);
 
         /* Utility Function*/
         void addPoint(int );

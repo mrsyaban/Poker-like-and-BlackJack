@@ -73,7 +73,7 @@ class Game {
             // balikin semua kartu player ke deck  
         }
 
-        void start(){
+        void start();
             // cout << "Game started" << endl;
             // cout << "Init point : " << point.getValue() << endl;
             // Quadruple ability;
@@ -84,8 +84,10 @@ class Game {
             //     udah 6 ronde
             //     initNewMatch();
             // }
-        }
-        
+
+        /* SETTER */
+        void dealToTable();
+        void dealToPlayers();
 };
 
 #endif

@@ -39,6 +39,7 @@ void ReRoll::Execute(Game& g) {
     Player temp = selectPlayer(g);
     temp.deleteall();
     temp.add(g.getCardDeck());
+    temp.add(g.getCardDeck());
 }
 
 Quadruple::Quadruple() : Ability("Quadruple") {}

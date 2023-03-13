@@ -7,11 +7,13 @@
 using namespace std;
 
 class Table: public InventoryHolder<Card> {
-    private:
+    protected:
         int neff;
     
     public:
         Table();
+        void dealToTable(InventoryHolder<Card>&);
+        void openCard();
         void getInfo() const;
 
 };

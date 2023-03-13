@@ -69,13 +69,13 @@ class Switch: public Ability {
         void Execute(Game&); // lihat situasi
 };
 
-// class Abilityless: public Ability {
-//     private:
+class Abilityless: public Ability {
+    private:
 
-//     public:
-//         Abilityless();
-//         void Execute(); // lihat situasi
-// };
+    public:
+        Abilityless();
+        void Execute(); // lihat situasi
+};
 
 
 

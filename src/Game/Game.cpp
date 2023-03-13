@@ -15,3 +15,7 @@ Game::Game() : currentPlayer(players.begin()->first) {
 Game::~Game(){
 
 }
+
+void Game::start() {
+    
+}
