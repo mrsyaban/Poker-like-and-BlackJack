@@ -19,8 +19,6 @@ Deck<T>::Deck() {
         *this = *this + tempDeck.at(position);
         tempDeck.erase(cardAt);        
     }
-
-    // acak
 }
 
 template <>

@@ -28,7 +28,7 @@ InventoryHolder<Card>& InventoryHolder<Card>::operator-(const Card& other){
 template<>
 InventoryHolder<Ability>& InventoryHolder<Ability>::operator-(const Ability& other){
     auto itr = this->items.begin();
-    while (*itr.getType() != other.getType()) {
+    while (itr->getType() != other.getType()) {
         itr++;
     }
     items.erase(itr);
@@ -38,7 +38,35 @@ InventoryHolder<class T>& InventoryHolder<class T>::operator=(InventoryHolder& o
     this->items = other.items;
     return *this;
 }
-        
+
+template <class T>
+void InventoryHolder<class T>::add(InventoryHolder& other) {
+    T temp = other.items.at(0);
+    this->items = this->items + temp;
+    other.items = other.items - temp;
+}   
+
+template <class T>
+void InventoryHolder<class T>::exchange(InventoryHolder& other) {
+    T temp = other.items.at(0);
+    T temp2 = this->items.at(0);
+    this->items = this->items + temp;
+    this->items = this->items - temp2;
+    other.items = other.items + temp2;
+    other.items = other.items - temp;
+}   
+
+template <class T>
+void InventoryHolder<class T>::deleteall() {
+    this->items.clear();
+}
+
+template <class T>
+void InventoryHolder<class T>::puttoback() {
+    T temp = other.items.at(0);
+    this->items = this->items - temp;
+    this->items = this->items + temp;
+}
 
 template class InventoryHolder<Card>;
 template class InventoryHolder<Ability>;

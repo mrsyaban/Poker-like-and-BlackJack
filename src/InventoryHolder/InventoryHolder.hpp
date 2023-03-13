@@ -18,7 +18,10 @@ class InventoryHolder
         InventoryHolder<class T>& operator+(const T&);
         InventoryHolder<class T>& operator-(const T&);
         InventoryHolder<class T>& operator=(InventoryHolder&);
-
+        void add(InventoryHolder&);
+        void exchange(InventoryHolder&);
+        void deleteall();
+        void puttoback();
         virtual void getInfo() const = 0;
 };
 

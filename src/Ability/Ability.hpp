@@ -20,17 +20,16 @@ class Ability {
         virtual void Execute(Game& g) = 0;
 
         /* Getter */
-        string getType();
+        string getType() const;
 };
 
-// class ReRoll: public Ability {
-//     private:
+class ReRoll: public Ability {
+    private:
         
-//     public:
-//         ReRoll();
-//         ~ReRoll();
-//         void Execute(); // lihat situasi
-// };
+    public:
+        ReRoll();
+        void Execute(Game& g); // lihat situasi
+};
 
 class Quadruple: public Ability {
     private:
@@ -54,21 +53,21 @@ class ReverseDirection: public Ability {
         void Execute(Game& g); // lihat situasi
 };
 
-// class SwapCard: public Ability {
-//     private:
+class SwapCard: public Ability {
+    private:
 
-//     public:
-//         SwapCard();
-//         void Execute(); // lihat situasi
-// };
+    public:
+        SwapCard();
+        void Execute(Game& g); // lihat situasi
+};
 
-// class Switch: public Ability {
-//     private:
+class Switch: public Ability {
+    private:
 
-//     public:
-//         Switch();
-//         void Execute(); // lihat situasi
-// };
+    public:
+        Switch();
+        void Execute(Game&); // lihat situasi
+};
 
 // class Abilityless: public Ability {
 //     private:

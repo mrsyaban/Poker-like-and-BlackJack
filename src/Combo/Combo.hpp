@@ -14,6 +14,7 @@ class Combo : public ObjectWithValue<double> {
         double score;
         vector<Card> cards;
         vector<Card> combo;
+        vector<vector<Card>> records;
 
     public:
         Combo(); // ctor
@@ -22,13 +23,14 @@ class Combo : public ObjectWithValue<double> {
 
         double value() const; // Score Getter
         void setScore(double number); // Setter
-        vector<Card> getCombo(); // Combo Getter
+        vector<Card> getCombo() const; // Combo Getter
         void setCombo(vector<Card>); // Combo Getter
-        vector<Card> getCards(); // Cards Getter
+        vector<Card> getCards() const; // Cards Getter
         void setCards(vector<Card>); // Cards Setter
 
         int length(); // Length of Hand Card and Table Card
-        vector<Card> sortCards(); // Sorting cards berdasarkan angka masih
+        vector<Card> sortCards(); // Sorting cards by number and color
+        vector<Card> sortCombo(); // Sorting combo by number and color
         
         void highCard(); 
         void pair();
@@ -43,6 +45,8 @@ class Combo : public ObjectWithValue<double> {
         void checkCombo();
 
         bool operator<(const Combo& other);
+        bool operator>(const Combo& other);
+        bool operator==(const Combo& other);
 };
 
 #endif
