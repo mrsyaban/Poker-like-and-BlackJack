@@ -1,73 +1,81 @@
 #ifndef ABILITY_HPP
 #define ABILITY_HPP
 
-#include "../Game/Game.hpp"
+// #include <map>
 
 #include <iostream>
 using namespace std;
 
+class Game; // forward declaration
+
 class Ability { 
     private:
         bool available;
-        // static int& playerTurn;
-        // static bool& isReversed;
-        // static Player& players[7];
-        // static Deck& deck;
-        // static Point& point;
+        string type;
     public:
-        Ability();
-        ~Ability();
-        void initData(Game&);
-        virtual void Execute() = 0;
+        Ability(string);
+        /* Execute, pass the game state to ability to act accordingly */
+        virtual void Execute(Game& g) = 0;
+
+        /* Getter */
+        string getType();
 };
 
-class ReRoll: public Ability {
-    private:
+// class ReRoll: public Ability {
+//     private:
         
-    public:
-        ReRoll();
-        ~ReRoll();
-        void Execute(); // lihat situasi
-};
+//     public:
+//         ReRoll();
+//         ~ReRoll();
+//         void Execute(); // lihat situasi
+// };
 
 class Quadruple: public Ability {
     private:
 
     public:
-        Quadruple();
-        void Execute(); // lihat situasi
+        Quadruple(); // default ctor
+        void Execute(Game& g);
 };
 
-class ReverseDirection: public Ability {
-    private:
-
+class Quarter: public Ability {
     public:
-        ReverseDirection();
-        void Execute(); // lihat situasi
+        Quarter(); // default ctor
+        void Execute(Game& g);
 };
 
-class SwapCard: public Ability {
-    private:
+// class ReverseDirection: public Ability {
+//     private:
 
-    public:
-        SwapCard();
-        void Execute(); // lihat situasi
-};
+//     public:
+//         ReverseDirection();
+//         void Execute(); // lihat situasi
+// };
 
-class Switch: public Ability {
-    private:
+// class SwapCard: public Ability {
+//     private:
 
-    public:
-        Switch();
-        void Execute(); // lihat situasi
-};
+//     public:
+//         SwapCard();
+//         void Execute(); // lihat situasi
+// };
 
-class Abilityless: public Ability {
-    private:
+// class Switch: public Ability {
+//     private:
 
-    public:
-        Abilityless();
-        void Execute(); // lihat situasi
-};
+//     public:
+//         Switch();
+//         void Execute(); // lihat situasi
+// };
+
+// class Abilityless: public Ability {
+//     private:
+
+//     public:
+//         Abilityless();
+//         void Execute(); // lihat situasi
+// };
+
+
 
 #endif

@@ -29,7 +29,7 @@ void Point::Double(){
     this->value *= 2;
 }
 
-void Point::Quadraple(){
+void Point::Quadruple(){
     this->value *= 4;
 }
 

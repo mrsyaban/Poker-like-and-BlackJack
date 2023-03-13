@@ -16,7 +16,7 @@ class Point {
         /* value modification from player skills */
         void Half();
         void Double();
-        void Quadraple();
+        void Quadruple();
         void Quarter();
 
         void Add(int);

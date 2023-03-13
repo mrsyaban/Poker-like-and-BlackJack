@@ -1,83 +1,83 @@
 #include <iostream>
 #include "Ability.hpp"
+#include "../Game/Game.hpp"
+
 using namespace std;
 
-Ability::Ability() {
-    this->available = true;
+Ability::Ability(string type) {
+    available = true;
+    this->type = type;
 }
 
-Ability::~Ability() {
 
-}
-
-ReRoll::ReRoll() {
+// ReRoll::ReRoll() : Ability("Reroll") {
     
+// }
+
+// ReRoll::~ReRoll() {
+//     Ability::~Ability();
+// }
+
+// void ReRoll::Execute() {
+
+// }
+
+Quadruple::Quadruple() : Ability("Quadruple"){}
+
+void Quadruple::Execute(Game& g) {
+    g.getPoint().Quadruple();
 }
 
-ReRoll::~ReRoll() {
-    Ability::~Ability();
+Quarter::Quarter() : Ability("Quarter"){}
+
+void Quarter::Execute(Game& g) {
+    g.getPoint().Quarter();
 }
 
-void ReRoll::Execute() {
-
-}
-
-Quadruple::Quadruple(): Ability() {
+// ReverseDirection::ReverseDirection(): Ability("Reverse") {
     
-}
+// }
 
-Quadruple::~Quadruple() {
-    Ability::~Ability();
-}
+// ReverseDirection::~ReverseDirection() {
+//     Ability::~Ability();
+// }
 
-void Quadruple::Execute() {
+// void ReverseDirection::Execute() {
 
-}
+// }
 
-ReverseDirection::ReverseDirection(): Ability() {
+// SwapCard::SwapCard(): Ability("Swap") {
     
-}
+// }
 
-ReverseDirection::~ReverseDirection() {
-    Ability::~Ability();
-}
+// SwapCard::~SwapCard() {
+//     Ability::~Ability();
+// }
 
-void ReverseDirection::Execute() {
+// void SwapCard::Execute() {
 
-}
+// }
 
-SwapCard::SwapCard(): Ability() {
+// Switch::Switch(): Ability("Switch") {
     
-}
+// }
 
-SwapCard::~SwapCard() {
-    Ability::~Ability();
-}
+// Switch::~Switch() {
+//     Ability::~Ability();
+// }
 
-void SwapCard::Execute() {
+// void Switch::Execute() {
 
-}
+// }
 
-Switch::Switch(): Ability() {
+// Abilityless::Abilityless(): Ability("Abilityless") {
     
-}
+// }
 
-Switch::~Switch() {
-    Ability::~Ability();
-}
+// Abilityless::~Abilityless() {
+//     Ability::~Ability();
+// }
 
-void Switch::Execute() {
+// void Abilityless::Execute() {
 
-}
-
-Abilityless::Abilityless(): Ability() {
-    
-}
-
-Abilityless::~Abilityless() {
-    Ability::~Ability();
-}
-
-void Abilityless::Execute() {
-
-}
+// }
