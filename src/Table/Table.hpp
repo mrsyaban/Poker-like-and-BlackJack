@@ -6,12 +6,13 @@
 #include "../InventoryHolder/InventoryHolder.hpp"
 using namespace std;
 
-class Table: public InventoryHolder {
+class Table: public InventoryHolder<Card> {
     private:
         int neff;
     
     public:
         Table();
+        void getInfo() const;
 
 };
 

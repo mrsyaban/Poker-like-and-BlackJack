@@ -2,6 +2,7 @@
 #define _INVENTORYHOLDER_HPP_
 
 #include "../Card/Card.hpp"
+#include "../Ability/Ability.hpp"
 #include <vector>
 #include <algorithm>
 using namespace std;
@@ -13,13 +14,12 @@ class InventoryHolder
         vector<T> items;
 
     public:
-        virtual ~InventoryHolder(); // dtor
-        void addCard(const T&);
-        void delCard(const T&);
-        // Rencana: pure virtual nya bakal info
-        virtual InventoryHolder& operator+(const Card&);
-        virtual InventoryHolder& operator-(const Card&);
-        virtual InventoryHolder& operator=(const InventoryHolder&);
+        ~InventoryHolder(); // dtor
+        InventoryHolder<class T>& operator+(const T&);
+        InventoryHolder<class T>& operator-(const T&);
+        InventoryHolder<class T>& operator=(InventoryHolder&);
+
+        virtual void getInfo() const = 0;
 };
 
 #endif

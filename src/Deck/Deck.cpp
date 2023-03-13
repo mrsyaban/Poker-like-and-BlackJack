@@ -3,26 +3,12 @@
 #include "../InventoryHolder/InventoryHolder.hpp"
 using namespace std;
 
-InventoryHolder& Deck::operator+(const Card& c) {
-    addCard(c);
-    return *this;
-}
-
-InventoryHolder& Deck::operator-(const Card& c) {
-    addCard(c);
-    return *this;
-}
-
-InventoryHolder& Deck::operator=(InventoryHolder& other) {
-    this->cards = other.getCards();
-    return *this;
-}
-
-Deck::Deck() {
-    vector<Card> tempDeck;
+template <class T>
+Deck<T>::Deck() {
+    vector<T> tempDeck;
     for (int i = 0; i < 4; i++) {
         for (int j = 1; j <= 13; j++) {
-            Card temp = Card(CardColor(i), j);
+            T temp = Card(CardColor(i), j);
             tempDeck.push_back(temp);
         }
     }
@@ -35,4 +21,14 @@ Deck::Deck() {
     }
 
     // acak
+}
+
+template <>
+void Deck<Card>::getInfo() const {
+    cout << "This is Main Deck" << endl;
+}
+
+template <>
+void Deck<Ability>::getInfo() const {
+    cout << "This is Ability Deck" << endl;
 }

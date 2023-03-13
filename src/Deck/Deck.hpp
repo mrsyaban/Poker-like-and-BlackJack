@@ -14,9 +14,7 @@ class Deck: public InventoryHolder<T> {
 
     public:
         Deck();
-        InventoryHolder& operator=(const InventoryHolder&);
-        InventoryHolder& operator+(const T&);
-        InventoryHolder& operator-(const T&);
+        void getInfo() const;
 };
 
 #endif

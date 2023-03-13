@@ -21,14 +21,12 @@ class Player : public InventoryHolder<Card> {
         /* Operator Overloading*/
         friend bool operator<(const Player& p1, const Player& p2);
         friend bool operator>(const Player& p1, const Player& p2);
-        InventoryHolder<Card>& operator+(const Card &);
-        InventoryHolder<Card>& operator-(const Card &);
-        InventoryHolder<Card>& operator=(InventoryHolder &);
 
         /* Accessor */
-        Card getCard(int) const;
+        Card getCard(string) const;
         int getPoint() const;
         Combo getHighestCombo() const;
+        void getInfo() const;
 
         /* Setter */
         void setHighestCombo(Combo );

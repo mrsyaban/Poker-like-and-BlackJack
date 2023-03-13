@@ -12,15 +12,34 @@ InventoryHolder<T>::~InventoryHolder()
     cout << "vector cards telah dikosongkan" << endl;
 }
 
-// template <class T>
-// void InventoryHolder<T>::addCard(const Card& c) {
-//     this->cards.push_back(c);
-// }
+InventoryHolder<class T>& InventoryHolder<class T>::operator+(const T& other){
+    items.push_back(other);
+}
 
-// template <class T>
-// void InventoryHolder<T>::delCard(const Card& c) {
-//     auto cardAt = this->cards.begin();
-//     this->cards.erase(cardAt);
-// }
+template<>
+InventoryHolder<Card>& InventoryHolder<Card>::operator-(const Card& other){
+    auto itr = this->items.begin();
+    while (!(*itr == other)) {
+        itr++;
+    }
+    items.erase(itr);
+}
 
+template<>
+InventoryHolder<Ability>& InventoryHolder<Ability>::operator-(const Ability& other){
+    auto itr = this->items.begin();
+    while (*itr.getType() != other.getType()) {
+        itr++;
+    }
+    items.erase(itr);
+}
+
+InventoryHolder<class T>& InventoryHolder<class T>::operator=(InventoryHolder& other){
+    this->items = other.items;
+    return *this;
+}
+        
+
+template class InventoryHolder<Card>;
+template class InventoryHolder<Ability>;
 // either : pindahin hpp atau bikin instance satu satu

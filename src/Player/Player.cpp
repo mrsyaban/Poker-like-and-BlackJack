@@ -23,21 +23,15 @@ bool operator>(const Player& p1, const Player& p2) {
     }
 }
 
-InventoryHolder<Card>& Player::operator+(const Card & card) {
-    this->items.push_back(card);
-    return *this;
-}
-
-InventoryHolder<Card>& operator-(const Card & card){
-    // this->items.push_back(card) ;
-    // return *this;
-}
-
-// InventoryHolder<Card>& operator=(InventoryHolder<Card> &);
-
 /* Accessor */
-Card Player::getCard(int i) const{
-    return items[i];
+Card Player::getCard(string position) const{
+    if (position == "kiri"){
+        return items[0];
+    } else if (position == "kanan") {
+        return items[1];
+    } else {
+        throw ;
+    }
 }
 
 int Player::getPoint() const{
@@ -46,6 +40,10 @@ int Player::getPoint() const{
 
 Combo Player::getHighestCombo() const{
     return highestCombo;
+}
+
+void Player::getInfo() const {
+    cout << "This is "<< nickName << "'s Card" << endl;
 }
 
 /* Setter */
