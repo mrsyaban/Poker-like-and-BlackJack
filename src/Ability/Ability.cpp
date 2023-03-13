@@ -31,6 +31,16 @@ Player& Ability::selectPlayer(Game& g) {
     }
 }
 
+bool Ability::getAvail() const
+{
+    return this->available;
+}
+
+Ability& Ability::setAvail(bool avail)
+{
+    this->available = avail;
+}
+
 ReRoll::ReRoll() : Ability("Reroll") {
     
 }
@@ -102,14 +112,34 @@ void Switch::Execute(Game& g) {
     temp1.exchange(temp2);
 }
 
-// Abilityless::Abilityless(): Ability("Abilityless") {
+Abilityless::Abilityless(): Ability("Abilityless") {
 
-// }
+}
 
-// Abilityless::~Abilityless() {
-//     Ability::~Ability();
-// }
+void Abilityless::Execute(Game& g) {
+    Player playerChosen = selectPlayer(g);
+    bool allAvail = true;
+    int n = g.getPlayers().size(), i = 0;
 
-// void Abilityless::Execute() {
+    while (allAvail && i < n) {
+        if (g.getPlayers()[i].first.getAbility()->getAvail() == true and g.getPlayers()[i] != g.getPlayers()[g.getCurrentPlayer()]) {
+            i++;
+        } else {
+            allAvail = false;
+        }
+    }
 
-// }
+    if (allAvail == true) {
+        if (playerChosen.getAbility()->getAvail() == true) {
+            playerChosen.getAbility()->setAvail(false);
+            cout << "Kartu ability " << playerChosen.getNickname() << " telah dimatikan" << endl;
+        } else if (playerChosen.getAbility()->getAvail() == true) {
+            cout << "Kartu ability " << playerChosen.getNickname() << " telah dipakai sebelumnya. Yah, sayang penggunaan kartu ini sia-sia" << endl;
+        }
+    } else {
+        g.getPlayers()[g.getCurrentPlayer()].first.getAbility()->setAvail(false);
+        cout << "Eits, ternyata semua pemain sudah memakai kartu kemampuan. Yah kamu" 
+             << "\nkena sendiri deh, kemampuanmu menjadi abilityless. Yah, pengunaan"
+             << "\nkartu ini sia-sia" << endl;
+    }
+}

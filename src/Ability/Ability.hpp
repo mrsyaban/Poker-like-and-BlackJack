@@ -21,6 +21,10 @@ class Ability {
 
         /* Getter */
         string getType() const;
+        bool getAvail() const;
+
+        /* Setter */
+        Ability& setAvail(bool);
 };
 
 class ReRoll: public Ability {
@@ -74,7 +78,7 @@ class Abilityless: public Ability {
 
     public:
         Abilityless();
-        void Execute(); // lihat situasi
+        void Execute(Game&); // lihat situasi
 };
 
 
