@@ -7,6 +7,7 @@
 #include "../Player/Player.hpp"
 #include "../Table/Table.hpp"
 #include "../ObjectWithValue/ObjectWithValue.hpp"
+#include "../Exception/exception.h"
 
 class Combo : public ObjectWithValue<double> {
     private:

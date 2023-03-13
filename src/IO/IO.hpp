@@ -9,11 +9,8 @@ class IO {
     public :
         void setInput(string);
 
-
-        void inputPlayerName(){
-            
-        }
-
-        void printSplashScreen();
+        void splashScreen();
+        void inputPlayerName();
+        void mainMenu();
         bool isValid();
 };

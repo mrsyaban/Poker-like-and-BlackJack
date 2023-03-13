@@ -10,27 +10,30 @@
 
 class Player : public InventoryHolder<Card> {
     private:
-        string nickName;
-        Ability& handAbility;
+        const string nickName;
+        Ability* handAbility;
         int handPoint;
         Combo highestCombo;
 
     public:
-        Player(); // ctor
+        Player(string); // ctor
 
         /* Operator Overloading*/
         friend bool operator<(const Player& p1, const Player& p2);
         friend bool operator>(const Player& p1, const Player& p2);
 
         /* Accessor */
-        Card getCard(int position) const;
+        string getNickname() const;
+        Ability* getAbility() const;
         int getPoint() const;
         Combo getHighestCombo() const;
+
+        Card getCard(int position) const;
         void getInfo() const;
-        string getNickname() const;
 
         /* Setter */
-        void setHighestCombo(Combo );
+        void setHighestCombo(Combo);
+        void setAbility(Ability&);
         void dealToPlayer(InventoryHolder&);
 
         /* Utility Function*/
