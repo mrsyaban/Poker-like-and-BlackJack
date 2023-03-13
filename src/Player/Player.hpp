@@ -23,7 +23,7 @@ class Player : public InventoryHolder<Card> {
         friend bool operator>(const Player& p1, const Player& p2);
 
         /* Accessor */
-        Card getCard(string) const;
+        Card getCard(int position) const;
         int getPoint() const;
         Combo getHighestCombo() const;
         void getInfo() const;

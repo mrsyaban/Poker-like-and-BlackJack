@@ -24,13 +24,11 @@ bool operator>(const Player& p1, const Player& p2) {
 }
 
 /* Accessor */
-Card Player::getCard(string position) const{
-    if (position == "kiri"){
+Card Player::getCard(int position) const{
+    if (position == 1){
         return items[0];
-    } else if (position == "kanan") {
+    } else if (position == 2) {
         return items[1];
-    } else {
-        throw ;
     }
 }
 
