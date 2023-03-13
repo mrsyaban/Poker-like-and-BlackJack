@@ -7,6 +7,7 @@
 #include "../Point/Point.hpp"
 #include "../Ability/Ability.hpp"
 #include "../Table/Table.hpp"
+#include "../IO/IO.hpp"
 
 #include <iostream>
 #include <map>
@@ -67,6 +68,9 @@ class Game {
         Player& getCurrentPlayer(){
             return this->currentPlayer;
         }
+
+        /* Setter */
+        void addPlayer();
         
         void initNewMatch(){
             // reset deckCard, point, table, isReversed, playerTurn, round
