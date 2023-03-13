@@ -60,6 +60,7 @@ ReverseDirection::ReverseDirection() : Ability("Reverse") {}
 
 void ReverseDirection::Execute(Game &g)
 {
+    g.setReverseInfo(true);
 }
 
 SwapCard::SwapCard(): Ability("Swap") {

@@ -23,10 +23,10 @@ class Game {
         bool isReversed;
         int playerTurn;
         int round;
-        Player& currentPlayer;
+        int currentPlayer;
 
     public:
-        Game(); // init all needed objects;
+        Game(); // init all needed objects, init status player false;
         ~Game();
         // initNewMatch()
 
@@ -64,8 +64,18 @@ class Game {
             return this->round;
         }
 
-        Player& getCurrentPlayer(){
+        int getCurrentPlayer(){
             return this->currentPlayer;
+        }
+
+        void incCurrentPlayer() {
+            currentPlayer++;
+            currentPlayer %= 7;
+        }
+
+        void decCurrentPlayer() {
+            currentPlayer--;
+            currentPlayer %= 7;
         }
         
         void initNewMatch(){
@@ -84,10 +94,58 @@ class Game {
             //     udah 6 ronde
             //     initNewMatch();
             // }
+        
+        void nextPlayer() {
+            if (isReversed) {
+                decCurrentPlayer();
+            } else {
+                incCurrentPlayer();
+            }
+        }
+        
+        void nextTurn() {
+
+            nextPlayer();
+
+            if (playerTurn != 7) {
+                // status player yang udah jalan adalah true  (1) untuk ronde ganjil (mod 2 == 1)
+                // status player yang udah jalan adalah false (0) untuk ronde genap  (mod 2 == 0)
+                while (players[currentPlayer].second % 2 == round % 2) {
+                    nextPlayer();
+                }
+
+                // TODO
+                // currentPlayer jalan, manggil command (??)
+
+                // setelah playernya jalan, statusnya ditoggle
+                players[currentPlayer].second = !players[currentPlayer].second;
+
+                playerTurn++;
+
+            } else {
+                // udah jalan semua, set playerTurn = 0, nextRound
+                playerTurn = 0;
+                nextRound();
+            }
+        }
+
+        void nextRound() {
+            if (this->round < 6) {
+                round++;
+                nextPlayer();
+            } else {
+                // TODO
+                // udah selesai 6 ronde, cari pemenang (??)
+            }
+        }
 
         /* SETTER */
         void dealToTable();
         void dealToPlayers();
+
+        void setReverseInfo(bool r) {
+            this->isReversed = r;
+        }
 };
 
 #endif
