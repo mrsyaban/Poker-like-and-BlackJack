@@ -29,7 +29,8 @@ class Player : public InventoryHolder<Card> {
         void getInfo() const;
 
         /* Setter */
-        void setHighestCombo(Combo );
+        void setHighestCombo(Combo);
+        void setNickName(string);
 
         /* Utility Function*/
         void addPoint(int );

@@ -5,15 +5,11 @@ using namespace std;
 class IO {
     private: 
         string input;        
-
+        
     public :
         void setInput(string);
 
-
-        void inputPlayerName(){
-            
-        }
-
-        void printSplashScreen();
+        void splashScreen();
+        void inputPlayerName();
         bool isValid();
 };

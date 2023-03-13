@@ -29,6 +29,9 @@ Card Player::getCard(int position) const{
         return items[0];
     } else if (position == 2) {
         return items[1];
+    } else {
+        NumberInputException err;
+        throw err;
     }
 }
 
