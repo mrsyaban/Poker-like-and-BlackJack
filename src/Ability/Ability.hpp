@@ -12,6 +12,8 @@ class Ability {
     private:
         bool available;
         string type;
+    protected:
+        Player& selectPlayer(Game& g);
     public:
         Ability(string);
         /* Execute, pass the game state to ability to act accordingly */
