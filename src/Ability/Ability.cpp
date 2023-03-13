@@ -30,17 +30,15 @@ Player& Ability::selectPlayer(Game& g) {
     }
 }
 
-// ReRoll::ReRoll() : Ability("Reroll") {
+ReRoll::ReRoll() : Ability("Reroll") {
     
-// }
+}
 
-// ReRoll::~ReRoll() {
-//     Ability::~Ability();
-// }
-
-// void ReRoll::Execute() {
-
-// }
+void ReRoll::Execute(Game& g) {
+    Player temp = selectPlayer(g);
+    temp.deleteall();
+    temp.add(g.getCardDeck());
+}
 
 Quadruple::Quadruple() : Ability("Quadruple"){}
 
@@ -66,29 +64,44 @@ void Quarter::Execute(Game& g) {
 
 // }
 
-// SwapCard::SwapCard(): Ability("Swap") {
+SwapCard::SwapCard(): Ability("Swap") {
     
-// }
+}
 
-// SwapCard::~SwapCard() {
-//     Ability::~Ability();
-// }
+void SwapCard::Execute(Game& g) {
+    Player temp1 = selectPlayer(g);
+    Player temp2 = selectPlayer(g);
 
-// void SwapCard::Execute() {
+    string kartuPertama;
+    string kartuKedua;
 
-// }
+    cout << "Silahkan masukkan kartu untuk player pertama: (kiri atau kanan)" << endl;
+    cin >> kartuPertama;
+    cout << "Silahkan masukkan kartu untuk player kedua: (kiri atau kanan)" << endl;
+    cin >> kartuKedua;
 
-// Switch::Switch(): Ability("Switch") {
+    if (kartuPertama == "kanan") {
+        temp1.puttoback();
+    }
+
+    if (kartuKedua == "kanan") {
+        temp2.puttoback();
+    }
+
+    temp1.exchange(temp2);
+}
+
+Switch::Switch(): Ability("Switch") {
     
-// }
+}
 
-// Switch::~Switch() {
-//     Ability::~Ability();
-// }
+void Switch::Execute(Game& g) {
+    Player temp1 = selectPlayer(g);
+    Player temp2 = selectPlayer(g);
 
-// void Switch::Execute() {
-
-// }
+    temp1.exchange(temp2);
+    temp1.exchange(temp2);
+}
 
 // Abilityless::Abilityless(): Ability("Abilityless") {
     
