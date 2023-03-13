@@ -23,7 +23,7 @@ class Game {
         bool isReversed;
         int playerTurn;
         int round;
-        Player& player;
+        Player& currentPlayer;
 
     public:
         Game(); // init all needed objects;
