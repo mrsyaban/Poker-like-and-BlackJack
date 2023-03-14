@@ -1,14 +1,16 @@
 #ifndef ABILITY_HPP
 #define ABILITY_HPP
 
-// #include <map>
+#include "../Player/Player.hpp"
+#include "../Action/Action.hpp"
 
+// #include "../Game/Game.hpp" implicit import with forward declaration
 #include <iostream>
 using namespace std;
 
 class Game; // forward declaration
 
-class Ability { 
+class Ability : public Action { 
     private:
         bool available;
         string type;
@@ -24,7 +26,7 @@ class Ability {
         bool getAvail() const;
 
         /* Setter */
-        Ability& setAvail(bool);
+        void setAvail(bool);
 };
 
 class ReRoll: public Ability {
@@ -80,7 +82,5 @@ class Abilityless: public Ability {
         Abilityless();
         void Execute(Game&); // lihat situasi
 };
-
-
 
 #endif

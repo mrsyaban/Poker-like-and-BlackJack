@@ -2,7 +2,7 @@
 #include "Game.hpp"
 using namespace std;
 
-Game::Game() : currentPlayer(players.begin()->first) {
+Game::Game() {
     // this->gameStart = true;
     // // ctor player
     // for (int i = 1; i <= 7; i++) {

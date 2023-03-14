@@ -37,7 +37,7 @@ class Game {
             return this->players;
         }
 
-        Deck<Card> getCardDeck(){
+        Deck<Card>& getCardDeck(){
             return this->cardDeck;
         }
 
