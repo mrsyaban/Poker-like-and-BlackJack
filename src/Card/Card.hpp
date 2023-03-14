@@ -7,21 +7,23 @@
 
 #include "../ObjectWithValue/ObjectWithValue.hpp"
 #include <utility>
+#include <map>
 using namespace std;
 
 enum CardColor {
-/*
-    Green: 0,
-    Blue: 1,
-    Yellow: 2,
-    Red: 3
-
-    since Red > Yellow > Blue > Green
-*/
+/* Card Color */
     Green = 0,
     Blue = 1,
     Yellow = 2,
     Red = 3
+};
+
+const map<CardColor, string> cardToString = {
+/* Mapping color to int for */
+    {Green, "Green"},
+    {Blue, "Blue"},
+    {Yellow, "Yellow"},
+    {Red, "Red"}
 };
 
 class Card : public ObjectWithValue<double> {
