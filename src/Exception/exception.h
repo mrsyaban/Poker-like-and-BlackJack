@@ -1,10 +1,14 @@
 #ifndef EXCEPTION_H
 #define EXCEPTION_H
 
-#include <exception>
 using namespace std;
 
-struct NumberInputException : public exception
+class baseException {
+    protected:
+        virtual const char *what() const throw() = 0;
+};
+
+class NumberInputException : public baseException
 {
     const char *what() const throw()
     {
@@ -12,7 +16,7 @@ struct NumberInputException : public exception
     }
 };
 
-struct FileException : public exception
+class FileException : public baseException
 {
     const char *what() const throw()
     {
@@ -20,7 +24,7 @@ struct FileException : public exception
     }
 };
 
-struct AbilityException : public exception
+class AbilityException : public baseException
 {
     const char *what() const throw()
     {
@@ -28,7 +32,7 @@ struct AbilityException : public exception
     }
 };
 
-struct playerException : public exception
+class playerException : public baseException
 {
     const char *what() const throw()
     {

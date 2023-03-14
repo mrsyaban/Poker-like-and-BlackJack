@@ -14,6 +14,25 @@ string retrieveInput(){
     return input;
 }
 
+// bool IO::isValid(string input){
+//     vector<string> validString = {
+//         "NEXT",
+//         "HALF",
+//         "DOUBLE",
+//         "RE-ROLL",
+//         "QUADRUPLE",
+//         "QUARTER",
+//         "REVERSE",
+//         "SWAP CARD",
+//         "SWITCH",
+//         "ABILITYLESS"
+//     }
+//     if (find(validString.begin(), validString.end(), input) == validString.end()){
+        
+//         throw 
+//     }
+// }
+
 void IO::splashScreen(){
     string splash = "WELKAMM";
     cout << splash << endl;
@@ -62,7 +81,6 @@ void IO::printTable(Table table){
     }
 }
 
-
 void IO::printAbilitySuccess(const Player& player, const vector<string>& resPlayer){
     string type = player.getAbility()->getType(); 
     cout << abilColor;
@@ -107,6 +125,19 @@ void IO::printAbilitySuccess(const Player& player,const Point& poin){
     }
     cout << resetColor;
 }
+
+// void IO::printActionSuccess(const Player& player, const Point& poin, int type){
+//     cout << actnColor;
+//     if (type == 1){
+//         cout << "Turn given to the next player" << endl;
+//     } else if (type == 2){
+//         cout << player.getNickname() << " melakukan DOUBLE! Poin hadiah naik dari" << endl;
+//         cout << poin.getValue()/2 << " menjadi " << poin.getValue() << "!" << endl;
+//     } else if (type == 3){
+//         cout << player.getNickname() << " melakukan HALF! Poin hadiah turun dari" << endl;
+//         cout << poin.getValue()*2 << " menjadi " << poin.getValue() << "!" << endl;
+//     }
+// }
 
 vector<int> IO::selectCard(const vector<string> playersNick){
     int choice;
