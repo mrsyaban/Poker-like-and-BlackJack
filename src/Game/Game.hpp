@@ -37,7 +37,7 @@ class Game {
             return this->players;
         }
 
-        Deck<Card> getCardDeck(){
+        Deck<Card>& getCardDeck(){
             return this->cardDeck;
         }
 
@@ -145,10 +145,14 @@ class Game {
         /* SETTER */
         void dealToTable();
         void dealToPlayers();
+        void dealAbilityToPlayers();
 
         void setReverseInfo(bool r) {
             this->isReversed = r;
         }
+
+        /* GETTER */
+        bool gameEnded();
 };
 
 #endif

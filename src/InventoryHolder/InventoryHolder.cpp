@@ -42,6 +42,21 @@ InventoryHolder<T>& InventoryHolder<T>::operator=(InventoryHolder<T>& other){
 }
 
 template <class T>
+vector<T>& InventoryHolder<T>::getItems() {
+    return this->items;
+}
+
+template <class T>
+T& InventoryHolder<T>::getTopItems() {
+    return this->items;
+}
+
+template <class T>
+auto InventoryHolder<T>::getTopItemsIterator() {
+    return this->items.begin();
+}
+
+template <class T>
 void InventoryHolder<T>::add(InventoryHolder& other) {
     T temp = other.items.at(0);
     *this = *this + temp;

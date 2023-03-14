@@ -18,6 +18,9 @@ class Table: public InventoryHolder<Card> {
         int getNeff() const;
         
 
+        /* Getter */
+        Card getCard(int) const;
+
 };
 
 #endif

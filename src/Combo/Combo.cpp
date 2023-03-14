@@ -6,12 +6,12 @@ using namespace std;
 Combo::Combo() : score(0) {}
 
 Combo::Combo(Player player, Table table) {
-    // this->cards.push_back(player.getCard()[0]);
-    // this->cards.push_back(player.getCard()[1]);
+    this->cards.push_back(player.getCard(0));
+    this->cards.push_back(player.getCard(1));
 
-    // for (int i = 0; i < 5; i++) {
-    //     this->cards.push_back(table.kartuMeja[i]);
-    // }
+    for (int i = 0; i < 5; i++) {
+        this->cards.push_back(table.getCard(i));
+    }
 
     this->sortCards();
     this->score = 0;
@@ -102,6 +102,8 @@ void Combo::pair() {
     if (temp.size() > 1) {
         records.push_back(this->combo);
     }
+
+    this->sortCombo();
 }
 
 void Combo::twoPair() {
@@ -137,6 +139,8 @@ void Combo::twoPair() {
     if (temp.size() > 1) {
         records.push_back(this->combo);
     }
+
+    this->sortCombo();
 }
 
 void Combo::threeOfAKind() {
@@ -222,6 +226,8 @@ void Combo::straight() {
     if (temp.size() > 1) {
         records.push_back(this->combo);
     }
+
+    this->sortCombo();
 }
 
 void Combo::flush() {
@@ -275,6 +281,8 @@ void Combo::flush() {
     if (temp.size() > 1) {
         records.push_back(this->combo);
     }
+
+    this->sortCombo();
 }
 
 void Combo::fullHouse() {
@@ -326,6 +334,7 @@ void Combo::fullHouse() {
         records.push_back(this->combo);
     }
 
+    this->sortCombo();
 }
 
 void Combo::fourOfKind() {
@@ -370,6 +379,8 @@ void Combo::fourOfKind() {
     if (temp.size() > 1) {
         records.push_back(this->combo);
     }
+
+    this->sortCombo();
 }
 
 void Combo::straightFlush() {
@@ -426,6 +437,8 @@ void Combo::straightFlush() {
     if (temp.size() > 1) {
         records.push_back(this->combo);
     }
+
+    this->sortCombo();
 }
 
 void Combo::checkCombo() {

@@ -121,7 +121,8 @@ vector<int> IO::selectCard(const vector<string> playersNick){
     }
     for (int i=0; i<2; i++){
         if (res[i]<1 || res[i] >2){
-            throw NumberInputException;
+            NumberInputException err;
+            throw err;
         }
     }
     return res;
@@ -153,12 +154,13 @@ vector<string> IO::selectPlayer(const Player& player, const vector<pair<Player&,
         cout << "\033[5m" << "Player's Name 2 >>> " << resetColor; cin >> player2;
 
         // Exception
+        playerException err;
         if (player1 == player2){
-            throw playerException;
+            throw err;
         } else if (find(tempList.begin(), tempList.end(), player1) == tempList.end()){
-            throw playerException;
+            throw err;
         } else if (find(tempList.begin(), tempList.end(), player2) == tempList.end()){
-            throw playerException;
+            throw err;
         }
         resPlayers = {player1, player2};
 
@@ -168,8 +170,9 @@ vector<string> IO::selectPlayer(const Player& player, const vector<pair<Player&,
         cout << "\033[5m" << "Player's Name >>> " << resetColor; cin >> player1;
         
         // Exception
+        playerException err;
         if (find(tempList.begin(), tempList.end(), player1) == tempList.end()){
-            throw playerException;
+            throw err;
         } 
         resPlayers.push_back(player1);
 
@@ -179,8 +182,9 @@ vector<string> IO::selectPlayer(const Player& player, const vector<pair<Player&,
         cout << "\033[5m" << "Player's Name >>> " << resetColor; cin >> player1;
         
         // Exception
+        playerException err;
         if (find(tempList.begin(), tempList.end(), player1) == tempList.end()){
-            throw playerException;
+            throw err;
         } 
         resPlayers.push_back(player1);
     }

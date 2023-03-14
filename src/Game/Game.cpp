@@ -2,7 +2,7 @@
 #include "Game.hpp"
 using namespace std;
 
-Game::Game() : currentPlayer(players.begin()->first) {
+Game::Game() {
     // this->gameStart = true;
     // // ctor player
     // for (int i = 1; i <= 7; i++) {
@@ -23,6 +23,53 @@ void Game::addPlayer(){
     players.push_back(element);
 }
 
+void Game::dealToTable() {
+    this->table.dealToTable(this->cardDeck);
+}
+
+void Game::dealToPlayers() {
+    for (auto p_itr = getPlayers().begin(); p_itr != getPlayers().end(); p_itr++) {
+        p_itr->first.dealToPlayer(this->cardDeck);
+    }
+}
+
+void Game::dealAbilityToPlayers() {
+    for (auto p_itr = getPlayers().begin(); p_itr != getPlayers().end(); p_itr++) {
+        p_itr->first.setAbility(this->abilityDeck.getTopItems());
+        this->abilityDeck.getItems().erase(this->abilityDeck.getTopItemsIterator());
+    }
+}
+
+bool Game::gameEnded() {
+    for (auto p_itr = getPlayers().begin(); p_itr != getPlayers().end(); p_itr++) {
+        if (p_itr->first.getPoint() >= 4294967296) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void Game::start() {
-    
+    while (!gameEnded()) {
+        Deck<Card> deck;
+        Deck<Ability> deckAbility;
+        this->cardDeck = deck;
+        this->abilityDeck = deckAbility;
+        dealToTable();
+        dealToPlayers();
+        // cards already given to the table and players
+        do {
+            // BAGIAN I/O
+            nextRound();
+            this->table.openCard();
+            if (this->getRound() == 2) {
+                dealAbilityToPlayers();
+            }
+        } while (this->getRound() <= 6);
+
+        // compare score
+
+        // add points to the winner
+    }
 }
