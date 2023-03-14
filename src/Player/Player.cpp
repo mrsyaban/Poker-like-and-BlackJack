@@ -23,6 +23,14 @@ bool operator>(const Player& p1, const Player& p2) {
     }
 }
 
+bool operator==(const Player& p1, const Player& p2){
+    if (p1.getNickname() == p2.getNickname()){
+        return true;
+    } else {
+        return false;
+    }
+}
+
 /* Accessor */
 Card Player::getCard(int position) const{
     if (position == 1){

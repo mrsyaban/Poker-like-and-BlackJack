@@ -89,7 +89,7 @@ void IO::printTable(Table table){
     }
 }
 
-void IO::printAbilitySuccess(const Player& player, const vector<string>& resPlayer){
+void IO::printAbilitySuccess(const Player& player){
     string type = player.getAbility()->getType(); 
     cout << abilColor;
 
@@ -99,9 +99,16 @@ void IO::printAbilitySuccess(const Player& player, const vector<string>& resPlay
         cout << "Kamu mendapatkan 2 kartu baru yaitu:" << endl;
         cout << "1. " << player.getCard(0).getNumber() << " " << player.getCard(0).getColor() << endl;
         cout << "2. " << player.getCard(1).getNumber() << " " << player.getCard(1).getColor() << endl;
-    
+    }
+    cout << resetColor;
+}
+
+void IO::printAbilitySuccess(const Player& player, const vector<string>& resPlayer){
+    string type = player.getAbility()->getType(); 
+    cout << abilColor;
+
     // Swap Card
-    } else if (type == "Swap Card"){
+    if (type == "Swap Card"){
         cout << player.getNickname() << " successfully performed SWAP CARD!" << endl;
         cout << resPlayer[0] << "'s Card and " << resPlayer[1] << "'s Card has been swapped!" << endl; 
     
@@ -147,86 +154,80 @@ void IO::printActionSuccess(const Player& player, const Point& poin, int type){
     }
 }
 
-vector<int> IO::selectCard(const vector<string> playersNick){
+int IO::selectCard(string playersNick){
     int choice;
     cout << abilColor;
-    vector<int> res;
-    for (int i=0; i<2; i++){
-        cout << "Please choose which " << playersNick[i] << "'s cards you want to swap :" << endl;
-        cout << "1. Right" << endl;
-        cout << "2. Left" << endl;
-        cout << "\033[5m" << "Your choice Number >>> " << resetColor; cin >> choice;
-        res.push_back(choice);
+
+    cout << "Please choose which " << playersNick[i] << "'s cards you want to swap :" << endl;
+    cout << "1. Right" << endl;
+    cout << "2. Left" << endl;
+    cout << "\033[5m" << "Your choice Number >>> " << resetColor; cin >> choice;
+
+    if (choice<1 || choice >2){
+        NumberInputException err;
+        throw err;
     }
-    for (int i=0; i<2; i++){
-        if (res[i]<1 || res[i] >2){
-            NumberInputException err;
-            throw err;
-        }
-    }
-    return res;
+    return choice;
 }
 
-vector<string> printPlayer(string nick, const vector<pair<Player&, bool>>& listPlayer){
-    vector<string> tempList;
+void printPlayer(string nick, const vector<pair<Player&, bool>>& listPlayer){
     int i=1;
     for (auto p: listPlayer){
         if (nick != p.first.getNickname()){
             cout << i << ". " << listPlayer[i].first.getNickname() << endl;
             i++;
-            tempList.push_back(listPlayer[i].first.getNickname());
         }
     }
 }
 
-vector<string> IO::selectPlayer(const Player& player, const vector<pair<Player&, bool>>& listPlayer){
+vector<Player>& IO::selectPlayer(const Player& player, const vector<pair<Player&, bool>>& listPlayer) const{
     string type = player.getAbility()->getType(); 
-    cout << abilColor;
     string player1, player2;
-    vector<string> tempList;
-    vector<string> resPlayers;
+    vector<Player> resPlayers;
+    playerException err;
+
+    cout << abilColor;
     if (type == "Swap Card"){
         cout << "Silakan pilih pemain yang kartunya ingin anda tukar :" << endl;
-        tempList = printPlayer(player.getNickname(), listPlayer);
+        printPlayer(player.getNickname(), listPlayer);
         cout << "\033[5m" << "Player's Name 1 >>> " << resetColor; cin >> player1;
         cout << abilColor;
         cout << "\033[5m" << "Player's Name 2 >>> " << resetColor; cin >> player2;
 
+        for (auto p_itr = listPlayer.begin(); p_itr != listPlayer.end(); p_itr++) {
+            if (p_itr->first.getNickname() == player1 || p_itr->first.getNickname() == player2){
+                resPlayers.push_back(p_itr->first);
+            }
+        }
+
         // Exception
-        playerException err;
         if (player1 == player2){
             throw err;
-        } else if (find(tempList.begin(), tempList.end(), player1) == tempList.end()){
-            throw err;
-        } else if (find(tempList.begin(), tempList.end(), player2) == tempList.end()){
-            throw err;
         }
-        resPlayers = {player1, player2};
 
     } else if (type == "Switch"){
         cout << "Silakan pilih pemain yang kartunya ingin anda tukar :" << endl;
-        tempList = printPlayer(player.getNickname(), listPlayer);
+        printPlayer(player.getNickname(), listPlayer);
         cout << "\033[5m" << "Player's Name >>> " << resetColor; cin >> player1;
         
-        // Exception
-        playerException err;
-        if (find(tempList.begin(), tempList.end(), player1) == tempList.end()){
-            throw err;
-        } 
-        resPlayers.push_back(player1);
+        for (auto p_itr = listPlayer.begin(); p_itr != listPlayer.end(); p_itr++) {
+            if (p_itr->first.getNickname() == player1){
+                resPlayers.push_back(p_itr->first);
+            }
+        }
 
     } else if (type == "Abilityless"){
         cout << "Silakan pilih pemain yang kartunya ingin anda matikan :" << endl;
-        tempList = printPlayer(player.getNickname(), listPlayer);
+        printPlayer(player.getNickname(), listPlayer);
         cout << "\033[5m" << "Player's Name >>> " << resetColor; cin >> player1;
         
-        // Exception
-        playerException err;
-        if (find(tempList.begin(), tempList.end(), player1) == tempList.end()){
-            throw err;
-        } 
-        resPlayers.push_back(player1);
+        for (auto p_itr = listPlayer.begin(); p_itr != listPlayer.end(); p_itr++) {
+            if (p_itr->first.getNickname() == player1 || p_itr->first.getNickname() == player2){
+                resPlayers.push_back(p_itr->first);
+            }
+        }
     }
+    
     cout << resetColor;
     return resPlayers;
 }

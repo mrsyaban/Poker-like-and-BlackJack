@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "Ability.hpp"
 #include "../Game/Game.hpp"
 #include "../Exception/exception.h"
@@ -53,22 +54,33 @@ void ReRoll::Execute(Game& g) {
     owner->deleteall();
     owner->add(g.getCardDeck());
     owner->add(g.getCardDeck());
+
+    IO io;
+    io.printAbilitySuccess(*owner);
 }
 
 /* Quadruple Ability */
 Quadruple::Quadruple() : Ability("Quadruple") {}
 
-void Quadruple::Execute(Game &g)
-{
+void Quadruple::Execute(Game &g){
     g.getPoint().Quadruple();
+    
+    // print success message
+    Player& owner = ((g.getPlayers().begin() + g.getCurrentPlayer())->first);
+    IO io;
+    io.printAbilitySuccess(owner, g.getPoint());
 }
 
 /* Quarter Ability */
 Quarter::Quarter() : Ability("Quarter") {}
 
-void Quarter::Execute(Game &g)
-{
+void Quarter::Execute(Game &g){
     g.getPoint().Quarter();
+    
+    // print success message
+    Player& owner = ((g.getPlayers().begin() + g.getCurrentPlayer())->first);
+    IO io;
+    io.printAbilitySuccess(owner, g.getPoint());
 }
 
 /* Reverse Direction Ability */
@@ -83,37 +95,40 @@ void ReverseDirection::Execute(Game &g)
 SwapCard::SwapCard(): Ability("Swap") {}
 
 void SwapCard::Execute(Game& g) {
-    Player * player1 = &selectPlayer(g);
-    Player * player2 = &selectPlayer(g);
+    IO io;
+    Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
 
-    string firstCard;
-    string secondCard;
+    // select Player
+    vector<Player>& listPlayer = io.selectPlayer(owner, g.getPlayers());
+    Player& player1 = listPlayer[0];
+    Player& player2 = listPlayer[1];
 
-    cout << "Silahkan masukkan kartu untuk player pertama: (kiri atau kanan)" << endl;
-    cin >> firstCard;
-    cout << "Silahkan masukkan kartu untuk player kedua: (kiri atau kanan)" << endl;
-    cin >> secondCard;
+    // select Card
+    int cardPlayer1 = io.selectCard(player1.getNickname());
+    int cardPlayer2 = io.selectCard(player2.getNickname());
 
-    if (firstCard == "kanan") {
-        player1->puttoback();
+    // swap
+    if (cardPlayer1 == 1) {
+        player1.puttoback();
     }
-
-    if (secondCard == "kanan") {
-        player2->puttoback();
+    if (cardPlayer2 == 1) {
+        player2.puttoback();
     }
-
-    player1->exchange(*player2);
+    player1.exchange(player2);
 }
 
 /* Switch Card Ability */
 Switch::Switch(): Ability("Switch") {}
 
 void Switch::Execute(Game& g) {
-    Player * owner = &((g.getPlayers().begin() + g.getCurrentPlayer())->first);
-    Player * other = &selectPlayer(g);
+    Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
+    
+    IO io;
+    vector<Player>& target = io.selectPlayer(owner, g.getPlayers());
+    Player& other = target[0];
 
-    owner->exchange(*other);
-    owner->exchange(*other);
+    owner.exchange(other);
+    owner.exchange(other);
 }
 
 /* Abilityless Ability */

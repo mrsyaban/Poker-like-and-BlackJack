@@ -2,6 +2,7 @@
 #define ACTION_HPP
 
 #include "../Game/Game.hpp"
+#include "../IO/IO.hpp"
 
 /* Abstract class Action */
 class Action {

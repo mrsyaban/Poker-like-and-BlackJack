@@ -24,10 +24,11 @@ class IO {
         
         void printAbilitySuccess(const Player& , const vector<string>& );
         void printAbilitySuccess(const Player& ,const Point& );
+        void printAbilitySuccess(const Player& player);
         void printActionSuccess(const Player& ,const Point&, int );
 
-        vector<string> selectPlayer(const Player& , const vector<pair<Player&, bool>>& );
-        vector<int> selectCard(const vector<string> );
+        vector<Player>& selectPlayer(const Player& , const vector<pair<Player&, bool>>& ) const;
+        int selectCard(string);
 
         void printEndGame(const vector<pair<Player&, bool>>&);
 
