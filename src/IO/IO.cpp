@@ -10,7 +10,15 @@ string retrieveInput(){
     string input;
     cout << "\033[0m" << "\033[1m\033[36m" << " ";
     cin >> input;
-    cout << "\033[0m";
+    cout << "\033[0m" << endl;
+    return input;
+}
+
+string IO::turnInput(Player& player){
+    cout << enterColor;
+    cout << player.getNickname() << "'s turn >>> " << resetColor;
+    string input = retrieveInput();
+    isValid(input);
     return input;
 }
 

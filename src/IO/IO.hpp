@@ -14,6 +14,7 @@ class IO {
     public :    
         static string retrieveInput();
 
+        string turnInput(Player&);
         void isValid(string input);
         
         void splashScreen();
