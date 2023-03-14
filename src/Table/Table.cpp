@@ -24,3 +24,7 @@ void Table::openCard() {
 void Table::getInfo() const {
     cout << "This is Table Card" << endl;
 }
+
+Card Table::getCard(int position) const {
+    return this->items[position];
+}

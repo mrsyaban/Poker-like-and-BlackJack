@@ -16,6 +16,9 @@ class Table: public InventoryHolder<Card> {
         void openCard();
         void getInfo() const;
 
+        /* Getter */
+        Card getCard(int) const;
+
 };
 
 #endif
