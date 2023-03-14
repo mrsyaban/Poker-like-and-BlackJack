@@ -18,6 +18,9 @@ class InventoryHolder
         InventoryHolder<T>& operator+(const T&);
         InventoryHolder<T>& operator-(const T&);
         InventoryHolder<T>& operator=(InventoryHolder&);
+        vector<T>& getItems();
+        T& getTopItems();
+        auto getTopItemsIterator();
         void add(InventoryHolder&);
         void exchange(InventoryHolder&);
         void deleteall();

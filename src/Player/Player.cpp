@@ -64,14 +64,9 @@ void Player::setAbility(Ability& ability){
     handAbility = &ability;
 }
 
-void Player::dealToPlayer(InventoryHolder& deck) {
+void Player::dealToPlayer(InventoryHolder<Card>& deck) {
     this->deleteall();
     this->add(deck);
-    this->add(deck);
-}
-
-void Player::dealAbilityToPlayer(InventoryHolder& deck) {
-    this->deleteall();
     this->add(deck);
 }
 

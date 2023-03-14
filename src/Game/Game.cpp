@@ -35,7 +35,8 @@ void Game::dealToPlayers() {
 
 void Game::dealAbilityToPlayers() {
     for (auto p_itr = getPlayers().begin(); p_itr != getPlayers().end(); p_itr++) {
-        p_itr->first.dealAbilityToPlayer(this->abilityDeck);
+        p_itr->first.setAbility(this->abilityDeck.getTopItems());
+        this->abilityDeck.getItems().erase(this->abilityDeck.getTopItemsIterator());
     }
 }
 
