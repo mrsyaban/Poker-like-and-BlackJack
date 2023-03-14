@@ -7,6 +7,7 @@
 #include "../Point/Point.hpp"
 #include "../Ability/Ability.hpp"
 #include "../Table/Table.hpp"
+#include "../IO/IO.hpp"
 
 #include <iostream>
 #include <map>
@@ -68,6 +69,8 @@ class Game {
             return this->currentPlayer;
         }
 
+        /* Setter */
+        void addPlayer();
         void incCurrentPlayer() {
             currentPlayer++;
             currentPlayer %= 7;

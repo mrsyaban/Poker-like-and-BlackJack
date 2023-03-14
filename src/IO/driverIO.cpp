@@ -1,6 +1,8 @@
 #include "IO.hpp"
 
 int main(){
+    Game game;
     IO io;
-    io.inputPlayerName();
+    io.mainMenu();
+    io.inputPlayerName(game);
 }

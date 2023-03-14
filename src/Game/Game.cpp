@@ -16,6 +16,13 @@ Game::~Game(){
 
 }
 
+void Game::addPlayer(){
+    string nick = IO::retrieveInput();
+    Player player(nick);
+    pair<Player&, bool> element(player, false);
+    players.push_back(element);
+}
+
 void Game::start() {
     
 }

@@ -105,7 +105,9 @@ void SwapCard::Execute(Game& g) {
 // }
 
 void Switch::Execute(Game& g) {
-    Player temp1 = selectPlayer(g);
+    auto temp = g.getPlayers().begin();
+    temp += g.getCurrentPlayer();
+    Player temp1 = temp->first;
     Player temp2 = selectPlayer(g);
 
     temp1.exchange(temp2);
@@ -122,7 +124,7 @@ void Abilityless::Execute(Game& g) {
     int n = g.getPlayers().size(), i = 0;
 
     while (allAvail && i < n) {
-        if (g.getPlayers()[i].first.getAbility()->getAvail() == true and g.getPlayers()[i] != g.getPlayers()[g.getCurrentPlayer()]) {
+        if (g.getPlayers()[i].first.getAbility()->getAvail() == true && g.getPlayers()[i] != g.getPlayers()[g.getCurrentPlayer()]) {
             i++;
         } else {
             allAvail = false;
