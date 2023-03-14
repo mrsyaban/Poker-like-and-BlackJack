@@ -70,6 +70,11 @@ void Player::dealToPlayer(InventoryHolder& deck) {
     this->add(deck);
 }
 
+void Player::dealAbilityToPlayer(InventoryHolder& deck) {
+    this->deleteall();
+    this->add(deck);
+}
+
 /* Utility Function*/
 void Player::addPoint(int point){
     this->handPoint += point;
