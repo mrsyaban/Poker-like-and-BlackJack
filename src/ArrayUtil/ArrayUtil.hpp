@@ -9,8 +9,8 @@ T getHighest(T * buffer, int size) {
     if (size == 1) {
         return T[0];
     } else {
-        T left = GetHighest(buffer, size / 2);
-        T right = GetHighest(buffer + size / 2, size - size / 2);
+        T left = getHighest(buffer, size / 2);
+        T right = getHighest(buffer + size / 2, size - size / 2);
         return left > right ? left : right;
     }
 };
@@ -18,7 +18,7 @@ T getHighest(T * buffer, int size) {
 template <class T>
 // signature for vector
 T getHighest(vector<T> buffer) {
-    return GetHighest(buffer.data(), buffer.size());
+    return getHighest(buffer.data(), buffer.size());
 };
 
 #endif

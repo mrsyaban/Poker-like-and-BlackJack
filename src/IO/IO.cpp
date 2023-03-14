@@ -124,6 +124,15 @@ void IO::printAbilitySuccess(const Player& player, const vector<string>& resPlay
     } else if (type == "Abilityless"){
         cout << player.getNickname() << " successfully performed ABILITYLESS! " << endl;
         cout << resPlayer[0] << "'s Ability Card has been disabled";
+
+    // Reverse
+    } else if (type == "Reverse"){
+        cout << player.getNickname() << " successfully performed REVERSE! " << endl;
+        cout << "the rest of players order for this round: ";
+        // TODO sisa urutan player yg blm jalan
+        cout << endl;
+        cout << "players order for next round: ";
+        // TODO urutan player buat ronde berikutnya
     }
     cout << resetColor;
 }
