@@ -24,5 +24,19 @@ void Game::addPlayer(){
 }
 
 void Game::start() {
-    
+    while (!end) {
+        Deck<Card> deck;
+        this->cardDeck = deck;
+        dealToTable();
+        dealToPlayers();
+        // cards already given to the table and players
+        do {
+            // BAGIAN I/O
+            nextRound();
+        } while (this->getRound() <= 6);
+
+        // compare score
+
+        // add points to the winner
+    }
 }
