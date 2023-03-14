@@ -142,6 +142,30 @@ class Game {
             }
         }
 
+        // return vector sisa urutan eksekusi saat ini (setelah reverse)
+        vector<string> getRemainingReversedPlayer() {
+            vector<string> res;
+            int i = currentPlayer-1;
+            while (i % 7 != currentPlayer) {
+                if (players[i].second % 2 != round % 2) {
+                    res.push_back(players[i].first.getNickname());
+                }
+                i--;
+            }
+            return res;
+        }
+
+        // return vector buat urutan eksekusi ronde berikutnya (setelah reverse)
+        vector<string> getReversedPlayer() {
+            vector<string> res;
+            int i = currentPlayer-1;
+            while (i % 7 != currentPlayer) {
+                res.push_back(players[i].first.getNickname());
+                i--;
+            }
+            return res;
+        }
+
         /* SETTER */
         void dealToTable();
         void dealToPlayers();
