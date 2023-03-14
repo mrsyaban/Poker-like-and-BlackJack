@@ -1,8 +1,6 @@
 #include "../Game/Game.hpp"
+#include "../Exception/exception.h"
 
-#include <iostream>
-#include <string>
-using namespace std;
 
 class IO {
     private:         
@@ -11,13 +9,20 @@ class IO {
         const string wordColor = "\033[1m\033[36m";
         const string inputColor = "\033[1m\033[36m";
         const string enterColor = "\033[5m\033[1m\033[33m";
-
-
+        const string abilColor;
     public :    
         static string retrieveInput();
+        
         void splashScreen();
         string mainMenu();  
         void inputPlayerName(Game& game);
-        bool isValid();
-        void addPlayer();
+        void printTable(Table);
+        
+        void printAbilitySuccess(const Player& , const vector<string>& );
+        void printAbilitySuccess(const Player& ,const Point& );
+
+        vector<string> selectPlayer(const Player& , const vector<pair<Player&, bool>>& );
+        vector<int> selectCard(const vector<string> );
+
+        void printEndGame(const vector<pair<Player&, bool>>&);
 };

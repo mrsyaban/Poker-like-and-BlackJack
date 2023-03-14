@@ -22,6 +22,7 @@ class InventoryHolder
         void exchange(InventoryHolder&);
         void deleteall();
         void puttoback();
+        T getItems(int i);
         virtual void getInfo() const = 0;
 };
 

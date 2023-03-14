@@ -41,6 +41,8 @@ Ability& Ability::setAvail(bool avail)
     this->available = avail;
 }
 
+
+/** REROLL */
 ReRoll::ReRoll() : Ability("Reroll") {
     
 }
@@ -52,6 +54,8 @@ void ReRoll::Execute(Game& g) {
     temp.add(g.getCardDeck());
 }
 
+
+/** QUADRUPLE */
 Quadruple::Quadruple() : Ability("Quadruple") {}
 
 void Quadruple::Execute(Game &g)
@@ -66,6 +70,8 @@ void Quarter::Execute(Game &g)
     g.getPoint().Quarter();
 }
 
+
+/** REVERSE */
 ReverseDirection::ReverseDirection() : Ability("Reverse") {}
 
 void ReverseDirection::Execute(Game &g)
@@ -73,6 +79,8 @@ void ReverseDirection::Execute(Game &g)
     g.setReverseInfo(true);
 }
 
+
+/** SWAP CARD */
 SwapCard::SwapCard(): Ability("Swap") {
     
 }
@@ -100,6 +108,8 @@ void SwapCard::Execute(Game& g) {
     temp1.exchange(temp2);
 }
 
+
+/** SWITCH CARD */
 // Switch::Switch(): Ability("Switch") {
     
 // }
@@ -114,6 +124,8 @@ void Switch::Execute(Game& g) {
     temp1.exchange(temp2);
 }
 
+
+/** ABILITYLESS */
 Abilityless::Abilityless(): Ability("Abilityless") {
 
 }

@@ -15,6 +15,8 @@ class Table: public InventoryHolder<Card> {
         void dealToTable(InventoryHolder<Card>&);
         void openCard();
         void getInfo() const;
+        int getNeff() const;
+        
 
 };
 

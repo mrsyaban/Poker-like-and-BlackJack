@@ -24,3 +24,7 @@ void Table::openCard() {
 void Table::getInfo() const {
     cout << "This is Table Card" << endl;
 }
+
+int Table::getNeff() const {
+    return this->neff;
+}

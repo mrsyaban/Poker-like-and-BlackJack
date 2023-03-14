@@ -8,7 +8,7 @@ struct NumberInputException : public exception
 {
     const char *what() const throw()
     {
-        return "Angka masukan tidak valid";
+        return "Input number not valid!";
     }
 };
 
@@ -16,7 +16,7 @@ struct FileException : public exception
 {
     const char *what() const throw()
     {
-        return "File masukan tidak valid";
+        return "Input file not valid!";
     }
 };
 
@@ -24,7 +24,15 @@ struct AbilityException : public exception
 {
     const char *what() const throw()
     {
-        return "Ability tidak valid";
+        return "Ability not valid";
+    }
+};
+
+struct playerException : public exception
+{
+    const char *what() const throw()
+    {
+        return "Players input name not valid!";
     }
 };
 
