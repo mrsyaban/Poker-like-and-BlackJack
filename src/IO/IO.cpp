@@ -18,11 +18,8 @@ string IO::turnInput(Player& player){
     cout << enterColor;
     cout << player.getNickname() << "'s turn >>> " << resetColor;
     string input = retrieveInput();
-    isValid(input);
-    return input;
-}
 
-void IO::isValid(string input){
+    // input validation
     vector<string> validString = {
         "NEXT",
         "HALF",
@@ -35,14 +32,55 @@ void IO::isValid(string input){
         "SWITCH",
         "ABILITYLESS"
     };
+
     if (find(validString.begin(), validString.end(), input) == validString.end()){
         inputException err;
         throw err;
     }
+
+    return input;
 }
 
 void IO::splashScreen(){
-    string splash = "WELKAMM";
+    string spades = "\033[1;34m";
+    string clubs = "\033[1;33m";
+    string hearts = "\033[1;31m";
+    string diamonds = "\033[1;32m";
+
+    string splash = clubs +                                                                    
+"                          .,;;;:::::::::::;;;;;;;,,,;;,.                                            \n"
+"                          .olcoxxxxxxxxxxxxxxxxxkkkkOOO;                                            \n"
+"                          .lc;lxxxxxxxxxxxxkkkOOO0000KKc                                            \n"
+"                          .lc,cxxxxxxxkkkOOO000KKXXXXNNl....            "+spades+".'..                        \n"
++hearts+"                          .cl:"+clubs+"ldxkkkkOO000KKKXXNNNNNWWWd"+diamonds+",cooc:;'...    "+spades+"'llcl:,..                    \n"
++hearts+"                       ..,cdxl,"+clubs+":dkO000KKXXXNNNWWWWWWWWWx"+diamonds+";cdxxxxxdolc;,,"+spades+"cc':ddddl:'.                 \n"
++hearts+"                   ..,:ldkkO0Kd;"+clubs+":x0KXX0OOO0XWWWWWWWWWWWk"+diamonds+";lxxxxxxxxxxxkxxdolc"+spades+"oxxxxxoc;..             \n"
++hearts+"               ..,:lodxxkO00KXNOc"+clubs+"ckXXx:;,,;cOWWWWWWWWWWk"+diamonds+":okkkkOOOOOOOOO000l,c"+spades+"dxxxxxxxdl;'.          \n"
++hearts+"            .':ldxxxxxkOO0KXXNWWKo"+clubs+"lxOo'....'xNWWWWWWWWWk"+diamonds+"lx0000KKKKKKKXXXXO;,"+spades+"lxxxxxxxxxxxdl;'..      \n"
++hearts+"        ..,coxxxxxxxkkO0KKXNNWWWWNd"+clubs+"'.,......,;:xNWWWWWWk"+diamonds+"oOXXXXXNNNNNNNNNNd,"+spades+"cxOOOOkkkkkkkxxxxoc,\n"
++hearts+"     .';lodxxxxxxxxkOO0KXXNWWWWWWWNx."+clubs+"          'OWWWWWNk"+diamonds+"oxkKNWWWWWWWWWWWKcc"+spades+"k000000000000OOOOOOkd'\n"
++hearts+"    .:olldxxxxxxxkkO0KKXNNWWWWWWWWWWO'"+clubs+" ';'.    ,0WNNNNXd"+diamonds+",',c0WWWWWWWWWWWkc"+spades+"xXNNXXXXXXXXXXKKKKKKO:\n"
++hearts+"     .clccoxxxxxkOO0KXNNWNKOOOKWWWWWW0"+clubs+"oc;lxc,,cONNXXXKKl"+diamonds+"...';kNWWWWWWWMKll"+spades+"kOOxkNWNWWNNNNNNNNN0;\n"
++hearts+"      .:occdxxkkO0KKXNNWNx:,'';oKWWWWWK;"+clubs+".'kNXXXXKKKK00Oc"+diamonds+".....,dNWWWWWWWd."+spades+".....:0WWWWWWWWWWWW0;\n"
++hearts+"       .;oxxxkOO0KK0kxdkx;......lNWWWNN0"+clubs+"doOXKKK00OOOOkkc"+diamonds+".......oXWWWWW0,"+spades+"      .lKWWWWWWWWWW0, \n"
++hearts+"         'oxkOO0KXOc,''.........oNWWNNXKO"+clubs+"cdO0OOOkkkkxxx:"+diamonds+".....,lkNWWWWNl"+spades+"       ..cKWWWWWWWWO, \n"
++hearts+"          .oO00KXNx;'..........cKWWNXXK0Ok"+clubs+"olxkkxxxxdolo;"+diamonds+"..;oOXWWWNNNNO,"+spades+"..      .'xWWWWWWWx'\n"
++hearts+"           .o0KXNWXd,.........:KWNNXXK0Okkx"+clubs+"ocoxxxxxd:,cc"+diamonds+"l0NNNNXXXXXX0d"+spades+"c;;c'    .:KWWWWWNx.\n"
++hearts+"            .oKNNWWN0xolllc:,,kWNNXKK0Okkxxdl"+clubs+"coxxxxxc;ll"+diamonds+"kXXKKKKK000Ox"+spades+"dd;;O0l;;cxXWWWWWXx.\n"
++hearts+"             .lXWWWWWWWMWMWWXKXNXXK0OOkxxxoccl"+clubs+"clddddc:ll"+diamonds+"x000OOOOOOkx"+spades+"okXXKKNXXXNNXXXXX0;\n"
++hearts+"               cXWWWWWWWWWWWWNNXXK0Okkxxxxdoccl"+diamonds+"ccoooooodkkkkkkkkxxx"+spades+"loO000000KKKKKKK0x,\n"
++hearts+"                :KWWWWWWWWWWNNXK00Okkxxxxxxxocll"+diamonds+"cdkxxxxxxxxxxxxoodo"+spades+"cdkkOOOOOOOOOOOko\n"
++hearts+"                 ,0WWWWWWWNNXXK0Okkxxxxxxxxdl"+diamonds+"cclodxxxxxxxxxxxxdl:l"+spades+"clxxxxxxxxxkxxkx:\n"
++hearts+"                  'kWWWWNNXXK0OOkxxddxxxdc;'"+diamonds+"ccc,;::cloddxxxxddl:ll"+spades+"cdxxxxxxxxdccdo;\n"
++hearts+"                   .dXNNXKK0Okkxdddddo:,               "+diamonds+"',;;:clccl"+spades+";,codddddddc,;c,\n"
++hearts+"                    .l0K00Okxxddolc;'.                 "+diamonds+"........'"+spades+".....,:cooo:,:c'\n"
++hearts+"                     .:kOkxddoc;,.                                   "+spades+"...,;;:;\n"
++hearts+"                       ,odlc,...          "+" _       __"+clubs+"____  "+diamonds+"____"+spades+"__\n"
++hearts+"                        ....              "+ "| |     / /"+clubs+" __ \\"+diamonds+"/  _/ "+spades+"/\n"
++hearts+"                                          | | /| / / "+clubs+"/ / /"+diamonds+"/ // "+spades+"/ \n"
++hearts+"                                          | |/ |/ / "+clubs+"/_/ /"+diamonds+"/ //"+spades+"_/  \n"   
++hearts+"                                          |__/|__/"+clubs+"\\____/"+diamonds+"___"+spades+"(_)   \n" + resetColor;
+                       
     cout << splash << endl;
 }
 
@@ -89,26 +127,18 @@ void IO::printTable(Table table){
     }
 }
 
-void IO::printAbilitySuccess(const Player& player){
+void IO::printAbilitySuccess(const Player& player, vector<string> resPlayer = {}, vector<string> reversed = {}){
     string type = player.getAbility()->getType(); 
     cout << abilColor;
-
     // Re-Roll
     if ( type == "Re-Roll"){
-        cout << "Melakukan pembuangan kartu yang sedang dimiliki" << endl;
-        cout << "Kamu mendapatkan 2 kartu baru yaitu:" << endl;
+        cout << "Replacing your current cards..." << endl;
+        cout << "You got 2 new cards :" << endl;
         cout << "1. " << player.getCard(0).getNumber() << " " << player.getCard(0).getColor() << endl;
         cout << "2. " << player.getCard(1).getNumber() << " " << player.getCard(1).getColor() << endl;
-    }
-    cout << resetColor;
-}
-
-void IO::printAbilitySuccess(const Player& player, const vector<string>& resPlayer){
-    string type = player.getAbility()->getType(); 
-    cout << abilColor;
-
+    
     // Swap Card
-    if (type == "Swap Card"){
+    } else if (type == "Swap"){
         cout << player.getNickname() << " successfully performed SWAP CARD!" << endl;
         cout << resPlayer[0] << "'s Card and " << resPlayer[1] << "'s Card has been swapped!" << endl; 
     
@@ -128,24 +158,40 @@ void IO::printAbilitySuccess(const Player& player, const vector<string>& resPlay
     // Reverse
     } else if (type == "Reverse"){
         cout << player.getNickname() << " successfully performed REVERSE! " << endl;
-        cout << "the rest of players order for this round: ";
-        // TODO sisa urutan player yg blm jalan
+        cout << "The rest of players order for this round: ";
+        for (auto itr = resPlayer.begin(); itr != resPlayer.end(); itr++){
+            cout << *itr;
+            if (itr != resPlayer.end()-1){
+                cout << " - ";
+            }
+        }
         cout << endl;
-        cout << "players order for next round: ";
-        // TODO urutan player buat ronde berikutnya
+        cout << "Players order for next round: ";
+        for (auto itr = reversed.begin(); itr != reversed.end(); itr++){
+            cout << *itr;
+            if (itr != resPlayer.end()-1){
+                cout << " - ";
+            }
+        }
+        cout << endl;
     }
     cout << resetColor;
 }
 
-void IO::printAbilitySuccess(const Player& player,const Point& poin){
+
+void IO::printAbilitySuccess(const Player& player, const Point& poin = Point()){
     string type = player.getAbility()->getType(); 
     cout << abilColor;
+    
+    // Quadruple
     if (type == "Quadruple"){
-        cout << player.getNickname() << " melakukan QUADRUPLE! Poin hadiah naik dari" << endl;
-        cout << poin.getValue()/4 << " menjadi " << poin.getValue() << "!" << endl;
+        cout << player.getNickname() << " successfully performed QUADRUPLE! Game Point has been quadrupled from" << endl;
+        cout << poin.getValue()/4 << " became " << poin.getValue() << "!" << endl;
+    
+    // Quarter
     } else if (type == "Quarter"){
-        cout << player.getNickname() << " melakukan QUARTER! Poin hadiah turun dari" << endl;
-        cout << poin.getValue()*4 << " menjadi " << poin.getValue() << "!" << endl;
+        cout << player.getNickname() << " successfully performed QUARTER! Game Point has been quartered from" << endl;
+        cout << poin.getValue()*4 << " became " << poin.getValue() << "!" << endl;
     }
     cout << resetColor;
 }
@@ -155,11 +201,11 @@ void IO::printActionSuccess(const Player& player, const Point& poin, int type){
     if (type == 1){
         cout << "Turn given to the next player" << endl;
     } else if (type == 2){
-        cout << player.getNickname() << " melakukan DOUBLE! Poin hadiah naik dari" << endl;
-        cout << poin.getValue()/2 << " menjadi " << poin.getValue() << "!" << endl;
+        cout << player.getNickname() << " successfully performed DOUBLE! Game Point has been doubled from" << endl;
+        cout << poin.getValue()/2 << " became " << poin.getValue() << "!" << endl;
     } else if (type == 3){
-        cout << player.getNickname() << " melakukan HALF! Poin hadiah turun dari" << endl;
-        cout << poin.getValue()*2 << " menjadi " << poin.getValue() << "!" << endl;
+        cout << player.getNickname() << " successfully performed HALF! Game Point has been halved from" << endl;
+        cout << poin.getValue()*2 << " became " << poin.getValue() << "!" << endl;
     }
 }
 
@@ -167,7 +213,7 @@ int IO::selectCard(string playersNick){
     int choice;
     cout << abilColor;
 
-    cout << "Please choose which " << playersNick[i] << "'s cards you want to swap :" << endl;
+    cout << "Please choose which " << playersNick << "'s cards you want to swap :" << endl;
     cout << "1. Right" << endl;
     cout << "2. Left" << endl;
     cout << "\033[5m" << "Your choice Number >>> " << resetColor; cin >> choice;
@@ -196,7 +242,7 @@ vector<Player>& IO::selectPlayer(const Player& player, const vector<pair<Player&
     playerException err;
 
     cout << abilColor;
-    if (type == "Swap Card"){
+    if (type == "Swap"){
         cout << "Silakan pilih pemain yang kartunya ingin anda tukar :" << endl;
         printPlayer(player.getNickname(), listPlayer);
         cout << "\033[5m" << "Player's Name 1 >>> " << resetColor; cin >> player1;

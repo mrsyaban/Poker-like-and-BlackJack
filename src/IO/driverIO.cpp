@@ -1,8 +1,9 @@
+#include <iostream>
 #include "IO.hpp"
+#include <string>
+using namespace std;
 
-int main(){
-    Game game;
+int main() {
     IO io;
-    io.mainMenu();
-    io.inputPlayerName(game);
+    io.splashScreen();
 }

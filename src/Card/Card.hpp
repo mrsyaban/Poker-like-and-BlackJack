@@ -18,13 +18,6 @@ enum CardColor {
     Red = 3
 };
 
-const map<CardColor, string> cardToString = {
-/* Mapping color to int for */
-    {Green, "Green"},
-    {Blue, "Blue"},
-    {Yellow, "Yellow"},
-    {Red, "Red"}
-};
 
 class Card : public ObjectWithValue<double> {
     private:

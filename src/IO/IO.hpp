@@ -1,36 +1,47 @@
 #include "../Game/Game.hpp"
 #include "../Exception/exception.h"
+#include "../Table/Table.hpp"
 
+const map<int, string> cardToString = {
+/* Mapping color to int for */
+    {0, "Green"},
+    {1, "Blue"},
+    {2, "Yellow"},
+    {3, "Red"}
+};
 
 class IO {
     private:   
-        const string lineColor = "\033[1m\033[33m";
-        const string resetColor = "\033[0m";
-        const string wordColor = "\033[1m\033[36m";
-        const string inputColor = "\033[1m\033[36m";
-        const string enterColor = "\033[5m\033[1m\033[33m";
-        const string abilColor;
-        const string actnColor;
+        string lineColor = "\033[1;33m";
+        string resetColor = "\033[0m";
+        string wordColor = "\033[1;36m";
+        string inputColor = "\033[1;36m";
+        string enterColor = "\033[5;1;33m";
+        string abilColor = "\033[1;31m";
+        string actnColor = "\033[1;34m";
+
     public :    
         static string retrieveInput();
 
-        string turnInput(Player&);
-        void isValid(string input);
-        
+        /* print function*/
         void splashScreen();
+        void printTable(Table);
+        void printEndGame(const vector<pair<Player&, bool>>&);
+        
+        /* main menu */
         string mainMenu();  
         void inputPlayerName(Game& game);
-        void printTable(Table);
+        string turnInput(Player&);
         
-        void printAbilitySuccess(const Player& , const vector<string>& );
-        void printAbilitySuccess(const Player& ,const Point& );
-        void printAbilitySuccess(const Player& player);
+        /* success message function*/
+        void printAbilitySuccess(const Player& player, vector<string> resPlayer = {}, vector<string> reversed = {});
+        void printAbilitySuccess(const Player&, const Point&); 
         void printActionSuccess(const Player& ,const Point&, int );
 
+        /* select function */
         vector<Player>& selectPlayer(const Player& , const vector<pair<Player&, bool>>& ) const;
         int selectCard(string);
 
-        void printEndGame(const vector<pair<Player&, bool>>&);
 
 
 };

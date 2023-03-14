@@ -89,6 +89,10 @@ ReverseDirection::ReverseDirection() : Ability("Reverse") {}
 void ReverseDirection::Execute(Game &g)
 {
     g.setReverseInfo(true);
+
+    IO io;
+    Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
+    io.printAbilitySuccess(owner, g.getRemainingReversedPlayer(), g.getReversedPlayer());
 }
 
 /* Swap Card Ability */
@@ -115,20 +119,27 @@ void SwapCard::Execute(Game& g) {
         player2.puttoback();
     }
     player1.exchange(player2);
+    
+    // print successfull message
+    vector<string> output = {player1.getNickname(), player2.getNickname()};
+    io.printAbilitySuccess(owner, output);
 }
 
 /* Switch Card Ability */
 Switch::Switch(): Ability("Switch") {}
 
 void Switch::Execute(Game& g) {
+    IO io;
     Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
     
-    IO io;
     vector<Player>& target = io.selectPlayer(owner, g.getPlayers());
     Player& other = target[0];
 
     owner.exchange(other);
     owner.exchange(other);
+
+    vector<string> output = {target[0].getNickname()};
+    io.printAbilitySuccess(owner, output);
 }
 
 /* Abilityless Ability */
