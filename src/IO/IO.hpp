@@ -14,7 +14,7 @@ class IO {
     public :    
         static string retrieveInput();
 
-        bool isValid();
+        void isValid(string input);
         
         void splashScreen();
         string mainMenu();  

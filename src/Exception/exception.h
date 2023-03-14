@@ -40,4 +40,12 @@ class playerException : public baseException
     }
 };
 
+class inputException : public baseException
+{
+    const char *what() const throw()
+    {
+        return "Input not valid!";
+    }
+};
+
 #endif
