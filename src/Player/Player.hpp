@@ -21,6 +21,7 @@ class Player : public InventoryHolder<Card> {
         /* Operator Overloading*/
         friend bool operator<(const Player& p1, const Player& p2);
         friend bool operator>(const Player& p1, const Player& p2);
+        friend bool operator==(const Player& p1, const Player& p2);
 
         /* Accessor */
         string getNickname() const;

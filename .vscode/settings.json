@@ -3,10 +3,6 @@
         "array": "cpp",
         "string_view": "cpp",
         "initializer_list": "cpp",
-<<<<<<< HEAD
-        "iostream": "cpp"
-=======
         "*.tcc": "cpp"
->>>>>>> 495adaf4b6807f90cf3916c2e2644776b995063d
     }
 }
