@@ -151,7 +151,6 @@ void SearchCombo::twoPair()
     Combo c;
 
     int count[13] = {0};
-    int count[13] = {0};
     for (unsigned int i = 0; i < this->cards.size(); i++)
     {
         count[this->cards[i].getNumber()]++;
@@ -224,8 +223,6 @@ void SearchCombo::straight()
 {
     cout << "masuk cek straight\n";
     int max = 0;
-    unsigned int i = 0;
-    int countStraight = 0;
 
     vector<Card> straight;
     Combo c;

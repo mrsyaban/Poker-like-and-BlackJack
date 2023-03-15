@@ -22,18 +22,22 @@ void Point::setValue(int val) {
 
 /* value modification from player skills */
 void Point::Half(){
+    if (this->value < 2) return; // at least 2 to halve 
     this->value *= 0.5;
 }
 
 void Point::Double(){
+    if (this->value >= 1073741824) return; // handle integer overflow
     this->value *= 2;
 }
 
 void Point::Quadruple(){
+    if (this->value >= 536870912) return; // handle integer overflow
     this->value *= 4;
 }
 
 void Point::Quarter(){
+    if (this->value < 4) return; // at least 4 to quarter
     this->value *= 0.25;
 }
 

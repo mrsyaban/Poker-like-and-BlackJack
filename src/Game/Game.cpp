@@ -90,10 +90,28 @@ void Game::initNewMatch(bool isRandom)
     round = 1;
     playerTurn = 0;
     point = Point(); // default point : 64
-    Deck<Card> deck; // create new randomized card deck
-    Deck<Ability*> deckAbility; // create new randomized ability deck
-    this->cardDeck = deck; // assign to cardDeck
-    this->abilityDeck = deckAbility; // assign to abilityDeck
+
+    if (isRandom){
+        Deck<Card> deck; // create new randomized card deck
+        Deck<Ability*> deckAbility; // create new randomized ability deck
+        this->cardDeck = deck; // assign to cardDeck
+        this->abilityDeck = deckAbility; // assign to abilityDeck
+    } else {
+        bool success = false;
+        while(!success){
+            try {
+                pair<vector<Card>, vector<Ability*>> temp = io.inputFile();
+
+                Deck<Card> deck(temp.first);
+                Deck<Ability*> deckAbility(temp.second);
+                this->cardDeck = deck;
+                this->abilityDeck = deckAbility;
+                success = true;
+            } catch (BaseException& e){
+                std::cout << e.what() << endl;
+            }
+        }
+    }
 
     // share all the cards to players and table
     dealToTable();

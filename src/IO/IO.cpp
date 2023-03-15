@@ -430,7 +430,7 @@ pair<vector<Card>, vector<Ability*>> IO::inputFile(){
     if (count < 59){
         throw err;
     }
-    
+    }    
     pair<vector<Card>, vector<Ability*>> ret(mainDeck, abilityDeck);
     return ret;
 }
