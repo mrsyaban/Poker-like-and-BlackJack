@@ -20,6 +20,7 @@ class Table: public InventoryHolder<Card> {
         /* Getter */
         void getInfo() const;
         int getNeff() const;
+        Card getCard(int) const;
 
 };
 

@@ -53,6 +53,10 @@ Ability* Player::getAbility() const {
     return handAbility;
 }
 
+Card Player::getCard(int i) const{
+    return this->items[i];
+}
+
 /* Setter */
 void Player::setHighestCombo(Combo c){
     this->highestCombo = c;

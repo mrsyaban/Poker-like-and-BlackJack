@@ -15,16 +15,23 @@ class InventoryHolder
 
     public:
         ~InventoryHolder(); // dtor
+
+        /* Operator Overloading*/
         InventoryHolder<T>& operator+(const T&);
         InventoryHolder<T>& operator-(const T&);
         InventoryHolder<T>& operator=(InventoryHolder&);
+
+        /* getter */
         vector<T>& getItems();
         T& getTopItems();
         typename vector<T>::iterator getTopItemsIterator();
+        
+        /* utility function */
         void add(InventoryHolder&);
         void exchange(InventoryHolder&);
         void deleteall();
         void puttoback();
+
         virtual void getInfo() const = 0;
 };
 

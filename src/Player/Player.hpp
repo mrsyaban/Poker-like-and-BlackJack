@@ -30,8 +30,8 @@ class Player : public InventoryHolder<Card> {
         Ability* getAbility() const;
         int getPoint() const;
         Combo getHighestCombo() const;
-
         void getInfo() const;
+        Card getCard(int) const;
 
         /* Setter */
         void setHighestCombo(Combo);

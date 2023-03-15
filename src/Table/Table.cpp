@@ -28,3 +28,7 @@ void Table::getInfo() const {
 int Table::getNeff() const {
     return this->neff;
 }
+
+Card Table::getCard(int i) const {
+    return this->items[i];
+}
