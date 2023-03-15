@@ -20,12 +20,12 @@ class InventoryHolder
         InventoryHolder<T>& operator=(InventoryHolder&);
         vector<T>& getItems();
         T& getTopItems();
-        auto getTopItemsIterator();
+        typename vector<T>::iterator getTopItemsIterator();
         void add(InventoryHolder&);
         void exchange(InventoryHolder&);
         void deleteall();
         void puttoback();
-        T getItems(int i);
+        typename T getItems(int i);
         virtual void getInfo() const = 0;
 };
 

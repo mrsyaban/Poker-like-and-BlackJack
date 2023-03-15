@@ -52,7 +52,7 @@ T& InventoryHolder<T>::getTopItems() {
 }
 
 template <class T>
-auto InventoryHolder<T>::getTopItemsIterator() {
+typename vector<T>::iterator InventoryHolder<T>::getTopItemsIterator() {
     return this->items.begin();
 }
 
