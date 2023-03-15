@@ -48,6 +48,7 @@ class IO {
         string mainMenu();  
         vector<string> inputPlayerName();
         string turnInput(const Player&);
+        string dealMenu();
         
         /* success message function*/
         void printAbilitySuccess(Player player, vector<string> resPlayer = {}, vector<string> reversed = {});
@@ -63,6 +64,7 @@ class IO {
 
         /* input File*/
         pair<vector<Card>, vector<Ability*>> inputFile();
+        Ability* stringToAbility(string code);
 
 };
 

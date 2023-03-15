@@ -14,6 +14,7 @@ class Deck: public InventoryHolder<T> {
 
     public:
         Deck();
+        Deck(vector<T>);
         void getInfo() const;
 };
 

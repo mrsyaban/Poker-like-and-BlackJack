@@ -53,6 +53,24 @@ Deck<Ability*>::Deck() {
 }
 
 template <>
+Deck<Card>::Deck(vector<Card> deckCard) {
+    this->deleteall();
+    
+    for (auto itr=deckCard.begin(); itr!=deckCard.end(); itr++){
+        this->items.push_back(*itr);
+    }
+}
+
+template <>
+Deck<Ability*>::Deck(vector<Ability*> deckAbility) {
+    this->deleteall();
+
+    for (auto itr=deckAbility.begin(); itr!=deckAbility.end(); itr++){
+        this->items.push_back(*itr);
+    }
+}
+
+template <>
 void Deck<Card>::getInfo() const {
     cout << "This is Main Deck" << endl;
 }

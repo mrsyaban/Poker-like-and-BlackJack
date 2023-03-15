@@ -81,7 +81,7 @@ void Game::decCurrentPlayer()
     currentPlayer %= 7;
 }
 
-void Game::initNewMatch()
+void Game::initNewMatch(bool isRandom)
 {
     /* Create new match*/
     IO io;
@@ -98,10 +98,12 @@ void Game::initNewMatch()
     // share all the cards to players and table
     dealToTable();
     dealToPlayers();
+    cout << this->cardDeck.getTopItems().getNumber() << this->cardDeck.getTopItems().getColor() ;
 
     // print table
     io.printTable(table);
 }
+
 
 void Game::addPlayer()
 {
@@ -164,7 +166,7 @@ void Game::start()
     }
     catch (BaseException &e)
     {
-        cout << e.what() << endl;
+        std::cout << e.what() << endl;
     }
 
     while (mainMenu == "1")
@@ -239,7 +241,7 @@ void Game::nextTurn()
             }
             catch (BaseException &e)
             {
-                cout << e.what() << endl;
+                std::cout << e.what() << endl;
             }
         }
 
@@ -259,45 +261,45 @@ void Game::nextTurn()
         {
         case 1:
             // execute next
-            cout << "next" << endl;
+            std::cout << "next" << endl;
             nxt.Execute(*this);
             break;
         case 2:
-            cout << "half" << endl;
+            std::cout << "half" << endl;
             h.Execute(*this);
             break;
         case 3:
-            cout << "double" << endl;
-            cout << point.getValue() << endl;
+            std::cout << "double" << endl;
+            std::cout << point.getValue() << endl;
             d.Execute(*this);
-            cout << point.getValue() << endl;
+            std::cout << point.getValue() << endl;
             break;
         case 4:
-            cout << "reroll" << endl;
+            std::cout << "reroll" << endl;
             rr.Execute(*this);
             break;
         case 5:
-            cout << "quadruple" << endl;
+            std::cout << "quadruple" << endl;
             qd.Execute(*this);
             break;
         case 6:
-            cout << "quarter" << endl;
+            std::cout << "quarter" << endl;
             qtr.Execute(*this);
             break;
         case 7:
-            cout << "reverse" << endl;
+            std::cout << "reverse" << endl;
             rv.Execute(*this);
             break;
         case 8:
-            cout << "swap card" << endl;
+            std::cout << "swap card" << endl;
             swp.Execute(*this);
             break;
         case 9:
-            cout << "switch" << endl;
+            std::cout << "switch" << endl;
             swt.Execute(*this);
             break;
         case 10:
-            cout << "abilityless" << endl;
+            std::cout << "abilityless" << endl;
             abl.Execute(*this);
             break;
         default:
@@ -307,10 +309,10 @@ void Game::nextTurn()
         // sToggle player status
         players[currentPlayer].second = !players[currentPlayer].second;
 
-        cout << "d" << endl;
+        std::cout << "d" << endl;
         playerTurn++;
         nextPlayer();
-        cout << "PLAYERTURN : " << playerTurn << endl;
+        std::cout << "PLAYERTURN : " << playerTurn << endl;
         // nextRound();
     }
     else
@@ -327,7 +329,7 @@ void Game::nextRound()
     if (this->round < 6)
     {
         round++;
-        cout << "RONDE : " << round << endl;
+        std::cout << "RONDE : " << round << endl;
         this->table.openCard();
         io.printTable(table);
         if (this->getRound() == 2)
@@ -342,7 +344,7 @@ void Game::nextRound()
         // TODO
         // udah selesai 6 ronde, cari pemenang (??)
         // find score and compare
-        cout << "ronde (harusnya udah 6) : " << round << endl;
+        std::cout << "ronde (harusnya udah 6) : " << round << endl;
         double maxScore = 0;
         int playerWithMaxScore;
         int playerCtr = -1;
@@ -365,7 +367,7 @@ void Game::nextRound()
         winner.addPoint(point.getValue());
         if (!gameEnded())
         {
-            cout << "RONDE SEKARANG : " << round << endl;
+            std::cout << "RONDE SEKARANG : " << round << endl;
             // TODO init new match
             point = Point();
             Deck<Card> deck;
@@ -375,7 +377,7 @@ void Game::nextRound()
             dealToTable();
             dealToPlayers();
         }
-        initNewMatch();
+        initNewMatch(true);
     }
 }
 

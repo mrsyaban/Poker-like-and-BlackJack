@@ -69,8 +69,8 @@ public:
     void incCurrentPlayer();
     void decCurrentPlayer();
 
-    /* Game progression */
-    void initNewMatch();
+    void initNewMatch(bool);
+
     void start();
     void nextPlayer();
     void nextTurn();
