@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "Combo.hpp"
+#include "SearchCombo.hpp"
 #include "../Card/Card.hpp"
 using namespace std;
 
@@ -16,28 +17,34 @@ using namespace std;
 // }
 
 int main() {
-    // vector<Card> cards;
-    // Card card1(Green, 1);
-    // Card card2(Green, 2);
-    // Card card3(Red, 1);
-    // Card card4(Blue, 1);
-    // Card card5(Yellow, 1);
-    // Card card6(Red, 1);
-    // Card card7(Blue, 1);
+    Card card1(Green,3);
+    Card card2(Green,3);
+    Card card3(Green,3);
+    Card card4(Green,3);
+    Card card5(Blue,3);
+    Card card6(Yellow,3);
+    Card card7(Red,3);
 
-    // cards.push_back(card1);
-    // cards.push_back(card2);
-    // cards.push_back(card3);
-    // cards.push_back(card4);
-    // cards.push_back(card5);
-    // cards.push_back(card6);
-    // cards.push_back(card7);
+    vector<Card> cards;
+    cards.push_back(card1);
+    cards.push_back(card2);
+    cards.push_back(card3);
+    cards.push_back(card4);
+    cards.push_back(card5);
+    cards.push_back(card6);
+    cards.push_back(card7);
 
-    // for (auto x : cards) {
-    //     cout << x.getNumber() << endl;
-    // }
+    SearchCombo sCombo;
+    sCombo.setCards(cards);
+    sCombo.sortCards();
+    sCombo.checkCombo();
 
-    // Combo coms;
+    Combo combs;
+    combs = sCombo.getHighestCombo();
+
+    for (auto x : combs.getCombo()) {
+        cout << x.getNumber() << " " << x.getColor() << endl;
+    }
 
     return 0;
 }

@@ -64,9 +64,9 @@ void SearchCombo::sortCards()
     //     this->cards[maxIndex] = temp;
     // }
 
-    for (int i = 0; i < this->cards.size() - 1; i++) {
+    for (unsigned i = 0; i < this->cards.size() - 1; i++) {
         int min_idx = i;
-        for (int j = i + 1; j < this->cards.size(); j++) {
+        for (unsigned j = i + 1; j < this->cards.size(); j++) {
             if (this->cards[j].value() < this->cards[min_idx].value()) {
                 min_idx = j;
             }
@@ -155,13 +155,13 @@ void SearchCombo::twoPair()
     vector<Card> pairs, temp;
     Combo c;
 
-    int count[14] = {0};
+    int count[13] = {0};
     for (unsigned int i = 0; i < this->cards.size(); i++)
     {
         count[this->cards[i].getNumber()]++;
     }
 
-    for (int i = 0; i <= 14; i++)
+    for (int i = 0; i <= 12; i++)
     {
         if (count[i] == 2)
         {
@@ -231,58 +231,81 @@ void SearchCombo::straight()
     unsigned int i = 0;
     int countStraight = 0;
 
-    vector<Card> temp, straight;
+    vector<Card> straight;
     Combo c;
 
-    while (i < this->cards.size())
+    int count[13] = {0};
+    for (unsigned int i = 0; i < this->cards.size(); i++)
     {
-        if (i + 4 < 7)
-        {
-            if (this->cards[i].getNumber() + 1 == this->cards[i + 1].getNumber() &&
-                this->cards[i].getNumber() + 2 == this->cards[i + 2].getNumber() &&
-                this->cards[i].getNumber() + 3 == this->cards[i + 3].getNumber() &&
-                this->cards[i].getNumber() + 4 == this->cards[i + 4].getNumber())
-            {
+        count[this->cards[i].getNumber()]++;
+    }
 
-                straight.insert(straight.end(), this->cards[i]);
-                straight.insert(straight.end(), this->cards[i + 1]);
-                straight.insert(straight.end(), this->cards[i + 2]);
-                straight.insert(straight.end(), this->cards[i + 3]);
-                straight.insert(straight.end(), this->cards[i + 4]);
-
-                countStraight++;
-            }
+    for (unsigned int i = 12; i >= 5; i--) {
+        if (count[i] >= 1 && count[i-1] >= 1 && count[i-2] >= 1 && count[i-3] >= 1 && count[i-4] >= 1) {
+            straight.push_back(this->cards[i]);
+            straight.push_back(this->cards[i-1]);
+            straight.push_back(this->cards[i-2]);
+            straight.push_back(this->cards[i-3]);
+            straight.push_back(this->cards[i-4]);
+            break;
         }
-        i++;
     }
 
-    if (countStraight >= 1)
-    {
-        temp.push_back(straight[straight.size() - 5]);
-        temp.push_back(straight[straight.size() - 4]);
-        temp.push_back(straight[straight.size() - 3]);
-        temp.push_back(straight[straight.size() - 2]);
-        temp.push_back(straight[straight.size() - 1]);
+    c.setCombo(straight);
+    // c.setScore(max);
+    this->records.push_back(c);
 
-        c.setCombo(temp);
 
-        // for (auto x : this->combo) {
-        //     max += x.value();
-        // }
 
-        max += c.getCombo()[4].value();
+    // while (i < this->cards.size())
+    // {
+    //     if (i + 4 < 7)
+    //     {
+    //         if (this->cards[i].getNumber() + 1 == this->cards[i + 1].getNumber() &&
+    //             this->cards[i].getNumber() + 2 == this->cards[i + 2].getNumber() &&
+    //             this->cards[i].getNumber() + 3 == this->cards[i + 3].getNumber() &&
+    //             this->cards[i].getNumber() + 4 == this->cards[i + 4].getNumber())
+    //         {
 
-        max += 12.3;
+    //             straight.insert(straight.end(), this->cards[i]);
+    //             straight.insert(straight.end(), this->cards[i + 1]);
+    //             straight.insert(straight.end(), this->cards[i + 2]);
+    //             straight.insert(straight.end(), this->cards[i + 3]);
+    //             straight.insert(straight.end(), this->cards[i + 4]);
 
-        c.setScore(max);
-    }
+    //             countStraight++;
+    //         }
+    //     }
+    //     i++;
+    // }
 
-    if (temp.size() > 1)
-    {
-        records.push_back(c);
-    }
+    // if (countStraight >= 1)
+    // {
+    //     temp.push_back(straight[straight.size() - 5]);
+    //     temp.push_back(straight[straight.size() - 4]);
+    //     temp.push_back(straight[straight.size() - 3]);
+    //     temp.push_back(straight[straight.size() - 2]);
+    //     temp.push_back(straight[straight.size() - 1]);
 
-    // this->sortCombo();
+    //     c.setCombo(temp);
+
+    //     // for (auto x : this->combo) {
+    //     //     max += x.value();
+    //     // }
+
+    //     max += c.getCombo()[4].value();
+
+    //     max += 12.3;
+
+    //     c.setScore(max);
+    // }
+
+    // if (temp.size() > 1)
+    // {
+    //     records.push_back(c);
+    // }
+
+    // // this->sortCombo();
 }
 
 void SearchCombo::flush()
