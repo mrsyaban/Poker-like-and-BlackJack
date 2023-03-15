@@ -64,9 +64,9 @@ void SearchCombo::sortCards()
     //     this->cards[maxIndex] = temp;
     // }
 
-    for (int i = 0; i < this->cards.size() - 1; i++) {
+    for (unsigned int i = 0; i < this->cards.size() - 1; i++) {
         int min_idx = i;
-        for (int j = i + 1; j < this->cards.size(); j++) {
+        for (unsigned int j = i + 1; j < this->cards.size(); j++) {
             if (this->cards[j].value() < this->cards[min_idx].value()) {
                 min_idx = j;
             }
@@ -79,9 +79,9 @@ void SearchCombo::sortCards()
 }
 
 void SearchCombo::sortCards2() {
-    for (int i = 0; i < this->cards.size() - 1; i++) {
+    for (unsigned int i = 0; i < this->cards.size() - 1; i++) {
         int min_idx = i;
-        for (int j = i + 1; j < this->cards.size(); j++) {
+        for (unsigned int j = i + 1; j < this->cards.size(); j++) {
             // compare the colors of the cards
             if (cards[j].getColor() < cards[min_idx].getColor()) {
                 min_idx = j;
