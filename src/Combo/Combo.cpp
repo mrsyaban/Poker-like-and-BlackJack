@@ -5,10 +5,10 @@ using namespace std;
 
 Combo::Combo() : score(0) {}
 
-Combo::Combo(SearchCombo combo) {
-    this->combo = combo.getComboCards();
-    this->score = 0;
-}
+// Combo::Combo(SearchCombo combo) {
+//     this->combo = combo.getComboCards();
+//     this->score = 0;
+// }
 
 Combo::~Combo() {}
 
@@ -17,6 +17,11 @@ double Combo::value() const {return this->score;}
 void Combo::setScore(double number) {this->score = number;}
 
 vector<Card> Combo::getCombo() const {return this->combo;}
+
+void Combo::setCombo(Combo other) {
+    this->combo = other.combo;
+    this->score = other.score;
+}
 
 void Combo::setCombo(vector<Card> combo) {this->combo = combo;}
 

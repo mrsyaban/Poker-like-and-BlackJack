@@ -18,13 +18,14 @@ class Combo : public ObjectWithValue<double> {
 
     public:
         Combo(); // ctor
-        Combo(SearchCombo combo); // constructor
+        //Combo(SearchCombo combo); // constructor
         ~Combo(); // destructor
 
         double value() const; // Score Getter
         void setScore(double number); // Setter
         vector<Card> getCombo() const; // Combo Getter
-        void setCombo(vector<Card>); // Combo Getter
+        void setCombo(Combo); // Combo Setter
+        void setCombo(vector<Card>); // Combo Setter
 
         vector<Card> sortCombo(); // Sorting combo by number and color
 
