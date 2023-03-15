@@ -14,6 +14,20 @@
 #include <string>
 using namespace std;
 
+/* Mapping command to int */
+const map<string, int> inputToCommand = {
+        {"NEXT", 1},
+        {"HALF", 2},
+        {"DOUBLE", 3},
+        {"RE-ROLL", 4},
+        {"QUADRUPLE", 5},
+        {"QUARTER", 6},
+        {"REVERSE", 7},
+        {"SWAP CARD", 8},
+        {"SWITCH", 9},
+        {"ABILITYLESS", 10}
+};
+
 class Game {
     private:
         vector<pair<Player&, bool>> players; // idenya player bisa diakses lewat map, int adalah urutan player

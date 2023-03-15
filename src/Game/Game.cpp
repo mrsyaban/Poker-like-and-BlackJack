@@ -51,48 +51,65 @@ bool Game::gameEnded() {
 }
 
 void Game::start() {
-    // inisialisasi player
-    for (int i = 0; i < 7; i++) {
-        addPlayer();
-    }
+    IO io;
 
+    io.splashScreen();
+    string mainMenu = io.mainMenu();
 
-    while (!gameEnded()) {
-        point = Point();
-        Deck<Card> deck;
-        Deck<Ability> deckAbility;
-        this->cardDeck = deck;
-        this->abilityDeck = deckAbility;
-        dealToTable();
-        dealToPlayers();
-        // cards already given to the table and players
-        do {
-            // BAGIAN I/O
-            nextRound();
-            this->table.openCard();
-            if (this->getRound() == 2) {
-                dealAbilityToPlayers();
+    while (mainMenu == "1"){
+        // inisialisasi player
+        io.inputPlayerName(*this);
+        while (!gameEnded()) {
+            point = Point();
+            Deck<Card> deck;
+            Deck<Ability> deckAbility;
+            this->cardDeck = deck;
+            this->abilityDeck = deckAbility;
+            dealToTable();
+            dealToPlayers();
+            // cards already given to the table and players
+            do {
+                // BAGIAN I/O
+                io.printTable(table);
+                
+                // execute command
+                int command = inputToCommand.at(io.turnInput(((this->players.begin() + this->currentPlayer)->first).getNickname()));
+                switch (command) {
+                    case 1:
+                        // execute next
+                    default:
+                        cout << "" << endl;
+                }
+
+                nextRound();
+                this->table.openCard();
+                if (this->getRound() == 2) {
+                    dealAbilityToPlayers();
+                }
+            } while (this->getRound() <= 6);
+
+            // find score and compare
+            double maxScore = 0;
+            int playerWithMaxScore;
+            int playerCtr = -1;
+
+            for (auto p_itr = getPlayers().begin(); p_itr != getPlayers().end(); p_itr++) {
+                playerCtr++;
+                SearchCombo highestCombo(p_itr->first, this->getTable());
+                p_itr->first.setHighestCombo(highestCombo.getHighestCombo());
+                
+                if (maxScore < p_itr->first.getHighestCombo().value()) {
+                    maxScore = p_itr->first.getHighestCombo().value();
+                    playerWithMaxScore = playerCtr;
+                }
             }
-        } while (this->getRound() <= 6);
 
-        // find score and compare
-        double maxScore = 0;
-        int playerWithMaxScore;
-        int playerCtr = -1;
-
-        for (auto p_itr = getPlayers().begin(); p_itr != getPlayers().end(); p_itr++) {
-            playerCtr++;
-            SearchCombo highestCombo(p_itr->first, this->getTable());
-            p_itr->first.setHighestCombo(highestCombo.getHighestCombo());
-            
-            if (maxScore < p_itr->first.getHighestCombo().value()) {
-                maxScore = p_itr->first.getHighestCombo().value();
-                playerWithMaxScore = playerCtr;
-            }
+            // add points to the winner
+            Player winner = (getPlayers().begin() + playerWithMaxScore)->first;
+            winner.addPoint(point.getValue());
         }
-
-        // add points to the winner
-        Player winner = (getPlayers().begin() + playerWithMaxScore)->first;
-        winner.addPoint(point.getValue());
+        mainMenu = io.mainMenu();        
     }
+
+    io.printThankYou();
 }

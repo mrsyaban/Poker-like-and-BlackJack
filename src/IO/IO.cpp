@@ -14,9 +14,9 @@ string retrieveInput(){
     return input;
 }
 
-string IO::turnInput(Player& player){
+string IO::turnInput(string nick){
     cout << enterColor;
-    cout << player.getNickname() << "'s turn >>> " << resetColor;
+    cout << nick << "'s turn >>> " << resetColor;
     string input = retrieveInput();
 
     // input validation
@@ -91,7 +91,7 @@ string IO::mainMenu(){
     cout << wordColor << " 1. Start " << endl;
     cout << wordColor << " 2. Exit" << endl;
     cout << endl;
-    cout << enterColor << "Enter Command >>>"; 
+    cout << enterColor << "Enter Command >>> "; 
     
     string command = retrieveInput();
     cout << resetColor << endl;
@@ -110,7 +110,7 @@ void IO::inputPlayerName(Game& game){
 
 void IO::printTable(Table table){
     cout << wordColor << "            ♦ TABLE ♦         " << resetColor << endl;
-    cout << lineColor << "==============================" << resetColor << endl;
+    cout << lineColor << "==============================" << resetColor << "\n\n";
     for (int i=0; i<table.getNeff(); i++){
         int color = table.getItems(i).getColor();
         if (color == 0){
@@ -122,9 +122,11 @@ void IO::printTable(Table table){
         } else {
             cout << "\033[1m\033[31m";
         }
-        cout << "  " << table.getItems(i).getNumber() << "  " << endl;
+        cout << "  " << table.getItems(i).getNumber() << "  ";
         cout << resetColor;
     }
+    cout << "\n\n";
+    cout << lineColor << "==============================" << resetColor << endl;
 }
 
 void IO::printAbilitySuccess(Player player, vector<string> resPlayer = {}, vector<string> reversed = {}){
@@ -297,7 +299,7 @@ void IO::printAbilityless(string nick = ""){
         cout << "Aww, tough luck, looks like you're now abilityless!" << endl;
         cout <<  "Womp womp, the use of those cards was all for naught!" << endl;
     }
-
+    cout << resetColor;
 }
 
 void printHelper(string nick){
@@ -339,4 +341,18 @@ void IO::printEndGame(const vector<pair<Player&, bool>>& listPlayer){
         cout << lineColor << "│" << resetColor << endl;
     }
     cout << lineColor << "==============================" << resetColor << endl;
+}
+
+void IO::printThankYou(){
+    cout << wordColor;
+    string end = R"(
+ _____ _                 _     __   __            _____            ____  _             _                ___                ____                           _ 
+|_   _| |__   __ _ _ __ | | __ \ \ / /__  _   _  |  ___|__  _ __  |  _ \| | __ _ _   _(_)_ __   __ _   / _ \ _   _ _ __   / ___| __ _ _ __ ___   ___  ___| |
+  | | | '_ \ / _` | '_ \| |/ /  \ V / _ \| | | | | |_ / _ \| '__| | |_) | |/ _` | | | | | '_ \ / _` | | | | | | | | '__| | |  _ / _` | '_ ` _ \ / _ \/ __| |
+  | | | | | | (_| | | | |   <    | | (_) | |_| | |  _| (_) | |    |  __/| | (_| | |_| | | | | | (_| | | |_| | |_| | |    | |_| | (_| | | | | | |  __/\__ \_|
+  |_| |_| |_|\__,_|_| |_|_|\_\   |_|\___/ \__,_| |_|  \___/|_|    |_|   |_|\__,_|\__, |_|_| |_|\__, |  \___/ \__,_|_|     \____|\__,_|_| |_| |_|\___||___(_)
+                                                                                 |___/         |___/                                                        
+)";
+    cout << end << endl;
+    cout << resetColor;
 }

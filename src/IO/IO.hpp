@@ -18,13 +18,14 @@ class IO {
 
         /* print function*/
         void splashScreen();
+        void printThankYou();
         void printTable(Table);
         void printEndGame(const vector<pair<Player&, bool>>&);
         
         /* main menu */
         string mainMenu();  
         void inputPlayerName(Game& game);
-        string turnInput(Player&);
+        string turnInput(string);
         
         /* success message function*/
         void printAbilitySuccess(Player player, vector<string> resPlayer = {}, vector<string> reversed = {});
