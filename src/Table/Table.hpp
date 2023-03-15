@@ -6,14 +6,14 @@
 #include "../InventoryHolder/InventoryHolder.hpp"
 using namespace std;
 
-template <class T>
-class Table: public InventoryHolder<T> {
+
+class Table: public InventoryHolder<Card> {
     protected:
         int neff;
     
     public:
         Table();
-        void dealToTable(InventoryHolder<T>&);
+        void dealToTable(InventoryHolder<Card>&);
         void openCard();
         
 
