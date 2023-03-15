@@ -158,7 +158,7 @@ void Game::start()
     {
         mainMenu = io.mainMenu();
     }
-    catch (baseException &e)
+    catch (BaseException &e)
     {
         cout << e.what() << endl;
     }
@@ -240,13 +240,14 @@ void Game::nextTurn()
             {
                 command = inputToCommand.at(io.turnInput(((this->players.begin() + this->currentPlayer)->first).getNickname()));
             }
-            catch (baseException &e)
+            catch (BaseException &e)
             {
                 cout << e.what() << endl;
             }
             cout << "asda" << endl;
         }
 
+        /* All possible command inputted */
         Next nxt;
         Half h;
         ReRoll rr;

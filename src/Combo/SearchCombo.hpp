@@ -34,7 +34,7 @@ class SearchCombo {
         //vector<Card> getComboCards(); // Combo Cards getter
 
         void sortCards(); // Sorting cards by number and color
-        //void sortCombo(); // Sorting combo by number and color
+        void sortCards2(); // Sorting combo by number and color
         
         void highCard(); 
         void pair();

@@ -360,72 +360,72 @@ void IO::printEndGame(const vector<pair<Player&, bool>>& listPlayer){
 }
 
 
-pair<vector<Card>, vector<Ability*>> IO::inputFile(){
-    string fileName;
-    cout << enterColor << "Enter Your file's name >>> " << resetColor;
-    cout << inputColor; cin >> fileName; cout << resetColor;
-    string filePath = "../../test/" + fileName;
-    ifstream infile(filePath);
-    inputException err;
-    while(!infile){
-        cout << enterColor << "Enter Your file's name >>> " << resetColor;
-        cout << inputColor; cin >> fileName; cout << resetColor;
-        filePath = "../../test/" + fileName;
-        ifstream infile(filePath);
+// pair<vector<Card>, vector<Ability*>> IO::inputFile(){
+//     string fileName;
+//     cout << enterColor << "Enter Your file's name >>> " << resetColor;
+//     cout << inputColor; cin >> fileName; cout << resetColor;
+//     string filePath = "../../test/" + fileName;
+//     ifstream infile(filePath);
+//     inputException err;
+//     while(!infile){
+//         cout << enterColor << "Enter Your file's name >>> " << resetColor;
+//         cout << inputColor; cin >> fileName; cout << resetColor;
+//         filePath = "../../test/" + fileName;
+//         // ifstream infile(filePath);
 
-        try {
-            throw err;
-        } catch (BaseException& e){
-            cout << e.what() << endl;
-        }
-        ifstream infile(filePath);
-    }
+//         try {
+//             throw err;
+//         } catch (BaseException& e){
+//             cout << e.what() << endl;
+//         }
+//         // ifstream infile(filePath);
+//     }
 
-    string line;
+//     string line;
 
-    vector<Card> mainDeck;
-    vector<Ability*> abilityDeck;
+//     vector<Card> mainDeck;
+//     vector<Ability*> abilityDeck;
 
-    int count = 0;
-    while(getline(infile, line)){
-        istringstream iss(line);
-        string code;
-        while (iss >> code) {
-            if (count <= 52){
-                if (code.length() == 2){
-                    Card card(CardColor(1), 0);
-                    card.setNumber(code[0] - '0');
-                    card.setColor(stringToColor.at(code[1]));
-                    mainDeck.push_back(card);
-                    count++;
+//     int count = 0;
+//     while(getline(infile, line)){
+//         istringstream iss(line);
+//         string code;
+//         while (iss >> code) {
+//             if (count <= 52){
+//                 if (code.length() == 2){
+//                     Card card(CardColor(1), 0);
+//                     card.setNumber(code[0] - '0');
+//                     card.setColor(stringToColor.at(code[1]));
+//                     mainDeck.push_back(card);
+//                     count++;
 
-                } else if (code.length() ==  3){
-                    Card card(CardColor(1), 0);
-                    card.setNumber((code[0] - '0')*10 + (code[1] - '0'));
-                    card.setColor(stringToColor.at(code[2]));
-                    mainDeck.push_back(card);
-                    count++;
-                } else {
-                    throw err;
-                }
+//                 } else if (code.length() ==  3){
+//                     Card card(CardColor(1), 0);
+//                     card.setNumber((code[0] - '0')*10 + (code[1] - '0'));
+//                     card.setColor(stringToColor.at(code[2]));
+//                     mainDeck.push_back(card);
+//                     count++;
+//                 } else {
+//                     throw err;
+//                 }
 
-            } else if (count <=59){
-                if (code.length() == 2){
-                    abilityDeck.push_back(stringToAbility(code));
-                    count++;
-                } else {
-                    throw err;
-                }
+//             } else if (count <=59){
+//                 if (code.length() == 2){
+//                     abilityDeck.push_back(stringToAbility(code));
+//                     count++;
+//                 } else {
+//                     throw err;
+//                 }
 
-            } else {
-                throw err;
-            }
-        }
-    }
+//             } else {
+//                 throw err;
+//             }
+//         }
+//     }
     
-    pair<vector<Card>, vector<Ability*>> ret(mainDeck, abilityDeck);
-    return ret;
-}
+//     pair<vector<Card>, vector<Ability*>> ret(mainDeck, abilityDeck);
+//     return ret;
+// }
 
 Ability* stringToAbility(string code){
     if (code == "RR"){

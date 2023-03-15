@@ -29,7 +29,7 @@ WARNING_CFLAG = -Wall -Wextra -Werror
 
 run :
 	build
-	@echo ./$(OUTPUT_FOLDER)/WOI.exe
+	@$(OUTPUT_FOLDER)/WOI.exe
 
 build :
 	$(CC) $(CPP_FILES) -o $(OUTPUT_FOLDER)/WOI $(WARNING_CFLAG)

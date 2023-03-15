@@ -69,14 +69,11 @@ public:
     void incCurrentPlayer();
     void decCurrentPlayer();
 
+    /* Game progression */
     void initNewMatch();
-
     void start();
-
     void nextPlayer();
-
     void nextTurn();
-
     void nextRound();
 
     // return vector sisa urutan eksekusi saat ini (setelah reverse)
