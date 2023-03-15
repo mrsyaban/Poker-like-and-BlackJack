@@ -19,7 +19,7 @@ class SearchCombo {
 
     public:
         SearchCombo(); // ctor
-        SearchCombo(Player player, Table table); // constructor
+        SearchCombo(Player player, Table<Card> table); // constructor
         ~SearchCombo(); // destructor
 
         /* Getter */
