@@ -4,6 +4,8 @@
         "**/src/**/*.jsx": "javascriptreact",
         "*.js": "javascriptreact",
         "*.pl": "prolog",
-        "string": "cpp"
+        "string": "cpp",
+        "algorithm": "cpp",
+        "iostream": "cpp"
     }
 }

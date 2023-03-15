@@ -3,11 +3,7 @@
 
 // #include "../Player/Player.hpp"
 #include "../Action/Action.hpp"
-<<<<<<< HEAD
-
-=======
 // #include "../IO/IO.hpp"
->>>>>>> 36bc60975083d8b1f9a9165c4b31752f720b5d36
 
 // #include "../Game/Game.hpp" implicit import with forward declaration
 #include <iostream>
