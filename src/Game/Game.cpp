@@ -180,7 +180,7 @@ void Game::start()
         currentPlayer = 0; // set current player to 0
 
         /* Every time get into new match */
-        initNewMatch(); // create table, card deck, ability deck, deal card to table and player
+        initNewMatch(true); // create table, card deck, ability deck, deal card to table and player
 
         while (!gameEnded())
         {
