@@ -22,7 +22,7 @@ class IO {
         string wordColor = "\033[1;36m";
         string inputColor = "\033[1;36m";
         string enterColor = "\033[5;1;33m";
-        string abilColor = "\033[1;31m";
+        string abilColor = "\033[1;32m";
         string actnColor = "\033[1;34m";
 
     public :    

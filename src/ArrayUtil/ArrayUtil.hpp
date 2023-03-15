@@ -11,7 +11,10 @@ template <class T>
 T getHighest(T * buffer, int size) {
     if (size == 1) {
         return buffer[0];
+    } else if (size == 2) {
+        return buffer[0] > buffer[1] ? buffer[0] : buffer[1];
     } else {
+        // cout << "size : " << size << endl;
         T left = getHighest(buffer, size / 2);
         T right = getHighest(buffer + size / 2, size - size / 2);
         return left > right ? left : right;
@@ -21,6 +24,8 @@ T getHighest(T * buffer, int size) {
 template <class T>
 // signature for vector
 T getHighest(vector<T> buffer) {
+    cout << "heallo" << endl;
+    cout << "buffer size : " << buffer.size() << endl;
     return getHighest(buffer.data(), buffer.size());
 };
 

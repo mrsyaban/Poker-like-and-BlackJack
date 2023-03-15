@@ -14,7 +14,6 @@
 class SearchCombo {
     private:
         vector<Card> cards;
-        Combo combo;
         vector<Combo> records;
 
     public:
@@ -32,10 +31,10 @@ class SearchCombo {
         void setCards(vector<Card>); // Cards Setter
         void setRecords(vector<Combo>); // Records Setter
 
-        vector<Card> getComboCards() const; // Combo Cards getter
+        //vector<Card> getComboCards(); // Combo Cards getter
 
         void sortCards(); // Sorting cards by number and color
-        void sortCombo(); // Sorting combo by number and color
+        //void sortCombo(); // Sorting combo by number and color
         
         void highCard(); 
         void pair();
