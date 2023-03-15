@@ -7,6 +7,7 @@
 
 #include "../ObjectWithValue/ObjectWithValue.hpp"
 #include <utility>
+#include <string>
 #include <map>
 using namespace std;
 

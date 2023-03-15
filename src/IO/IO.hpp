@@ -1,6 +1,15 @@
 // #include "../Game/Game.hpp"
 #include "../Exception/exception.h"
+// #include "../Player/Player.hpp"
 #include "../Table/Table.hpp"
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Player;
+class Game;
+class Point;
+
 
 #include <iostream>
 #include <string>

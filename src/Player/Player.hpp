@@ -7,6 +7,7 @@
 #include "../Combo/Combo.hpp"
 #include <string>
 
+// class Combo;
 class Ability;
 
 class Player : public InventoryHolder<Card> {
