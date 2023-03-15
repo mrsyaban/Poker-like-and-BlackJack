@@ -64,32 +64,12 @@ class Game {
 
         /* Setter */
         void addPlayer();
-        void incCurrentPlayer() {
-            currentPlayer++;
-            currentPlayer %= 7;
-        }
-
-        void decCurrentPlayer() {
-            currentPlayer--;
-            currentPlayer %= 7;
-        }
+        void incCurrentPlayer();
+        void decCurrentPlayer();
         
-        void initNewMatch(){
-            // reset deckCard, point, table, isReversed, playerTurn, round
-            // balikin semua kartu player ke deck  
-        }
+        void initNewMatch();
 
         void start();
-            // cout << "Game started" << endl;
-            // cout << "Init point : " << point.getValue() << endl;
-            // Quadruple ability;
-            // ability.Execute(*this);
-            // cout << "New point : " << point.getValue() << endl;
-
-            // while (!gameEnd){
-            //     udah 6 ronde
-            //     initNewMatch();
-            // }
         
         void nextPlayer() {
             if (isReversed) {

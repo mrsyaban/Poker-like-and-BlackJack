@@ -57,12 +57,12 @@ int& Game::getCurrentPlayer(){
 }
 
 /* Setter */
-void incCurrentPlayer() {
+void Game::incCurrentPlayer() {
     currentPlayer++;
     currentPlayer %= 7;
 }
 
-void decCurrentPlayer() {
+void Game::decCurrentPlayer() {
     currentPlayer--;
     currentPlayer %= 7;
 }
@@ -167,4 +167,72 @@ void Game::start() {
     }
 
     io.printThankYou();
+}
+
+void Game::nextPlayer() {
+    if (isReversed) {
+        decCurrentPlayer();
+    } else {
+        incCurrentPlayer();
+    }
+}
+
+void Game::nextTurn() {
+
+    nextPlayer();
+
+    if (playerTurn != 7) {
+        // status player yang udah jalan adalah true  (1) untuk ronde ganjil (mod 2 == 1)
+        // status player yang udah jalan adalah false (0) untuk ronde genap  (mod 2 == 0)
+        while (players[currentPlayer].second % 2 == round % 2) {
+            nextPlayer();
+        }
+
+        // TODO
+        // currentPlayer jalan, manggil command (??)
+
+        // setelah playernya jalan, statusnya ditoggle
+        players[currentPlayer].second = !players[currentPlayer].second;
+
+        playerTurn++;
+
+    } else {
+        // udah jalan semua, set playerTurn = 0, nextRound
+        playerTurn = 0;
+        nextRound();
+    }
+}
+
+void Game::nextRound() {
+    if (this->round < 6) {
+        round++;
+        nextPlayer();
+    } else {
+        // TODO
+        // udah selesai 6 ronde, cari pemenang (??)
+    }
+}
+
+// return vector sisa urutan eksekusi saat ini (setelah reverse)
+vector<string> Game::getRemainingReversedPlayer() {
+    vector<string> res;
+    int i = currentPlayer-1;
+    while (i % 7 != currentPlayer) {
+        if (players[i].second % 2 != round % 2) {
+            res.push_back(players[i].first.getNickname());
+        }
+        i--;
+    }
+    return res;
+}
+
+// return vector buat urutan eksekusi ronde berikutnya (setelah reverse)
+vector<string> Game::getReversedPlayer() {
+    vector<string> res;
+    int i = currentPlayer-1;
+    while (i % 7 != currentPlayer) {
+        res.push_back(players[i].first.getNickname());
+        i--;
+    }
+    return res;
 }
