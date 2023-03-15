@@ -17,10 +17,13 @@ Game::~Game(){
 }
 
 void Game::addPlayer(){
-    string nick = IO::retrieveInput();
-    Player player(nick);
-    pair<Player&, bool> element(player, false);
-    players.push_back(element);
+    IO io;
+    vector<string> inputNick = io.inputPlayerName(*this);
+    for (auto itr=inputNick.begin(); itr != inputNick.end(); itr++){
+        Player player(*itr);
+        pair<Player&, bool> element(player, false);
+        players.push_back(element);
+    }
 }
 
 void Game::dealToTable() {
@@ -58,7 +61,7 @@ void Game::start() {
 
     while (mainMenu == "1"){
         // inisialisasi player
-        io.inputPlayerName(*this);
+        addPlayer();
         while (!gameEnded()) {
             point = Point();
             Deck<Card> deck;
@@ -77,6 +80,7 @@ void Game::start() {
                 switch (command) {
                     case 1:
                         // execute next
+                        cout << "next" << endl;
                     default:
                         cout << "" << endl;
                 }

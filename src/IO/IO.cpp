@@ -1,23 +1,11 @@
 #include "IO.hpp"
-
-#include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
 using namespace std;
 
-string retrieveInput(){
+string IO::turnInput(const Player& player){
     string input;
-    cout << "\033[0m" << "\033[1m\033[36m" << " ";
-    cin >> input;
-    cout << "\033[0m" << endl;
-    return input;
-}
-
-string IO::turnInput(string nick){
     cout << enterColor;
-    cout << nick << "'s turn >>> " << resetColor;
-    string input = retrieveInput();
+    cout << player.getNickname() << "'s turn >>> " << resetColor;
+    cout << inputColor; cin >>  input;cout <<  resetColor;
 
     // input validation
     vector<string> validString = {
@@ -93,19 +81,23 @@ string IO::mainMenu(){
     cout << endl;
     cout << enterColor << "Enter Command >>> "; 
     
-    string command = retrieveInput();
+    string command;
+    cout << inputColor; cin >> command; cout <<  resetColor;
     cout << resetColor << endl;
     return command; 
 }
 
-void IO::inputPlayerName(Game& game){
-    string nick1, nick2, nick3, nick4, nick5, nick6, nick7;
+vector<string> IO::inputPlayerName(Game& game){
+    string inputNick;
+    vector<string> res;
     cout << wordColor << "Please enter player name :" << resetColor << endl;
     cout << lineColor << "==============================" << resetColor << endl;
     for (int i=1; i<=7; i++) {
-        cout << enterColor<< "Player " << i <<" >>> "; game.addPlayer();
+        cout << enterColor<< "Player " << i <<" >>> "; cout << inputColor; cin >> inputNick;
+        res.push_back(inputNick);
+        cout << resetColor << endl;
     }
-    cout << resetColor << endl;
+    return res;
 }
 
 void IO::printTable(Table table){
@@ -136,8 +128,8 @@ void IO::printAbilitySuccess(Player player, vector<string> resPlayer = {}, vecto
     if ( type == "Re-Roll"){
         cout << "Replacing your current cards..." << endl;
         cout << "You got 2 new cards :" << endl;
-        cout << "1. " << player.getItems(0).getNumber() << " " << cardToString[player.getItems(0).getColor()] << endl;
-        cout << "2. " << player.getItems(1).getNumber() << " " << cardToString[player.getItems(1).getColor()] << endl;
+        cout << "1. " << player.getItems(0).getNumber() << " " << cardToString.at(player.getItems(0).getColor()) << endl;
+        cout << "2. " << player.getItems(1).getNumber() << " " << cardToString.at(player.getItems(1).getColor()) << endl;
     
     // Swap Card
     } else if (type == "Swap"){
