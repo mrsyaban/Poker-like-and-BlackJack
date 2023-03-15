@@ -1,9 +1,6 @@
 #include "../Game/Game.hpp"
 #include "../Exception/exception.h"
-#include "../Table/Table.hpp"
-#include "../Player/Player.hpp"
 
-x       
 
 class IO {
 
@@ -38,6 +35,7 @@ class IO {
         vector<Player>& selectPlayer(const Player& , const vector<pair<Player&, bool>>& ) const;
         int selectCard(string);
 
-
+        /* Special for Abilityless*/
+        void printAbilityless(string nick = "");
 
 };

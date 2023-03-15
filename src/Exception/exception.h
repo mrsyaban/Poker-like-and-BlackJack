@@ -48,4 +48,11 @@ class inputException : public baseException
     }
 };
 
+class abilitylessException : public baseException
+{
+    const char *what() const throw()
+    {
+        return "Input not valid!";
+    }
+};
 #endif

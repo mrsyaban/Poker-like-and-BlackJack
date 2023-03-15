@@ -3,6 +3,7 @@
 #include "Ability.hpp"
 #include "../Game/Game.hpp"
 #include "../Exception/exception.h"
+#include "../IO/IO.hpp"
 
 using namespace std;
 
@@ -125,7 +126,13 @@ void Switch::Execute(Game& g) {
 Abilityless::Abilityless(): Ability("Abilityless") {}
 
 void Abilityless::Execute(Game& g) {
-    Player playerChosen = selectPlayer(g);
+    IO io;
+    Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
+    
+    /* Select Player */
+    vector<Player>& inputPlayer = io.selectPlayer(owner, g.getPlayers());
+    Player& playerChosen = inputPlayer[0]; 
+
     bool allAvail = true;
     int n = g.getPlayers().size(), i = 0;
 
@@ -137,17 +144,21 @@ void Abilityless::Execute(Game& g) {
         }
     }
 
-    if (allAvail == true) {
-        if (playerChosen.getAbility()->getAvail() == true) {
+    // at least one player's ability available
+    if (allAvail) {
+        // Ability success
+        if (playerChosen.getAbility()->getAvail()) {
             playerChosen.getAbility()->setAvail(false);
-            cout << "Kartu ability " << playerChosen.getNickname() << " telah dimatikan" << endl;
-        } else if (playerChosen.getAbility()->getAvail() == true) {
-            cout << "Kartu ability " << playerChosen.getNickname() << " telah dipakai sebelumnya. Yah, sayang penggunaan kartu ini sia-sia" << endl;
+            io.printAbilitySuccess(owner);
+        
+        // chosen player's Ability Card has been used
+        } else {
+            io.printAbilityless(playerChosen.getNickname());
         }
+    
+    // All ability non available
     } else {
         g.getPlayers()[g.getCurrentPlayer()].first.getAbility()->setAvail(false);
-        cout << "Eits, ternyata semua pemain sudah memakai kartu kemampuan. Yah kamu" 
-             << "\nkena sendiri deh, kemampuanmu menjadi abilityless. Yah, pengunaan"
-             << "\nkartu ini sia-sia" << endl;
+        io.printAbilityless();
     }
 }

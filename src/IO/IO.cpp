@@ -158,7 +158,7 @@ void IO::printAbilitySuccess(Player player, vector<string> resPlayer = {}, vecto
     // Reverse
     } else if (type == "Reverse"){
         cout << player.getNickname() << " successfully performed REVERSE! " << endl;
-        cout << "The rest of players order for this round: ";
+        cout << "Turn order for rest of this round : ";
         for (auto itr = resPlayer.begin(); itr != resPlayer.end(); itr++){
             cout << *itr;
             if (itr != resPlayer.end()-1){
@@ -166,7 +166,7 @@ void IO::printAbilitySuccess(Player player, vector<string> resPlayer = {}, vecto
             }
         }
         cout << endl;
-        cout << "Players order for next round: ";
+        cout << "Turn order for next round: ";
         for (auto itr = reversed.begin(); itr != reversed.end(); itr++){
             cout << *itr;
             if (itr != resPlayer.end()-1){
@@ -179,7 +179,7 @@ void IO::printAbilitySuccess(Player player, vector<string> resPlayer = {}, vecto
 }
 
 
-void IO::printAbilitySuccess(const Player& player, const Point& poin = Point()){
+void IO::printAbilitySuccess(const Player& player, const Point& poin){
     string type = player.getAbility()->getType(); 
     cout << abilColor;
     
@@ -199,7 +199,7 @@ void IO::printAbilitySuccess(const Player& player, const Point& poin = Point()){
 void IO::printActionSuccess(const Player& player, const Point& poin, int type){
     cout << actnColor;
     if (type == 1){
-        cout << "Turn given to the next player" << endl;
+        cout << "It's time to move on to the next player's turn. Let's keep this game rolling!" << endl;
     } else if (type == 2){
         cout << player.getNickname() << " successfully performed DOUBLE! Game Point has been doubled from" << endl;
         cout << poin.getValue()/2 << " became " << poin.getValue() << "!" << endl;
@@ -213,7 +213,7 @@ int IO::selectCard(string playersNick){
     int choice;
     cout << abilColor;
 
-    cout << "Please choose which " << playersNick << "'s cards you want to swap :" << endl;
+    cout << "Pick which " << playersNick << "'s cards you want to swap!" << endl;
     cout << "1. Right" << endl;
     cout << "2. Left" << endl;
     cout << "\033[5m" << "Your choice Number >>> " << resetColor; cin >> choice;
@@ -243,7 +243,7 @@ vector<Player>& IO::selectPlayer(const Player& player, const vector<pair<Player&
 
     cout << abilColor;
     if (type == "Swap"){
-        cout << "Silakan pilih pemain yang kartunya ingin anda tukar :" << endl;
+        cout << "Go ahead and pick the player whose card you want to swap!" << endl;
         printPlayer(player.getNickname(), listPlayer);
         cout << "\033[5m" << "Player's Name 1 >>> " << resetColor; cin >> player1;
         cout << abilColor;
@@ -261,7 +261,7 @@ vector<Player>& IO::selectPlayer(const Player& player, const vector<pair<Player&
         }
 
     } else if (type == "Switch"){
-        cout << "Silakan pilih pemain yang kartunya ingin anda tukar :" << endl;
+        cout << "Go ahead and pick the player whose card you want to swap! " << endl;
         printPlayer(player.getNickname(), listPlayer);
         cout << "\033[5m" << "Player's Name >>> " << resetColor; cin >> player1;
         
@@ -272,7 +272,7 @@ vector<Player>& IO::selectPlayer(const Player& player, const vector<pair<Player&
         }
 
     } else if (type == "Abilityless"){
-        cout << "Silakan pilih pemain yang kartunya ingin anda matikan :" << endl;
+        cout << "Go ahead and pick the player whose card you want to 'power down'! " << endl;
         printPlayer(player.getNickname(), listPlayer);
         cout << "\033[5m" << "Player's Name >>> " << resetColor; cin >> player1;
         
@@ -285,6 +285,19 @@ vector<Player>& IO::selectPlayer(const Player& player, const vector<pair<Player&
     
     cout << resetColor;
     return resPlayers;
+}
+
+void IO::printAbilityless(string nick = ""){
+    cout << abilColor;
+    if (nick == ""){
+        cout << "Oops, " << nick << "'s Ability Card has been used before :(" << endl;
+        cout << "Aww, what a shame, the use of this card was all for nothing" << endl;
+    } else {
+        cout << "Oops, turns out all the players have already used their ability cards :(" << endl;
+        cout << "Aww, tough luck, looks like you're now abilityless!" << endl;
+        cout <<  "Womp womp, the use of those cards was all for naught!" << endl;
+    }
+
 }
 
 void printHelper(string nick){
