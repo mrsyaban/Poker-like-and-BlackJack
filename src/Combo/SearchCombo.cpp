@@ -48,24 +48,34 @@ void SearchCombo::setRecords(vector<Combo> records)
 
 void SearchCombo::sortCards()
 {
-    cout << "masuk sorcard\n";
-    for (unsigned int i = 0; i < this->cards.size() - 1; i++)
-    {
-        int maxIndex = i;
-        for (unsigned int j = i + 1; j < this->cards.size(); j++)
-        {
-            if (this->cards[j].getNumber() > this->cards[maxIndex].getNumber() || (this->cards[j].getNumber() == this->cards[maxIndex].getNumber() && this->cards[j].getColor() > this->cards[maxIndex].getColor()))
-            {
-                maxIndex = j;
+    // for (unsigned int i = 0; i < this->cards.size() - 1; i++)
+    // {
+    //     int maxIndex = i;
+    //     for (unsigned int j = i + 1; j < this->cards.size(); j++)
+    //     {
+    //         if (this->cards[j].getNumber() > this->cards[maxIndex].getNumber() || (this->cards[j].getNumber() == this->cards[maxIndex].getNumber() && this->cards[j].getColor() > this->cards[maxIndex].getColor()))
+    //         {
+    //             maxIndex = j;
+    //         }
+    //     }
+
+    //     Card temp = this->cards[i];
+    //     this->cards[i] = this->cards[maxIndex];
+    //     this->cards[maxIndex] = temp;
+    // }
+
+    for (int i = 0; i < this->cards.size() - 1; i++) {
+        int min_idx = i;
+        for (int j = i + 1; j < this->cards.size(); j++) {
+            if (this->cards[j].value() < this->cards[min_idx].value()) {
+                min_idx = j;
             }
         }
-
-        cout << "progress sorcard\n";
+        // swap(this->cards[i], this->cards[min_idx]);
         Card temp = this->cards[i];
-        this->cards[i] = this->cards[maxIndex];
-        this->cards[maxIndex] = temp;
+        this->cards[i] = this->cards[min_idx];
+        this->cards[min_idx] = temp;
     }
-    cout << "keluar sorcard\n";
 }
 
 // void SearchCombo::sortCombo() {
