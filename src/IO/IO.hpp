@@ -1,7 +1,6 @@
 #include "../Game/Game.hpp"
 #include "../Exception/exception.h"
 
-
 class IO {
 
     private:   

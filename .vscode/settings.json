@@ -4,22 +4,6 @@
         "**/src/**/*.jsx": "javascriptreact",
         "*.js": "javascriptreact",
         "*.pl": "prolog",
-        "array": "cpp",
-        "string_view": "cpp",
-        "initializer_list": "cpp",
-        "*.tcc": "cpp",
-        "atomic": "cpp",
-        "cwchar": "cpp",
-        "string": "cpp",
-        "exception": "cpp",
-        "functional": "cpp",
-        "iosfwd": "cpp",
-        "istream": "cpp",
-        "new": "cpp",
-        "ostream": "cpp",
-        "stdexcept": "cpp",
-        "streambuf": "cpp",
-        "type_traits": "cpp",
-        "utility": "cpp"
+        "string": "cpp"
     }
 }

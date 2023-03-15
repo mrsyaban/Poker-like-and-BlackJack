@@ -5,9 +5,9 @@
 #include "../Card/Card.hpp"
 #include "../Deck/Deck.hpp"
 #include "../Point/Point.hpp"
-#include "../Ability/Ability.hpp"
+// #include "../Ability/Ability.hpp"
 #include "../Table/Table.hpp"
-#include "../IO/IO.hpp"
+// #include "../IO/IO.hpp"
 
 #include <iostream>
 #include <map>
@@ -27,6 +27,9 @@ const map<string, int> inputToCommand = {
         {"SWITCH", 9},
         {"ABILITYLESS", 10}
 };
+
+class IO;
+class Ability;
 
 class Game {
     private:
