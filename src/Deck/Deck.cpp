@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Deck.hpp"
 #include "../InventoryHolder/InventoryHolder.hpp"
+#include "../Ability/Ability.hpp"
 using namespace std;
 
 template <>

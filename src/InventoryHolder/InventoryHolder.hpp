@@ -76,7 +76,7 @@ class InventoryHolder
         }   
 
         void deleteall() {
-            this->deleteall();
+            this->items.deleteall();
         }
 
         void puttoback() {
