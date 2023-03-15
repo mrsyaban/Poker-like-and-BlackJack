@@ -1,15 +1,17 @@
 #ifndef ABILITY_HPP
 #define ABILITY_HPP
 
-#include "../Player/Player.hpp"
+// #include "../Player/Player.hpp"
 #include "../Action/Action.hpp"
-#include "../IO/IO.hpp"
+// #include "../IO/IO.hpp"
 
 // #include "../Game/Game.hpp" implicit import with forward declaration
 #include <iostream>
 using namespace std;
 
-class Game; // forward declaration
+// forward declaration
+class Game; 
+class Player;
 
 class Ability : public Action { 
     private:

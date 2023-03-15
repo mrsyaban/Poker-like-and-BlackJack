@@ -5,14 +5,17 @@
 #include "../Card/Card.hpp"
 #include "../Deck/Deck.hpp"
 #include "../Point/Point.hpp"
-#include "../Ability/Ability.hpp"
+// #include "../Ability/Ability.hpp"
 #include "../Table/Table.hpp"
-#include "../IO/IO.hpp"
+// #include "../IO/IO.hpp"
 
 #include <iostream>
 #include <map>
 #include <string>
 using namespace std;
+
+class IO;
+class Ability;
 
 class Game {
     private:

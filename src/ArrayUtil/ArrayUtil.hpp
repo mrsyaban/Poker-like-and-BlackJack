@@ -7,7 +7,7 @@ template <class T>
 // signature for array
 T getHighest(T * buffer, int size) {
     if (size == 1) {
-        return T[0];
+        return buffer[0];
     } else {
         T left = getHighest(buffer, size / 2);
         T right = getHighest(buffer + size / 2, size - size / 2);

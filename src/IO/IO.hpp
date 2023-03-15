@@ -3,8 +3,6 @@
 #include "../Table/Table.hpp"
 #include "../Player/Player.hpp"
 
-x       
-
 class IO {
 
     private:   

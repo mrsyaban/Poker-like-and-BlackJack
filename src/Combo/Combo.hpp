@@ -9,7 +9,7 @@
 #include "../ObjectWithValue/ObjectWithValue.hpp"
 #include "../Exception/exception.h"
 #include "../ArrayUtil/ArrayUtil.hpp"
-#include "SearchCombo.hpp"
+// #include "SearchCombo.hpp"
 
 class Combo : public ObjectWithValue<double> {
     private:
