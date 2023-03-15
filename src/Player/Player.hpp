@@ -4,6 +4,7 @@
 #include "../InventoryHolder/InventoryHolder.hpp"
 #include "../Card/Card.hpp"
 // #include "../Ability/Ability.hpp"
+#include "../Point/Point.hpp"
 #include "../Combo/Combo.hpp"
 #include <string>
 
@@ -14,7 +15,7 @@ class Player : public InventoryHolder<Card> {
     private:
         const string nickName;
         Ability* handAbility;
-        int handPoint;
+        Point handPoint;
         Combo highestCombo;
 
     public:
@@ -28,7 +29,7 @@ class Player : public InventoryHolder<Card> {
         /* Accessor */
         string getNickname() const;
         Ability* getAbility() const;
-        int getPoint() const;
+        Point getPoint() const;
         Combo getHighestCombo() const;
         void getInfo() const;
         Card getCard(int) const;
@@ -39,7 +40,7 @@ class Player : public InventoryHolder<Card> {
         void dealToPlayer(InventoryHolder<Card>&);
 
         /* Utility Function*/
-        void addPoint(int );
+        void addPoint(long);
 
 };
 

@@ -12,7 +12,7 @@ Point::Point(int val){
 
 // getter / setter (don't set value directly, use for resetting game point only)
 // use Add instead for adding value
-int Point::getValue() const{
+long Point::getValue() const{
     return this->value;
 }
 
@@ -27,18 +27,23 @@ void Point::Half(){
 }
 
 void Point::Double(){
-    if (this->value >= 1073741824) return; // handle integer overflow
+    if (this->value > 4294967296) return; // max point
     this->value *= 2;
 }
 
 void Point::Quadruple(){
-    if (this->value >= 536870912) return; // handle integer overflow
+    if (this->value > 4294967296) return; // max point
     this->value *= 4;
 }
 
 void Point::Quarter(){
     if (this->value < 4) return; // at least 4 to quarter
     this->value *= 0.25;
+}
+
+void Point::Add(int val){
+    if (this->value > 8589934592) return; // max point
+    this->value += val;
 }
 
 /* void */

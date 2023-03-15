@@ -374,7 +374,7 @@ void IO::printEndGame(const vector<pair<Player&, bool>>& listPlayer){
         cout << wordColor << i+1 << "." << resetColor;
         cout << lineColor << "│" << resetColor;
         cout << wordColor; printHelper(listPlayer[i].first.getNickname()); cout << resetColor;
-        cout << wordColor; printHelper(listPlayer[i].first.getPoint()); cout << resetColor;
+        cout << wordColor; printHelper(listPlayer[i].first.getPoint().getValue()); cout << resetColor;
         cout << lineColor << "│" << resetColor << endl;
     }
     cout << lineColor << "==============================" << resetColor << endl;

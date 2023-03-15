@@ -227,13 +227,15 @@ void SearchCombo::straight()
     vector<Card> straight;
     Combo c;
 
-    int count[13] = {0};
+    cout << "1 " << endl;
+    int count[13] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     for (unsigned int i = 0; i < this->cards.size(); i++)
     {
-        count[this->cards[i].getNumber()]++;
+        count[this->cards[i].getNumber()-1]++;
     }
+    cout << "2 " << endl;
 
-    for (unsigned int i = 12; i >= 5; i--) {
+    for (int i = 12; i >= 4; i--) {
         if (count[i] >= 1 && count[i-1] >= 1 && count[i-2] >= 1 && count[i-3] >= 1 && count[i-4] >= 1) {
             straight.push_back(this->cards[i]);
             straight.push_back(this->cards[i-1]);
@@ -244,65 +246,16 @@ void SearchCombo::straight()
         }
     }
 
-    c.setCombo(straight);
+    if (straight.size() > 1)
+    {
+        c.setCombo(straight);
 
-    max += c.getCombo()[4].value();
+        max += c.getCombo()[4].value();
 
-    max += 12.3;
-    c.setScore(max);
-    this->records.push_back(c);
-
-
-
-    // while (i < this->cards.size())
-    // {
-    //     if (i + 4 < 7)
-    //     {
-    //         if (this->cards[i].getNumber() + 1 == this->cards[i + 1].getNumber() &&
-    //             this->cards[i].getNumber() + 2 == this->cards[i + 2].getNumber() &&
-    //             this->cards[i].getNumber() + 3 == this->cards[i + 3].getNumber() &&
-    //             this->cards[i].getNumber() + 4 == this->cards[i + 4].getNumber())
-    //         {
-
-    //             straight.insert(straight.end(), this->cards[i]);
-    //             straight.insert(straight.end(), this->cards[i + 1]);
-    //             straight.insert(straight.end(), this->cards[i + 2]);
-    //             straight.insert(straight.end(), this->cards[i + 3]);
-    //             straight.insert(straight.end(), this->cards[i + 4]);
-
-    //             countStraight++;
-    //         }
-    //     }
-    //     i++;
-    // }
-
-    // if (countStraight >= 1)
-    // {
-    //     temp.push_back(straight[straight.size() - 5]);
-    //     temp.push_back(straight[straight.size() - 4]);
-    //     temp.push_back(straight[straight.size() - 3]);
-    //     temp.push_back(straight[straight.size() - 2]);
-    //     temp.push_back(straight[straight.size() - 1]);
-
-    //     c.setCombo(temp);
-
-    //     // for (auto x : this->combo) {
-    //     //     max += x.value();
-    //     // }
-
-    //     max += c.getCombo()[4].value();
-
-    //     max += 12.3;
-
-    //     c.setScore(max);
-    // }
-
-    // if (temp.size() > 1)
-    // {
-    //     records.push_back(c);
-    // }
-
-    // // this->sortCombo();
+        max += 12.3;
+        c.setScore(max);
+        this->records.push_back(c);
+    }   
 }
 
 void SearchCombo::flush()

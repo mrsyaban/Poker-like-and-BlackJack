@@ -161,7 +161,7 @@ bool Game::gameEnded()
 {
     for (auto p_itr = getPlayers().begin(); p_itr != getPlayers().end(); p_itr++)
     {
-        if (p_itr->first.getPoint() >= 4294967296.00)
+        if (p_itr->first.getPoint().getValue() >= 4294967296)
         {
             return true;
         }
