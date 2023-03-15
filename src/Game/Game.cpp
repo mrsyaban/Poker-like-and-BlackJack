@@ -119,7 +119,7 @@ void Game::initNewMatch(bool isRandom)
     cout << this->cardDeck.getTopItems().getNumber() << this->cardDeck.getTopItems().getColor() ;
 
     // print table
-    io.printTable(table);
+    io.printTable(table, point);
 }
 
 
@@ -249,21 +249,6 @@ void Game::nextTurn()
             nextPlayer();
         }
 
-        // init command
-        int command = -1;
-        while (command == -1)
-        {
-            try
-            {
-                string action_cmd = io.turnInput(((this->players.begin() + this->currentPlayer)->first));
-                command = inputToCommand.at(action_cmd);
-            }
-            catch (BaseException &e)
-            {
-                std::cout << e.what() << endl;
-            }
-        }
-
         /* All possible action */
         Next nxt;
         Half h;
@@ -276,42 +261,68 @@ void Game::nextTurn()
         Switch swt;
         Abilityless abl;
 
-        switch (command)
-        {
-        /* Execute command based on input */
-            case 1:
-                nxt.Execute(*this);
-                break;
-            case 2:
-                h.Execute(*this);
-                break;
-            case 3:
-                d.Execute(*this);
-                break;
-            case 4:
-                rr.Execute(*this);
-                break;
-            case 5:
-                qd.Execute(*this);
-                break;
-            case 6:
-                qtr.Execute(*this);
-                break;
-            case 7:
-                rv.Execute(*this);
-                break;
-            case 8:
-                swp.Execute(*this);
-                break;
-            case 9:
-                swt.Execute(*this);
-                break;
-            case 10:
-                abl.Execute(*this);
-                break;
-            default:
-                break;
+        bool proceed = false;
+
+        while (!proceed) {
+            // init command
+            int command = -1;
+            while (command == -1)
+            {
+                try
+                {
+                    string action_cmd = io.turnInput(((this->players.begin() + this->currentPlayer)->first));
+                    command = inputToCommand.at(action_cmd);
+                }
+                catch (BaseException &e)
+                {
+                    std::cout << e.what() << endl;
+                }
+            }
+            try {
+                switch (command)
+                {
+                /* Execute command based on input */
+                    case 1:
+                        nxt.Execute(*this);
+                        break;
+                    case 2:
+                        h.Execute(*this);
+                        break;
+                    case 3:
+                        d.Execute(*this);
+                        break;
+                    case 4:
+                        rr.Execute(*this);
+                        break;
+                    case 5:
+                        qd.Execute(*this);
+                        break;
+                    case 6:
+                        qtr.Execute(*this);
+                        break;
+                    case 7:
+                        rv.Execute(*this);
+                        break;
+                    case 8:
+                        swp.Execute(*this);
+                        break;
+                    case 9:
+                        swt.Execute(*this);
+                        break;
+                    case 10:
+                        abl.Execute(*this);
+                        break;
+                    default:
+                        break;
+                }
+
+                proceed = true;
+            } catch (BaseException &e) {
+                continue;
+            }
         }
+
+
 
         // Toggle player status
         players[currentPlayer].second = !players[currentPlayer].second;
@@ -335,7 +346,7 @@ void Game::nextRound()
     {
         round++;
         this->table.openCard();
-        io.printTable(table);
+        io.printTable(table, point);
         if (this->getRound() == 2)
         {
             dealAbilityToPlayers();

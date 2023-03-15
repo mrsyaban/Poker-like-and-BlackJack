@@ -144,7 +144,7 @@ vector<string> IO::inputPlayerName(){
     return res;
 }
 
-void IO::printTable(Table table){
+void IO::printTable(Table table, Point point){
     cout << wordColor << "            TABLE             " << resetColor << endl;
     cout << lineColor << "==============================" << resetColor << "\n\n";
     for (int i=0; i<table.getNeff(); i++){
@@ -162,7 +162,9 @@ void IO::printTable(Table table){
         cout << resetColor;
     }
     cout << "\n\n";
-    cout << lineColor << "==============================" << resetColor << endl;
+    cout << lineColor << "==============================" << endl << endl;
+    cout << "Current Points : " <<  point.getValue() << resetColor << endl << endl; 
+
 }
 
 void IO::printAbilitySuccess(Player player, vector<string> resPlayer, vector<string> reversed){

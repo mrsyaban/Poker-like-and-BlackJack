@@ -205,9 +205,11 @@ void Abilityless::Execute(Game& g) {
         checkAbilityError(g);
     } catch (AbilityNotAvailableException& e) {
         cout << e.what() << endl;
+        throw e;
         return;
     } catch (AbilityNotHaveException& e) {
         cout << e.what() << this->getType() << endl;
+        throw e;
         return;
     }
     IO io;
