@@ -1,4 +1,3 @@
-#include <ctime>
 #include "Player.hpp"
 
 /* default constructor*/

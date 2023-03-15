@@ -61,18 +61,6 @@ class Game {
         int& getPlayerTurn();
         int& getRound();
         int& getCurrentPlayer();
-        vector<pair<Player&, bool>>& getPlayers(){
-            return this->players;
-        }
-
-        Deck<Card>& getCardDeck();
-        Deck<Ability>& getAbilityDeck();
-        Table& getTable();
-        Point& getPoint();
-        bool& getReverseInfo();
-        int& getPlayerTurn();
-        int& getRound();
-        int& getCurrentPlayer();
 
         /* Setter */
         void addPlayer();

@@ -15,6 +15,7 @@ class InventoryHolder
         vector<T> items;
 
     public:
+        InventoryHolder();
         ~InventoryHolder()
         {
             while (!this->items.empty())

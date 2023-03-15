@@ -12,7 +12,7 @@ class Table: public InventoryHolder<Card> {
     
     public:
         Table();
-        void dealToTable(InventoryHolder<T>&);
+        void dealToTable(InventoryHolder<Card>&);
         void openCard();
         
 
