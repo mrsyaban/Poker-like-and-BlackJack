@@ -153,6 +153,7 @@ void Game::dealAbilityToPlayers()
     for (auto p_itr = getPlayers().begin(); p_itr != getPlayers().end(); p_itr++)
     {
         p_itr->first.setAbility(*(getAbilityDeck().getTopItems()));
+        cout << "Player " << p_itr->first.getNickname() << " get ability " << p_itr->first.getAbility()->getType() << endl;
         this->abilityDeck.getItems().erase(this->abilityDeck.getTopItemsIterator());
     }
 }

@@ -16,6 +16,7 @@
     "xstring": "cpp",
     "xtree": "cpp",
     "xutility": "cpp",
-    "iosfwd": "cpp"
+    "iosfwd": "cpp",
+    "ostream": "cpp"
   }
 }
