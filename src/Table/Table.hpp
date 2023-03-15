@@ -14,12 +14,11 @@ class Table: public InventoryHolder<Card> {
         Table();
         void dealToTable(InventoryHolder<Card>&);
         void openCard();
-        void getInfo() const;
-        int getNeff() const;
         
 
         /* Getter */
-        Card getCard(int) const;
+        void getInfo() const;
+        int getNeff() const;
 
 };
 

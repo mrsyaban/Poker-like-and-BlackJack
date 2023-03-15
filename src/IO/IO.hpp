@@ -1,16 +1,12 @@
 #include "../Game/Game.hpp"
 #include "../Exception/exception.h"
 #include "../Table/Table.hpp"
+#include "../Player/Player.hpp"
 
-const map<int, string> cardToString = {
-/* Mapping color to int for */
-    {0, "Green"},
-    {1, "Blue"},
-    {2, "Yellow"},
-    {3, "Red"}
-};
+x       
 
 class IO {
+
     private:   
         string lineColor = "\033[1;33m";
         string resetColor = "\033[0m";
@@ -34,7 +30,7 @@ class IO {
         string turnInput(Player&);
         
         /* success message function*/
-        void printAbilitySuccess(const Player& player, vector<string> resPlayer = {}, vector<string> reversed = {});
+        void printAbilitySuccess(Player player, vector<string> resPlayer = {}, vector<string> reversed = {});
         void printAbilitySuccess(const Player&, const Point&); 
         void printActionSuccess(const Player& ,const Point&, int );
 

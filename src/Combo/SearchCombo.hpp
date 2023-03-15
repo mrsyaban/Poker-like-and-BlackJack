@@ -22,12 +22,14 @@ class SearchCombo {
         SearchCombo(Player player, Table table); // constructor
         ~SearchCombo(); // destructor
 
-       
+        /* Getter */
         Combo getCombo() const; // Combo Getter
-        void setCombo(Combo); // Combo Getter
         vector<Card> getCards() const; // Cards Getter
-        void setCards(vector<Card>); // Cards Setter
         vector<Combo> getRecords() const; // Records Getter
+
+        /* Setter */
+        void setCombo(Combo); // Combo Setter
+        void setCards(vector<Card>); // Cards Setter
         void setRecords(vector<Combo>); // Records Setter
 
         vector<Card> getComboCards() const; // Combo Cards getter

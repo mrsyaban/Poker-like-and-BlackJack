@@ -86,7 +86,7 @@ void IO::splashScreen(){
 
 string IO::mainMenu(){
     cout << lineColor << "==============================" << resetColor << endl;
-    cout << wordColor << "          MAIN MENU           " << resetColor << endl;
+    cout << wordColor << "          ♦ MAIN MENU ♦       " << resetColor << endl;
     cout << lineColor << "==============================" << resetColor << endl;
     cout << wordColor << " 1. Start " << endl;
     cout << wordColor << " 2. Exit" << endl;
@@ -127,15 +127,15 @@ void IO::printTable(Table table){
     }
 }
 
-void IO::printAbilitySuccess(const Player& player, vector<string> resPlayer = {}, vector<string> reversed = {}){
+void IO::printAbilitySuccess(Player player, vector<string> resPlayer = {}, vector<string> reversed = {}){
     string type = player.getAbility()->getType(); 
     cout << abilColor;
     // Re-Roll
     if ( type == "Re-Roll"){
         cout << "Replacing your current cards..." << endl;
         cout << "You got 2 new cards :" << endl;
-        cout << "1. " << player.getCard(0).getNumber() << " " << player.getCard(0).getColor() << endl;
-        cout << "2. " << player.getCard(1).getNumber() << " " << player.getCard(1).getColor() << endl;
+        cout << "1. " << player.getItems(0).getNumber() << " " << cardToString[player.getItems(0).getColor()] << endl;
+        cout << "2. " << player.getItems(1).getNumber() << " " << cardToString[player.getItems(1).getColor()] << endl;
     
     // Swap Card
     } else if (type == "Swap"){
@@ -147,8 +147,8 @@ void IO::printAbilitySuccess(const Player& player, vector<string> resPlayer = {}
         cout << player.getNickname() << " successfully performed SWITCH!" << endl;
         cout << "both of your cards has been switched with " << resPlayer[0];
         cout << "your current cards are : " 
-        << player.getCard(0).getNumber() << "-" << player.getCard(1).getColor() << " & "
-        << player.getCard(1).getNumber() << "-" << player.getCard(1).getColor();
+        << player.getItems(0).getNumber() << "-" << player.getItems(1).getColor() << " & "
+        << player.getItems(1).getNumber() << "-" << player.getItems(1).getColor();
     
     // Abiilityless
     } else if (type == "Abilityless"){
@@ -327,38 +327,3 @@ void IO::printEndGame(const vector<pair<Player&, bool>>& listPlayer){
     }
     cout << lineColor << "==============================" << resetColor << endl;
 }
-
-// void IO::printCard(Card card){
-//     int color = card.getColor();
-//     int n = card.getNumber();
-//     if (color == 0){
-//         cout << "\033[1m\033[32m";
-//     } else if (color == 1){
-//         cout << "\033[1m\033[34m";
-//     } else if (color == 2){
-//         cout << "\033[1m\033[33m";
-//     } else {
-//         cout << "\033[1m\033[31m";
-//     }
-//     cout << "┌───────┐" << endl;
-//     cout << "│ ";
-//     if (n>10){
-//         cout << n;
-//     } else {
-//         cout << n << " ";
-//     }
-//     cout << "    │" << endl;
-//     cout << "│       │" << endl;
-//     cout << "│   ♦   │" << endl;
-//     cout << "│       │" << endl;
-//     cout << "│    ";
-//     if (n>10){
-//         cout << n;
-//     } else {
-//         cout << " " << n;
-//     }
-//     cout << " │" << endl;
-//     cout << "└───────┘" << endl;
-//     cout << resetColor;
-// }
-

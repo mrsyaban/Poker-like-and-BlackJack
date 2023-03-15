@@ -6,11 +6,11 @@ using namespace std;
 SearchCombo::SearchCombo() {}
 
 SearchCombo::SearchCombo(Player player, Table table) {
-    this->cards.push_back(player.getCard(0));
-    this->cards.push_back(player.getCard(1));
+    this->cards.push_back(player.getItems(0));
+    this->cards.push_back(player.getItems(1));
 
     for (int i = 0; i < 5; i++) {
-        this->cards.push_back(table.getCard(i));
+        this->cards.push_back(table.getItems(i));
     }
 
     this->sortCards();
@@ -18,17 +18,29 @@ SearchCombo::SearchCombo(Player player, Table table) {
 
 SearchCombo::~SearchCombo() {}
 
-Combo SearchCombo::getCombo() const {return this->combo;}
+Combo SearchCombo::getCombo() const {
+    return this->combo;
+}
 
-void SearchCombo::setCombo(Combo combo) {this->combo = combo;}
+void SearchCombo::setCombo(Combo combo) {
+    this->combo = combo;
+}
 
-vector<Card> SearchCombo::getCards() const {return this->cards;}
+vector<Card> SearchCombo::getCards() const {
+    return this->cards;
+}
 
-void SearchCombo::setCards(vector<Card> cards) {this->cards = cards;}
+void SearchCombo::setCards(vector<Card> cards) {
+    this->cards = cards;
+}
 
-vector<Combo> SearchCombo::getRecords() const {return this->records;}
+vector<Combo> SearchCombo::getRecords() const {
+    return this->records;
+}
 
-void SearchCombo::setRecords(vector<Combo> records) {this->records = records;}
+void SearchCombo::setRecords(vector<Combo> records) {
+    this->records = records;
+}
 
 vector<Card> SearchCombo::getComboCards() const {
     return this->combo.getCombo();
