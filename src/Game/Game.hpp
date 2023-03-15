@@ -8,6 +8,7 @@
 // #include "../Ability/Ability.hpp"
 #include "../Table/Table.hpp"
 // #include "../IO/IO.hpp"
+#include "../Combo/SearchCombo.hpp"
 
 #include <iostream>
 #include <map>

@@ -1,9 +1,10 @@
 {
-    "files.associations": {
-        "**/src/**/*.js": "javascriptreact",
-        "**/src/**/*.jsx": "javascriptreact",
-        "*.js": "javascriptreact",
-        "*.pl": "prolog",
-        "string": "cpp"
-    }
+  "files.associations": {
+    "**/src/**/*.js": "javascriptreact",
+    "**/src/**/*.jsx": "javascriptreact",
+    "*.js": "javascriptreact",
+    "*.pl": "prolog",
+    "string": "cpp",
+    "iostream": "cpp"
+  }
 }

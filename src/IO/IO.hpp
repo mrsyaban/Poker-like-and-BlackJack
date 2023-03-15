@@ -1,6 +1,13 @@
 #include "../Game/Game.hpp"
 #include "../Exception/exception.h"
 
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
 class IO {
 
     private:   
@@ -13,7 +20,6 @@ class IO {
         string actnColor = "\033[1;34m";
 
     public :    
-        static string retrieveInput();
 
         /* print function*/
         void splashScreen();
@@ -23,8 +29,8 @@ class IO {
         
         /* main menu */
         string mainMenu();  
-        void inputPlayerName(Game& game);
-        string turnInput(string);
+        vector<string> inputPlayerName(Game& game);
+        string turnInput(const Player&);
         
         /* success message function*/
         void printAbilitySuccess(Player player, vector<string> resPlayer = {}, vector<string> reversed = {});
