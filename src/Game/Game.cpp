@@ -259,51 +259,41 @@ void Game::nextTurn()
 
         switch (command)
         {
-        case 1:
-            // execute next
-            std::cout << "next" << endl;
-            nxt.Execute(*this);
-            break;
-        case 2:
-            std::cout << "half" << endl;
-            h.Execute(*this);
-            break;
-        case 3:
-            std::cout << "double" << endl;
-            std::cout << point.getValue() << endl;
-            d.Execute(*this);
-            std::cout << point.getValue() << endl;
-            break;
-        case 4:
-            std::cout << "reroll" << endl;
-            rr.Execute(*this);
-            break;
-        case 5:
-            std::cout << "quadruple" << endl;
-            qd.Execute(*this);
-            break;
-        case 6:
-            std::cout << "quarter" << endl;
-            qtr.Execute(*this);
-            break;
-        case 7:
-            std::cout << "reverse" << endl;
-            rv.Execute(*this);
-            break;
-        case 8:
-            std::cout << "swap card" << endl;
-            swp.Execute(*this);
-            break;
-        case 9:
-            std::cout << "switch" << endl;
-            swt.Execute(*this);
-            break;
-        case 10:
-            std::cout << "abilityless" << endl;
-            abl.Execute(*this);
-            break;
-        default:
-            break;
+        /* Execute command based on input */
+            case 1:
+                nxt.Execute(*this);
+                break;
+            case 2:
+                h.Execute(*this);
+                break;
+            case 3:
+                std::cout << point.getValue() << endl;
+                d.Execute(*this);
+                std::cout << point.getValue() << endl;
+                break;
+            case 4:
+                rr.Execute(*this);
+                break;
+            case 5:
+                qd.Execute(*this);
+                break;
+            case 6:
+                qtr.Execute(*this);
+                break;
+            case 7:
+                rv.Execute(*this);
+                break;
+            case 8:
+                swp.Execute(*this);
+                break;
+            case 9:
+                swt.Execute(*this);
+                break;
+            case 10:
+                abl.Execute(*this);
+                break;
+            default:
+                break;
         }
 
         // sToggle player status
