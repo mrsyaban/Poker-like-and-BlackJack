@@ -1,5 +1,9 @@
 {
   "files.associations": {
+    "**/src/**/*.js": "javascriptreact",
+    "**/src/**/*.jsx": "javascriptreact",
+    "*.js": "javascriptreact",
+    "*.pl": "prolog",
     "array": "cpp",
     "deque": "cpp",
     "string": "cpp",
