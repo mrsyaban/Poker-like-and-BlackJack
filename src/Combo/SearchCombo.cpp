@@ -6,11 +6,11 @@ using namespace std;
 SearchCombo::SearchCombo() {}
 
 SearchCombo::SearchCombo(Player player, Table table) {
-    this->cards.push_back(player.getItems(0));
-    this->cards.push_back(player.getItems(1));
+    this->cards.push_back(player.getCard(0));
+    this->cards.push_back(player.getCard(1));
 
     for (int i = 0; i < 5; i++) {
-        this->cards.push_back(table.getItems(i));
+        this->cards.push_back(table.getCard(i));
     }
 
     this->sortCards();

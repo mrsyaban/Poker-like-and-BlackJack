@@ -236,3 +236,7 @@ vector<string> Game::getReversedPlayer() {
     }
     return res;
 }
+
+void Game::setReverseInfo(bool r) {
+    this->isReversed = r;
+}

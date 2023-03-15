@@ -61,6 +61,18 @@ class Game {
         int& getPlayerTurn();
         int& getRound();
         int& getCurrentPlayer();
+        vector<pair<Player&, bool>>& getPlayers(){
+            return this->players;
+        }
+
+        Deck<Card>& getCardDeck();
+        Deck<Ability>& getAbilityDeck();
+        Table& getTable();
+        Point& getPoint();
+        bool& getReverseInfo();
+        int& getPlayerTurn();
+        int& getRound();
+        int& getCurrentPlayer();
 
         /* Setter */
         void addPlayer();
@@ -71,82 +83,24 @@ class Game {
 
         void start();
         
-        void nextPlayer() {
-            if (isReversed) {
-                decCurrentPlayer();
-            } else {
-                incCurrentPlayer();
-            }
-        }
+        void nextPlayer();
         
-        void nextTurn() {
+        void nextTurn();
 
-            nextPlayer();
-
-            if (playerTurn != 7) {
-                // status player yang udah jalan adalah true  (1) untuk ronde ganjil (mod 2 == 1)
-                // status player yang udah jalan adalah false (0) untuk ronde genap  (mod 2 == 0)
-                while (players[currentPlayer].second % 2 == round % 2) {
-                    nextPlayer();
-                }
-
-                // TODO
-                // currentPlayer jalan, manggil command (??)
-
-                // setelah playernya jalan, statusnya ditoggle
-                players[currentPlayer].second = !players[currentPlayer].second;
-
-                playerTurn++;
-
-            } else {
-                // udah jalan semua, set playerTurn = 0, nextRound
-                playerTurn = 0;
-                nextRound();
-            }
-        }
-
-        void nextRound() {
-            if (this->round < 6) {
-                round++;
-                nextPlayer();
-            } else {
-                // TODO
-                // udah selesai 6 ronde, cari pemenang (??)
-            }
-        }
+        void nextRound();
 
         // return vector sisa urutan eksekusi saat ini (setelah reverse)
-        vector<string> getRemainingReversedPlayer() {
-            vector<string> res;
-            int i = currentPlayer-1;
-            while (i % 7 != currentPlayer) {
-                if (players[i].second % 2 != round % 2) {
-                    res.push_back(players[i].first.getNickname());
-                }
-                i--;
-            }
-            return res;
-        }
+        vector<string> getRemainingReversedPlayer();
 
         // return vector buat urutan eksekusi ronde berikutnya (setelah reverse)
-        vector<string> getReversedPlayer() {
-            vector<string> res;
-            int i = currentPlayer-1;
-            while (i % 7 != currentPlayer) {
-                res.push_back(players[i].first.getNickname());
-                i--;
-            }
-            return res;
-        }
+        vector<string> getReversedPlayer();
 
         /* SETTER */
         void dealToTable();
         void dealToPlayers();
         void dealAbilityToPlayers();
 
-        void setReverseInfo(bool r) {
-            this->isReversed = r;
-        }
+        void setReverseInfo(bool r);
 
         /* GETTER */
         bool gameEnded();

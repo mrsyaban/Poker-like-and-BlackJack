@@ -12,13 +12,14 @@ class Table: public InventoryHolder<Card> {
     
     public:
         Table();
-        void dealToTable(InventoryHolder<Card>&);
+        void dealToTable(InventoryHolder<T>&);
         void openCard();
         
 
         /* Getter */
         void getInfo() const;
         int getNeff() const;
+        Card getCard(int) const;
 
 };
 
