@@ -119,19 +119,26 @@ void Game::start() {
         addPlayer();
 
         this->currentPlayer = 0;
+
+        point = Point();
+        Deck<Card> deck;
+        Deck<Ability*> deckAbility;
+        this->cardDeck = deck;
+        this->abilityDeck = deckAbility;
+        dealToTable();
+        dealToPlayers();
+
         while (!gameEnded()) {
-            point = Point();
-            Deck<Card> deck;
-            Deck<Ability*> deckAbility;
-            this->cardDeck = deck;
-            this->abilityDeck = deckAbility;
-            dealToTable();
-            dealToPlayers();
+            // point = Point();
+            // Deck<Card> deck;
+            // Deck<Ability*> deckAbility;
+            // this->cardDeck = deck;
+            // this->abilityDeck = deckAbility;
+            // dealToTable();
+            // dealToPlayers();
             // cards already given to the table and players
-            while (!gameEnded()) {
-                for (int i = 0; i < 7; i++) {
-                    nextTurn();
-                }
+            for (int i = 0; i < 7; i++) {
+                nextTurn();
             }
 
             // do {
@@ -262,6 +269,13 @@ void Game::nextRound() {
         winner.addPoint(point.getValue());
         if (!gameEnded()) {
             // TODO init new match
+            point = Point();
+            Deck<Card> deck;
+            Deck<Ability*> deckAbility;
+            this->cardDeck = deck;
+            this->abilityDeck = deckAbility;
+            dealToTable();
+            dealToPlayers();
         }
     }
 }

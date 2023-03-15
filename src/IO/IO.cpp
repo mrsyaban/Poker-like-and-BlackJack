@@ -85,7 +85,7 @@ string IO::mainMenu(){
     
     string command;
     cout << inputColor; cin >> command; cout <<  resetColor;
-    if (command != "1" || command != "2"){
+    if (!(command == "1" || command == "2")){
         NumberInputException err;
         throw err;
     }
