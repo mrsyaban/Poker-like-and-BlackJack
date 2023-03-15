@@ -29,7 +29,6 @@ class Player : public InventoryHolder<Card> {
         int getPoint() const;
         Combo getHighestCombo() const;
 
-        Card getCard(int position) const;
         void getInfo() const;
 
         /* Setter */
