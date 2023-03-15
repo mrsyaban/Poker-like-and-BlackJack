@@ -37,7 +37,7 @@ class IO {
         /* print function*/
         void splashScreen();
         void printThankYou();
-        void printTable(Table);
+        void printTable(Table<Card>);
         void printEndGame(const vector<pair<Player&, bool>>&);
         
         /* main menu */

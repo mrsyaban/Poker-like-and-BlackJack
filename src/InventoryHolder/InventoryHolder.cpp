@@ -93,3 +93,12 @@ T getItems(int i){
 template class InventoryHolder<Card>;
 template class InventoryHolder<Ability>;
 // either : pindahin hpp atau bikin instance satu satu
+
+
+template class InventoryHolder<ReRoll>;
+template class InventoryHolder<Quadruple>;
+template class InventoryHolder<Quarter>;
+template class InventoryHolder<ReverseDirection>;
+template class InventoryHolder<SwapCard>;
+template class InventoryHolder<Switch>;
+template class InventoryHolder<Abilityless>;

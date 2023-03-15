@@ -6,9 +6,8 @@
 #include "../Deck/Deck.hpp"
 #include "../Point/Point.hpp"
 // #include "../Ability/Ability.hpp"
-// #include "../Table/Table.hpp"
+#include "../Table/Table.hpp"
 // #include "../IO/IO.hpp"
-#include "../Combo/SearchCombo.hpp"
 
 #include <iostream>
 #include <map>
@@ -17,7 +16,7 @@ using namespace std;
 
 class IO;
 class Ability;
-class Table;
+// class Table;
 
 /* Mapping command to int */
 const map<string, int> inputToCommand = {
