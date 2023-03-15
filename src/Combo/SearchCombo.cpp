@@ -5,7 +5,7 @@ using namespace std;
 
 SearchCombo::SearchCombo() {}
 
-SearchCombo::SearchCombo(Player player, Table table) {
+SearchCombo::SearchCombo(Player player, Table<Card> table) {
     this->cards.push_back(player.getItems(0));
     this->cards.push_back(player.getItems(1));
 

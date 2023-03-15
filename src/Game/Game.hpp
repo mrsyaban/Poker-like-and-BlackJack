@@ -37,7 +37,7 @@ class Game {
         vector<pair<Player&, bool>> players; // idenya player bisa diakses lewat map, int adalah urutan player
         Deck<Card> cardDeck;
         Deck<Ability> abilityDeck;
-        Table table;
+        Table<Card> table;
         Point point;
         bool isReversed;
         int playerTurn;
@@ -63,7 +63,7 @@ class Game {
             return this->abilityDeck;
         }
 
-        Table getTable(){
+        Table<Card> getTable(){
             return this->table;
         }
 
