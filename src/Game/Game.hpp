@@ -28,7 +28,7 @@ const map<string, int> inputToCommand = {
         {"QUADRUPLE", 5},
         {"QUARTER", 6},
         {"REVERSE", 7},
-        {"SWAP CARD", 8},
+        {"SWAPCARD", 8},
         {"SWITCH", 9},
         {"ABILITYLESS", 10}
 };

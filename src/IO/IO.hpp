@@ -7,12 +7,23 @@
 #include "../Table/Table.hpp"
 #include <vector>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <algorithm>
+#include <map>
 using namespace std;
 
 class Player;
 class Game;
 class Point;
+
+const map<char, CardColor> stringToColor = {
+    {'R', Red},
+    {'G', Green},
+    {'B', Blue},
+    {'Y', Yellow}
+};
+
 
 class IO {
 
@@ -49,6 +60,9 @@ class IO {
 
         /* Special for Abilityless*/
         void printAbilityless(string nick = "");
+
+        /* input File*/
+        pair<vector<Card>, vector<Ability*>> inputFile();
 
 };
 

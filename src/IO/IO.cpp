@@ -6,7 +6,26 @@ using namespace std;
 string IO::turnInput(const Player& player){
     string input;
     cout << enterColor;
-    cout << player.getNickname() << "'s turn >>> " << resetColor;
+    cout << player.getNickname() << "'s turn (";
+    for (int i=0; i<2; i++){
+        cout << enterColor;
+        int color = player.getCard(i).getColor();
+        if (color == 0){
+            cout << "\033[1m\033[32m";
+        } else if (color == 1){
+            cout << "\033[1m\033[34m";
+        } else if (color == 2){
+            cout << "\033[1m\033[33m";
+        } else {
+            cout << "\033[1m\033[31m";
+        }
+        cout << player.getCard(i).getNumber() << resetColor;
+        if (i==0){
+            cout << enterColor << " - ";
+        }
+        cout << resetColor;
+    }
+    cout << enterColor <<  ") >>> ";
     cout << inputColor; cin >>  input;cout <<  resetColor;
 
     // input validation
@@ -338,6 +357,108 @@ void IO::printEndGame(const vector<pair<Player&, bool>>& listPlayer){
         cout << lineColor << "│" << resetColor << endl;
     }
     cout << lineColor << "==============================" << resetColor << endl;
+}
+
+
+pair<vector<Card>, vector<Ability*>> IO::inputFile(){
+    string fileName;
+    cout << enterColor << "Enter Your file's name >>> " << resetColor;
+    cout << inputColor; cin >> fileName; cout << resetColor;
+    string filePath = "../../test/" + fileName;
+    ifstream infile(filePath);
+    inputException err;
+    while(!infile){
+        cout << enterColor << "Enter Your file's name >>> " << resetColor;
+        cout << inputColor; cin >> fileName; cout << resetColor;
+        filePath = "../../test/" + fileName;
+        ifstream infile(filePath);
+
+        try {
+            throw err;
+        } catch (BaseException& e){
+            cout << e.what() << endl;
+        }
+        ifstream infile(filePath);
+    }
+
+    string line;
+
+    vector<Card> mainDeck;
+    vector<Ability*> abilityDeck;
+
+    int count = 0;
+    while(getline(infile, line)){
+        istringstream iss(line);
+        string code;
+        while (iss >> code) {
+            if (count <= 52){
+                if (code.length() == 2){
+                    Card card(CardColor(1), 0);
+                    card.setNumber(code[0] - '0');
+                    card.setColor(stringToColor.at(code[1]));
+                    mainDeck.push_back(card);
+                    count++;
+
+                } else if (code.length() ==  3){
+                    Card card(CardColor(1), 0);
+                    card.setNumber((code[0] - '0')*10 + (code[1] - '0'));
+                    card.setColor(stringToColor.at(code[2]));
+                    mainDeck.push_back(card);
+                    count++;
+                } else {
+                    throw err;
+                }
+
+            } else if (count <=59){
+                if (code.length() == 2){
+                    abilityDeck.push_back(stringToAbility(code));
+                    count++;
+                } else {
+                    throw err;
+                }
+
+            } else {
+                throw err;
+            }
+        }
+    }
+    
+    pair<vector<Card>, vector<Ability*>> ret(mainDeck, abilityDeck);
+    return ret;
+}
+
+Ability* stringToAbility(string code){
+    if (code == "RR"){
+        ReRoll* reroll = new ReRoll();
+        return reroll;
+    } else if (code == "QP"){
+        Quadruple* quadruple = new Quadruple();
+        return quadruple;
+
+    } else if (code == "QT"){
+        Quarter* quarter = new Quarter();
+        return quarter;
+
+    } else if (code == "RV"){
+        ReverseDirection* Reverse = new ReverseDirection();
+        return Reverse;
+
+    } else if (code == "SC"){
+        SwapCard* swapCard = new SwapCard();
+        return swapCard;
+
+    } else if (code == "SW"){
+        Switch* switc = new Switch();
+        return switc;
+
+    } else if (code == "AL"){
+        Abilityless* abilityless = new Abilityless();
+        return abilityless;
+
+    } else {
+        inputException err;
+        throw err;
+    }
 }
 
 void IO::printThankYou(){

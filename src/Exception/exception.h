@@ -3,12 +3,12 @@
 
 using namespace std;
 
-class baseException {
+class BaseException {
     public:
         virtual const char *what() const throw() = 0;
 };
 
-class NumberInputException : public baseException
+class NumberInputException : public BaseException
 {
     const char *what() const throw()
     {
@@ -16,43 +16,43 @@ class NumberInputException : public baseException
     }
 };
 
-class FileException : public baseException
+class FileException : public BaseException
 {
     const char *what() const throw()
     {
-        return "Input file not valid!";
+        return "\033[1;31mInput file not valid!\033[0m";
     }
 };
 
-class AbilityException : public baseException
+class AbilityException : public BaseException
 {
     const char *what() const throw()
     {
-        return "Ability not valid";
+        return "\033[1;31mAbility not valid\033[0m";
     }
 };
 
-class playerException : public baseException
+class playerException : public BaseException
 {
     const char *what() const throw()
     {
-        return "Players input name not valid!";
+        return "\033[1;31mPlayers input name not valid!\033[0m";
     }
 };
 
-class inputException : public baseException
+class inputException : public BaseException
 {
     const char *what() const throw()
     {
-        return "Input not valid!";
+        return "\033[1;31mInput not valid!\033[0m";
     }
 };
 
-class abilitylessException : public baseException
+class abilitylessException : public BaseException
 {
     const char *what() const throw()
     {
-        return "Input not valid!";
+        return "\033[1;31mInput not valid!\033[0m";
     }
 };
 #endif
