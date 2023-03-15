@@ -72,11 +72,8 @@ public:
     void initNewMatch(bool);
 
     void start();
-
     void nextPlayer();
-
     void nextTurn();
-
     void nextRound();
 
     // return vector sisa urutan eksekusi saat ini (setelah reverse)

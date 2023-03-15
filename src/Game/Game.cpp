@@ -285,6 +285,7 @@ void Game::nextTurn()
             std::cout << "asda" << endl;
         }
 
+        /* All possible command inputted */
         Next nxt;
         Half h;
         ReRoll rr;

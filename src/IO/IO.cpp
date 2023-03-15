@@ -412,16 +412,6 @@ pair<vector<Card>, vector<Ability*>> IO::inputFile(){
                     mainDeck.push_back(card);
                     count++;
 
-                } else if (code.length() ==  3){
-                    Card card(CardColor(1), 0);
-                    card.setNumber((code[0] - '0')*10 + (code[1] - '0'));
-                    card.setColor(stringToColor.at(code[2]));
-                    mainDeck.push_back(card);
-                    count++;
-                } else {
-                    throw err;
-                }
-
             // 7 other word for ability deck
             } else if (count <59){
                 if (code.length() == 2){
