@@ -31,6 +31,7 @@ class InventoryHolder
 
         InventoryHolder<T>& operator+(const T& other){
             items.push_back(other);
+            return *this;
         }
 
         InventoryHolder<T>& operator-(const T& other){

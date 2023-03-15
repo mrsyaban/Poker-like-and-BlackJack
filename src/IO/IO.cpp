@@ -1,4 +1,6 @@
 #include "IO.hpp"
+#include "../Player/Player.hpp"
+#include "../Game/Game.hpp"
 using namespace std;
 
 string IO::turnInput(const Player& player){
