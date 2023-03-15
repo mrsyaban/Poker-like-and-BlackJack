@@ -33,7 +33,7 @@ class IO {
         /* print function*/
         void splashScreen();
         void printThankYou();
-        void printTable(Table<Card>);
+        void printTable(Table);
         void printEndGame(const vector<pair<Player&, bool>>&);
         
         /* main menu */

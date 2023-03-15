@@ -85,10 +85,6 @@ void InventoryHolder<T>::puttoback() {
     *this = *this + temp;
 }
 
-template <class T>
-T getItems(int i){
-    return items[i];
-}
 
 template class InventoryHolder<Card>;
 template class InventoryHolder<Ability>;

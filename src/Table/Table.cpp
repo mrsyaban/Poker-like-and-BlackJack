@@ -3,13 +3,11 @@
 #include <stdlib.h>
 using namespace std;
 
-template <>
-Table<Card>::Table(){
+Table::Table(){
     neff = 0;
 }
 
-template <>
-void Table<Card>::dealToTable(InventoryHolder<Card>& deck) {
+void Table::dealToTable(InventoryHolder<Card>& deck) {
     this->deleteall();
     this->neff = 0;
     this->add(deck);
@@ -19,17 +17,14 @@ void Table<Card>::dealToTable(InventoryHolder<Card>& deck) {
     this->add(deck);
 }
 
-template <>
-void Table<Card>::openCard() {
+void Table::openCard() {
     this->neff++;
 }
 
-template <>
-void Table<Card>::getInfo() const {
+void Table::getInfo() const {
     cout << "This is Table Card" << endl;
 }
 
-template <>
-int Table<Card>::getNeff() const {
+int Table::getNeff() const {
     return this->neff;
 }
