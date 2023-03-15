@@ -76,7 +76,7 @@ void IO::splashScreen(){
 
 string IO::mainMenu(){
     cout << lineColor << "==============================" << resetColor << endl;
-    cout << wordColor << "          ♦ MAIN MENU ♦       " << resetColor << endl;
+    cout << wordColor << "           MAIN MENU          " << resetColor << endl;
     cout << lineColor << "==============================" << resetColor << endl;
     cout << wordColor << " 1. Start " << endl;
     cout << wordColor << " 2. Exit" << endl;
@@ -85,6 +85,10 @@ string IO::mainMenu(){
     
     string command;
     cout << inputColor; cin >> command; cout <<  resetColor;
+    if (command != "1" || command != "2"){
+        NumberInputException err;
+        throw err;
+    }
     cout << resetColor << endl;
     return command; 
 }
@@ -103,7 +107,7 @@ vector<string> IO::inputPlayerName(){
 }
 
 void IO::printTable(Table table){
-    cout << wordColor << "            ♦ TABLE ♦         " << resetColor << endl;
+    cout << wordColor << "            TABLE             " << resetColor << endl;
     cout << lineColor << "==============================" << resetColor << "\n\n";
     for (int i=0; i<table.getNeff(); i++){
         int color = table.getItems()[i].getColor();

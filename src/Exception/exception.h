@@ -4,7 +4,7 @@
 using namespace std;
 
 class baseException {
-    protected:
+    public:
         virtual const char *what() const throw() = 0;
 };
 
@@ -12,7 +12,7 @@ class NumberInputException : public baseException
 {
     const char *what() const throw()
     {
-        return "Input number not valid!";
+        return "\033[1;31mInput number not valid!\033[0m";
     }
 };
 
