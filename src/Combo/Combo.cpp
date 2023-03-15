@@ -1,6 +1,6 @@
 #include <iostream>
-#include "../Card/Card.hpp"
 #include "Combo.hpp"
+#include "../ArrayUtil/ArrayUtil.hpp"
 using namespace std;
 
 Combo::Combo() : score(0) {}

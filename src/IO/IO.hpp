@@ -3,19 +3,13 @@
 // #include "../Player/Player.hpp"
 #include "../Table/Table.hpp"
 #include <vector>
+#include <iostream>
 #include <algorithm>
 using namespace std;
 
 class Player;
 class Game;
 class Point;
-
-
-#include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
-using namespace std;
 
 class IO {
 

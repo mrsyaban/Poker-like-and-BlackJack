@@ -6,7 +6,6 @@
 #include "../InventoryHolder/InventoryHolder.hpp"
 using namespace std;
 
-
 class Table: public InventoryHolder<Card> {
     protected:
         int neff;

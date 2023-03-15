@@ -1,6 +1,9 @@
 #ifndef ARRAY_UTIL
 #define ARRAY_UTIL
 
+#include <vector>
+using namespace std;
+
 // GetHighest is a recursive function that returns the highest value in an array (O(n log n))
 template <class T>
 

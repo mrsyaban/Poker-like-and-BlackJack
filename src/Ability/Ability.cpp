@@ -2,7 +2,7 @@
 // #include <vector>
 #include "Ability.hpp"
 #include "../Game/Game.hpp"
-#include "../Exception/exception.h"
+#include "../Ability/Ability.hpp"
 #include "../IO/IO.hpp"
 
 using namespace std;

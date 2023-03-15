@@ -1,12 +1,12 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "../Player/Player.hpp"
 #include "../Card/Card.hpp"
 #include "../Deck/Deck.hpp"
 #include "../Point/Point.hpp"
-// #include "../Ability/Ability.hpp"
 #include "../Table/Table.hpp"
+// #include "../Player/Player.hpp"
+// #include "../Ability/Ability.hpp"
 // #include "../IO/IO.hpp"
 
 #include <iostream>
@@ -16,6 +16,7 @@ using namespace std;
 
 class IO;
 class Ability;
+class Player;
 // class Table;
 
 /* Mapping command to int */
@@ -51,41 +52,15 @@ class Game {
 
         /* Accessor, may only be called by class that act directly in the game */
         /* The returned reference may be altered */
-        vector<pair<Player&, bool>>& getPlayers(){
-            return this->players;
-        }
-
-        Deck<Card>& getCardDeck(){
-            return this->cardDeck;
-        }
-
-        Deck<Ability> getAbilityDeck(){
-            return this->abilityDeck;
-        }
-
-        Table getTable(){
-            return this->table;
-        }
-
-        Point& getPoint(){
-            return this->point;
-        }
-
-        bool& getReverseInfo(){
-            return this->isReversed;
-        }
-
-        int& getPlayerTurn(){
-            return this->playerTurn;
-        }
-
-        int& getRound(){
-            return this->round;
-        }
-
-        int getCurrentPlayer(){
-            return this->currentPlayer;
-        }
+        vector<pair<Player&, bool>>& getPlayers();
+        Deck<Card>& getCardDeck();
+        Deck<Ability>& getAbilityDeck();
+        Table& getTable();
+        Point& getPoint();
+        bool& getReverseInfo();
+        int& getPlayerTurn();
+        int& getRound();
+        int& getCurrentPlayer();
 
         /* Setter */
         void addPlayer();

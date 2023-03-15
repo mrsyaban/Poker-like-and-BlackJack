@@ -1,5 +1,9 @@
 #include <iostream>
 #include "Game.hpp"
+#include "../Ability/Ability.hpp"
+#include "../Player/Player.hpp"
+#include "../IO/IO.hpp"
+#include "../Combo/SearchCombo.hpp"
 using namespace std;
 
 Game::Game() {
@@ -14,6 +18,53 @@ Game::Game() {
 
 Game::~Game(){
 
+}
+
+vector<pair<Player&, bool>>& Game::getPlayers(){
+    return this->players;
+}
+
+Deck<Card>& Game::getCardDeck(){
+    return this->cardDeck;
+}
+
+Deck<Ability>& Game::getAbilityDeck(){
+    return this->abilityDeck;
+}
+
+Table& Game::getTable(){
+    return this->table;
+}
+
+Point& Game::getPoint(){
+    return this->point;
+}
+
+bool& Game::getReverseInfo(){
+    return this->isReversed;
+}
+
+int& Game::getPlayerTurn(){
+    return this->playerTurn;
+}
+
+int& Game::getRound(){
+    return this->round;
+}
+
+int& Game::getCurrentPlayer(){
+    return this->currentPlayer;
+}
+
+/* Setter */
+void incCurrentPlayer() {
+    currentPlayer++;
+    currentPlayer %= 7;
+}
+
+void decCurrentPlayer() {
+    currentPlayer--;
+    currentPlayer %= 7;
 }
 
 void Game::addPlayer(){

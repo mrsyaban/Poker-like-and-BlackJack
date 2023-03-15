@@ -2,8 +2,8 @@
 #define ABILITY_HPP
 
 // #include "../Player/Player.hpp"
-#include "../Action/Action.hpp"
 // #include "../IO/IO.hpp"
+#include "../Action/Action.hpp"
 
 // #include "../Game/Game.hpp" implicit import with forward declaration
 #include <iostream>

@@ -104,7 +104,7 @@ void IO::printTable(Table table){
     cout << wordColor << "            ♦ TABLE ♦         " << resetColor << endl;
     cout << lineColor << "==============================" << resetColor << "\n\n";
     for (int i=0; i<table.getNeff(); i++){
-        int color = table.getItems(i).getColor();
+        int color = table.getItems()[i].getColor();
         if (color == 0){
             cout << "\033[1m\033[32m";
         } else if (color == 1){
@@ -114,7 +114,7 @@ void IO::printTable(Table table){
         } else {
             cout << "\033[1m\033[31m";
         }
-        cout << "  " << table.getItems(i).getNumber() << "  ";
+        cout << "  " << table.getItems()[i].getNumber() << "  ";
         cout << resetColor;
     }
     cout << "\n\n";
@@ -128,8 +128,8 @@ void IO::printAbilitySuccess(Player player, vector<string> resPlayer = {}, vecto
     if ( type == "Re-Roll"){
         cout << "Replacing your current cards..." << endl;
         cout << "You got 2 new cards :" << endl;
-        cout << "1. " << player.getItems(0).getNumber() << " " << cardToString.at(player.getItems(0).getColor()) << endl;
-        cout << "2. " << player.getItems(1).getNumber() << " " << cardToString.at(player.getItems(1).getColor()) << endl;
+        cout << "1. " << player.getItems()[0].getNumber() << " " << cardToString.at(player.getItems()[0].getColor()) << endl;
+        cout << "2. " << player.getItems()[1].getNumber() << " " << cardToString.at(player.getItems()[1].getColor()) << endl;
     
     // Swap Card
     } else if (type == "Swap"){
@@ -141,8 +141,8 @@ void IO::printAbilitySuccess(Player player, vector<string> resPlayer = {}, vecto
         cout << player.getNickname() << " successfully performed SWITCH!" << endl;
         cout << "both of your cards has been switched with " << resPlayer[0];
         cout << "your current cards are : " 
-        << player.getItems(0).getNumber() << "-" << player.getItems(1).getColor() << " & "
-        << player.getItems(1).getNumber() << "-" << player.getItems(1).getColor();
+        << player.getItems()[0].getNumber() << "-" << player.getItems()[0].getColor() << " & "
+        << player.getItems()[1].getNumber() << "-" << player.getItems()[1].getColor();
     
     // Abiilityless
     } else if (type == "Abilityless"){

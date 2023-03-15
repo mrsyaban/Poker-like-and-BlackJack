@@ -4,11 +4,11 @@
 #include <vector>
 #include <algorithm>
 #include "../Card/Card.hpp"
-#include "../Player/Player.hpp"
-#include "../Table/Table.hpp"
+// #include "../Player/Player.hpp"
+// #include "../Table/Table.hpp"
 #include "../ObjectWithValue/ObjectWithValue.hpp"
-#include "../Exception/exception.h"
-#include "../ArrayUtil/ArrayUtil.hpp"
+// #include "../Exception/exception.h"
+// #include "../ArrayUtil/ArrayUtil.hpp"
 // #include "SearchCombo.hpp"
 
 class Combo : public ObjectWithValue<double> {
