@@ -79,7 +79,7 @@ void Game::decCurrentPlayer()
     currentPlayer %= 7;
 }
 
-void Game::initNewMatch()
+void Game::initNewMatch(bool isRandom)
 {
     IO io;
 
@@ -91,16 +91,37 @@ void Game::initNewMatch()
     // this->currentPlayer = 0;
 
     point = Point();
-    Deck<Card> deck;
-    Deck<Ability *> deckAbility;
-    this->cardDeck = deck;
-    this->abilityDeck = deckAbility;
+    if (isRandom){
+        Deck<Card> deck;
+        Deck<Ability *> deckAbility;
+        this->cardDeck = deck;
+        this->abilityDeck = deckAbility;
+    } else {
+        bool success = false;
+        while(!success){
+            try {
+                pair<vector<Card>, vector<Ability*>> temp = io.inputFile();
+
+                Deck<Card> deck(temp.first);
+                Deck<Ability*> deckAbility(temp.second);
+                this->cardDeck = deck;
+                this->abilityDeck = deckAbility;
+                success = true;
+            } catch (BaseException& e){
+                std::cout << e.what() << endl;
+            }
+        }
+    }
+
+    std::cout << "masokk ";
     dealToTable();
     dealToPlayers();
+    cout << this->cardDeck.getTopItems().getNumber() << this->cardDeck.getTopItems().getColor() ;
 
     // this->table.openCard();
     io.printTable(table);
 }
+
 
 void Game::addPlayer()
 {
@@ -158,15 +179,31 @@ void Game::start()
     {
         mainMenu = io.mainMenu();
     }
-    catch (baseException &e)
+    catch (BaseException &e)
     {
-        cout << e.what() << endl;
+        std::cout << e.what() << endl;
     }
 
     while (mainMenu == "1")
-    {
+    {   
+        // dealing card (random or input file)
+        string dealMenu;
+        try
+        {
+            dealMenu = io.dealMenu();
+        }
+        catch (BaseException &e)
+        {
+            std::cout << e.what() << endl;
+        }
+
+        if (dealMenu == "1"){
+            initNewMatch(false);
+        } else {
+            initNewMatch(true);
+        }
+
         addPlayer();
-        initNewMatch();
         isReversed = false;
         currentPlayer = 0;
         // // inisialisasi player
@@ -194,7 +231,8 @@ void Game::start()
 
             nextTurn();
         }
-        cout << "udah menang ----------" << endl;
+
+        std::cout << "udah menang ----------" << endl;
         mainMenu = io.mainMenu();
     }
 
@@ -220,13 +258,13 @@ void Game::nextTurn()
 
     if (playerTurn != 7)
     {
-        cout << "a" << endl;
-        cout << "PLAYER TURN : " << playerTurn << endl;
+        std::cout << "a" << endl;
+        std::cout << "PLAYER TURN : " << playerTurn << endl;
         // status player yang udah jalan adalah true  (1) untuk ronde ganjil (mod 2 == 1)
         // status player yang udah jalan adalah false (0) untuk ronde genap  (mod 2 == 0)
         while (players[currentPlayer].second % 2 == round % 2)
         {
-            cout << "RONDE a : " << round << endl;
+            std::cout << "RONDE a : " << round << endl;
             nextPlayer();
         }
 
@@ -234,17 +272,17 @@ void Game::nextTurn()
         int command = -1;
         while (command == -1)
         {
-            cout << "c" << endl;
-            cout << currentPlayer << endl;
+            std::cout << "c" << endl;
+            std::cout << currentPlayer << endl;
             try
             {
                 command = inputToCommand.at(io.turnInput(((this->players.begin() + this->currentPlayer)->first).getNickname()));
             }
-            catch (baseException &e)
+            catch (BaseException &e)
             {
-                cout << e.what() << endl;
+                std::cout << e.what() << endl;
             }
-            cout << "asda" << endl;
+            std::cout << "asda" << endl;
         }
 
         Next nxt;
@@ -262,45 +300,45 @@ void Game::nextTurn()
         {
         case 1:
             // execute next
-            cout << "next" << endl;
+            std::cout << "next" << endl;
             nxt.Execute(*this);
             break;
         case 2:
-            cout << "half" << endl;
+            std::cout << "half" << endl;
             h.Execute(*this);
             break;
         case 3:
-            cout << "double" << endl;
-            cout << point.getValue() << endl;
+            std::cout << "double" << endl;
+            std::cout << point.getValue() << endl;
             d.Execute(*this);
-            cout << point.getValue() << endl;
+            std::cout << point.getValue() << endl;
             break;
         case 4:
-            cout << "reroll" << endl;
+            std::cout << "reroll" << endl;
             rr.Execute(*this);
             break;
         case 5:
-            cout << "quadruple" << endl;
+            std::cout << "quadruple" << endl;
             qd.Execute(*this);
             break;
         case 6:
-            cout << "quarter" << endl;
+            std::cout << "quarter" << endl;
             qtr.Execute(*this);
             break;
         case 7:
-            cout << "reverse" << endl;
+            std::cout << "reverse" << endl;
             rv.Execute(*this);
             break;
         case 8:
-            cout << "swap card" << endl;
+            std::cout << "swap card" << endl;
             swp.Execute(*this);
             break;
         case 9:
-            cout << "switch" << endl;
+            std::cout << "switch" << endl;
             swt.Execute(*this);
             break;
         case 10:
-            cout << "abilityless" << endl;
+            std::cout << "abilityless" << endl;
             abl.Execute(*this);
             break;
         default:
@@ -311,10 +349,10 @@ void Game::nextTurn()
         // setelah playernya jalan, statusnya ditoggle
         players[currentPlayer].second = !players[currentPlayer].second;
 
-        cout << "d" << endl;
+        std::cout << "d" << endl;
         playerTurn++;
         nextPlayer();
-        cout << "PLAYERTURN : " << playerTurn << endl;
+        std::cout << "PLAYERTURN : " << playerTurn << endl;
         // nextRound();
     }
     else
@@ -331,7 +369,7 @@ void Game::nextRound()
     if (this->round < 6)
     {
         round++;
-        cout << "RONDE : " << round << endl;
+        std::cout << "RONDE : " << round << endl;
         this->table.openCard();
         io.printTable(table);
         if (this->getRound() == 2)
@@ -346,7 +384,7 @@ void Game::nextRound()
         // TODO
         // udah selesai 6 ronde, cari pemenang (??)
         // find score and compare
-        cout << "ronde (harusnya udah 6) : " << round << endl;
+        std::cout << "ronde (harusnya udah 6) : " << round << endl;
         double maxScore = 0;
         int playerWithMaxScore;
         int playerCtr = -1;
@@ -369,7 +407,7 @@ void Game::nextRound()
         winner.addPoint(point.getValue());
         if (!gameEnded())
         {
-            cout << "RONDE SEKARANG : " << round << endl;
+            std::cout << "RONDE SEKARANG : " << round << endl;
             // TODO init new match
             point = Point();
             Deck<Card> deck;
@@ -379,7 +417,7 @@ void Game::nextRound()
             dealToTable();
             dealToPlayers();
         }
-        initNewMatch();
+        initNewMatch(true);
     }
 }
 

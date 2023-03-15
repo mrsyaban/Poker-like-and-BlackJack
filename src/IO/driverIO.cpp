@@ -5,8 +5,11 @@
 using namespace std;
 
 int main() {
-    std::ifstream infile("../../test/fexample.txt");
+    std::ifstream infile("../../test/example.txt");
     std::string line;
+    if (!infile){
+        cout << "anjay" << endl;
+    }
 
     while (std::getline(infile, line)) {
         // Process the line here

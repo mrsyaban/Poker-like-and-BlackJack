@@ -69,7 +69,7 @@ public:
     void incCurrentPlayer();
     void decCurrentPlayer();
 
-    void initNewMatch();
+    void initNewMatch(bool);
 
     void start();
 

@@ -9,7 +9,9 @@ string IO::turnInput(const Player& player){
     cout << player.getNickname() << "'s turn (";
     for (int i=0; i<2; i++){
         cout << enterColor;
+        cout << "woi" << endl;
         int color = player.getCard(i).getColor();
+        cout << "woi ajg" << endl;
         if (color == 0){
             cout << "\033[1m\033[32m";
         } else if (color == 1){
@@ -97,8 +99,27 @@ string IO::mainMenu(){
     cout << lineColor << "==============================" << resetColor << endl;
     cout << wordColor << "           MAIN MENU          " << resetColor << endl;
     cout << lineColor << "==============================" << resetColor << endl;
-    cout << wordColor << " 1. Start " << endl;
-    cout << wordColor << " 2. Exit" << endl;
+    cout << wordColor << " 0. Exit " << endl;
+    cout << wordColor << " 1. Start" << endl;
+    cout << endl;
+    cout << enterColor << "Enter Command >>> "; 
+    
+    string command;
+    cout << inputColor; cin >> command; cout <<  resetColor;
+    if (!(command == "1" || command == "0")){
+        NumberInputException err;
+        throw err;
+    }
+    cout << resetColor << endl;
+    return command; 
+}
+
+string IO::dealMenu(){
+    cout << lineColor << "==============================" << resetColor << endl;
+    cout << wordColor << "         CARD DEALING         " << resetColor << endl;
+    cout << lineColor << "==============================" << resetColor << endl;
+    cout << wordColor << " 1. Input File" << endl;
+    cout << wordColor << " 2. Random" << endl;
     cout << endl;
     cout << enterColor << "Enter Command >>> "; 
     
@@ -364,25 +385,16 @@ pair<vector<Card>, vector<Ability*>> IO::inputFile(){
     string fileName;
     cout << enterColor << "Enter Your file's name >>> " << resetColor;
     cout << inputColor; cin >> fileName; cout << resetColor;
-    string filePath = "../../test/" + fileName;
+    cout << endl;
+    string filePath = "test/" + fileName;
     ifstream infile(filePath);
     inputException err;
-    while(!infile){
-        cout << enterColor << "Enter Your file's name >>> " << resetColor;
-        cout << inputColor; cin >> fileName; cout << resetColor;
-        filePath = "../../test/" + fileName;
-        ifstream infile(filePath);
 
-        try {
-            throw err;
-        } catch (BaseException& e){
-            cout << e.what() << endl;
-        }
-        ifstream infile(filePath);
+    if (!infile){
+        throw err;
     }
 
     string line;
-
     vector<Card> mainDeck;
     vector<Ability*> abilityDeck;
 
@@ -391,7 +403,8 @@ pair<vector<Card>, vector<Ability*>> IO::inputFile(){
         istringstream iss(line);
         string code;
         while (iss >> code) {
-            if (count <= 52){
+            // 52 first word is for main deck
+            if (count < 52){
                 if (code.length() == 2){
                     Card card(CardColor(1), 0);
                     card.setNumber(code[0] - '0');
@@ -409,7 +422,8 @@ pair<vector<Card>, vector<Ability*>> IO::inputFile(){
                     throw err;
                 }
 
-            } else if (count <=59){
+            // 7 other word for ability deck
+            } else if (count <59){
                 if (code.length() == 2){
                     abilityDeck.push_back(stringToAbility(code));
                     count++;
@@ -422,12 +436,16 @@ pair<vector<Card>, vector<Ability*>> IO::inputFile(){
             }
         }
     }
+
+    if (count < 59){
+        throw err;
+    }
     
     pair<vector<Card>, vector<Ability*>> ret(mainDeck, abilityDeck);
     return ret;
 }
 
-Ability* stringToAbility(string code){
+Ability* IO::stringToAbility(string code){
     if (code == "RR"){
         ReRoll* reroll = new ReRoll();
         return reroll;
