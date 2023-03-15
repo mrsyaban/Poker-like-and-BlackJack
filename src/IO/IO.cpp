@@ -9,9 +9,7 @@ string IO::turnInput(const Player& player){
     cout << player.getNickname() << "'s turn (";
     for (int i=0; i<2; i++){
         cout << enterColor;
-        cout << "woi" << endl;
         int color = player.getCard(i).getColor();
-        cout << "woi ajg" << endl;
         if (color == 0){
             cout << "\033[1m\033[32m";
         } else if (color == 1){

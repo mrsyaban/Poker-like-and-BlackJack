@@ -7,7 +7,6 @@ SearchCombo::SearchCombo() {}
 
 SearchCombo::SearchCombo(Player player, Table table)
 {
-    cout << "masuk ctor\n";
     this->cards.push_back(player.getCard(0));
     this->cards.push_back(player.getCard(1));
 
@@ -15,7 +14,6 @@ SearchCombo::SearchCombo(Player player, Table table)
     {
         this->cards.push_back(table.getCard(i));
     }
-    cout << "masuk ctor\n";
     this->sortCards();
     this->checkCombo();
 }
@@ -64,7 +62,7 @@ void SearchCombo::sortCards()
     //     this->cards[maxIndex] = temp;
     // }
 
-    for (unsigned i = 0; i < this->cards.size() - 1; i++) {
+    for (unsigned i = 0; i < this->cards.size(); i++) {
         int min_idx = i;
         for (unsigned j = i + 1; j < this->cards.size(); j++) {
             if (this->cards[j].value() < this->cards[min_idx].value()) {
@@ -97,21 +95,19 @@ void SearchCombo::sortCards2() {
 
 void SearchCombo::highCard()
 {
-    int max = 0;
+    double max = 0;
 
     vector<Card> crd = {this->cards[this->cards.size() - 1]};
     Combo c;
     c.setCombo(crd);
     max += this->cards[this->cards.size() - 1].value();
-
-    cout << "masuk highcard\n";
-
+    c.setScore(max);
     this->records.push_back(c);
 }
 
 void SearchCombo::pair()
 {
-    int max = 0;
+    double max = 0;
     unsigned int i = 0;
 
     vector<Card> temp;
@@ -124,27 +120,23 @@ void SearchCombo::pair()
 
             temp.insert(temp.end(), this->cards[i]);
             temp.insert(temp.end(), this->cards[i + 1]);
-
-            c.setScore(max);
-            c.setCombo(temp);
         }
         i++;
     }
 
     if (temp.size() > 1)
     {
+        c.setScore(max);
+        c.setCombo(temp);
         records.push_back(c);
     }
-
-    cout << "masuk pair\n";
 
     // this->sortCombo();
 }
 
 void SearchCombo::twoPair()
 {
-    cout << "masuk cek two pair\n";
-    int max = 0;
+    double max = 0;
     int countPair = 0;
 
     vector<Card> pairs, temp;
@@ -172,14 +164,13 @@ void SearchCombo::twoPair()
         temp.push_back(pairs[pairs.size() - 2]);
         temp.push_back(pairs[pairs.size() - 1]);
 
-        c.setCombo(temp);
-
         max += c.getCombo()[c.getCombo().size() - 1].value() + c.getCombo()[c.getCombo().size() - 3].value() + 4.14;
-        c.setScore(max);
     }
 
     if (temp.size() > 1)
     {
+        c.setCombo(temp);
+        c.setScore(max);
         records.push_back(c);
     }
 
@@ -188,8 +179,7 @@ void SearchCombo::twoPair()
 
 void SearchCombo::threeOfAKind()
 {
-    cout << "masuk cek threeofakind\n";
-    int max = 0;
+    double max = 0;
     unsigned int i = 1, countThree = 0;
 
     vector<Card> temp, three;
@@ -221,19 +211,16 @@ void SearchCombo::threeOfAKind()
 
 void SearchCombo::straight()
 {
-    cout << "masuk cek straight\n";
-    int max = 0;
+    double max = 0;
 
     vector<Card> straight;
     Combo c;
 
-    cout << "1 " << endl;
     int count[13] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     for (unsigned int i = 0; i < this->cards.size(); i++)
     {
         count[this->cards[i].getNumber()-1]++;
     }
-    cout << "2 " << endl;
 
     for (int i = 12; i >= 4; i--) {
         if (count[i] >= 1 && count[i-1] >= 1 && count[i-2] >= 1 && count[i-3] >= 1 && count[i-4] >= 1) {
@@ -260,8 +247,8 @@ void SearchCombo::straight()
 
 void SearchCombo::flush()
 {
-    cout << "masuk cek flush\n";
-    int max = 0, count = 0;
+    double max = 0;
+    int count = 0;
     unsigned int j = 0, i = 0;
     vector<Card> temp, flushCards;
     vector<bool> flush;
@@ -304,7 +291,7 @@ void SearchCombo::flush()
         temp.push_back(flushCards[flushCards.size() - 2]);
         temp.push_back(flushCards[flushCards.size() - 1]);
 
-        c.setCombo(temp);
+        
 
         // for (auto x : this->getComboCards()) {
         //     max += x.value();
@@ -314,11 +301,13 @@ void SearchCombo::flush()
 
         max += 18.15;
 
-        c.setScore(max);
+        
     }
 
     if (temp.size() > 1)
     {
+        c.setCombo(temp);
+        c.setScore(max);
         records.push_back(c);
     }
 
@@ -327,8 +316,8 @@ void SearchCombo::flush()
 
 void SearchCombo::fullHouse()
 {
-    cout << "masuk cek fullhouse\n";
-    int max = 0, countThree = 0, countPair = 0;
+    double max = 0;
+    int countThree = 0, countPair = 0;
 
     vector<Card> copyCards = this->cards;
     vector<Card> temp, three, pair;
@@ -388,8 +377,8 @@ void SearchCombo::fullHouse()
 
 void SearchCombo::fourOfKind()
 {
-    cout << "masuk cek fourofkind\n";
-    int max = 0, countFour = 0;
+    double max = 0;
+    int countFour = 0;
     unsigned int i = 0;
 
     vector<Card> temp, four;
@@ -439,8 +428,7 @@ void SearchCombo::fourOfKind()
 
 void SearchCombo::straightFlush()
 {
-    cout << "masuk cek straightflush\n";
-    int max = 0;
+    double max = 0;
     unsigned int i = 0;
     Combo c;
     vector<Card> straight;
@@ -497,7 +485,6 @@ void SearchCombo::straightFlush()
 
 void SearchCombo::checkCombo()
 {
-    cout << "masuk cek combo\n";
     this->highCard();
     this->pair();
     this->twoPair();
@@ -511,6 +498,5 @@ void SearchCombo::checkCombo()
 
 Combo SearchCombo::getHighestCombo()
 {
-    cout << this->getRecords().size() << endl;
     return getHighest(this->getRecords());
 }

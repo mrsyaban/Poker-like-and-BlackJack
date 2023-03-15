@@ -4,7 +4,8 @@
 
 /* default constructor*/
 Player::Player(string nick) : nickName(nick) {
-    this->handPoint = 0; // set point to zero
+    Point p(0);
+    this->handPoint = p; // set point to zero
 }
 
 /* Operator Overloading */

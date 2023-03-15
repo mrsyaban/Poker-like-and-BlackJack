@@ -285,9 +285,7 @@ void Game::nextTurn()
                 h.Execute(*this);
                 break;
             case 3:
-                std::cout << point.getValue() << endl;
                 d.Execute(*this);
-                std::cout << point.getValue() << endl;
                 break;
             case 4:
                 rr.Execute(*this);
@@ -314,14 +312,12 @@ void Game::nextTurn()
                 break;
         }
 
-        // sToggle player status
+        // Toggle player status
         players[currentPlayer].second = !players[currentPlayer].second;
 
-        std::cout << "d" << endl;
+        // Prepare next player
         playerTurn++;
         nextPlayer();
-        std::cout << "PLAYERTURN : " << playerTurn << endl;
-        // nextRound();
     }
     else
     {
@@ -337,7 +333,6 @@ void Game::nextRound()
     if (this->round < 6)
     {
         round++;
-        std::cout << "RONDE : " << round << endl;
         this->table.openCard();
         io.printTable(table);
         if (this->getRound() == 2)
@@ -349,12 +344,9 @@ void Game::nextRound()
     }
     else
     {
-        // TODO
-        // udah selesai 6 ronde, cari pemenang (??)
-        // find score and compare
-        std::cout << "ronde (harusnya udah 6) : " << round << endl;
+        cout << "Match ended, proceed to the next match" << endl;
         double maxScore = 0;
-        int playerWithMaxScore;
+        int playerWithMaxScore = 0;
         int playerCtr = -1;
 
         for (auto p_itr = getPlayers().begin(); p_itr != getPlayers().end(); p_itr++)
@@ -362,7 +354,6 @@ void Game::nextRound()
             playerCtr++;
             SearchCombo searchCombo(p_itr->first, this->getTable());
             p_itr->first.setHighestCombo(searchCombo.getHighestCombo());
-
             if (maxScore < p_itr->first.getHighestCombo().value())
             {
                 maxScore = p_itr->first.getHighestCombo().value();
@@ -371,21 +362,15 @@ void Game::nextRound()
         }
 
         // add points to the winner
-        Player &winner = (getPlayers().begin() + playerWithMaxScore)->first;
-        winner.addPoint(point.getValue());
+        cout << "The winner of this match is " << getPlayers()[playerWithMaxScore].first.getNickname() << endl;
+        cout << "Score gained : " << this->point.getValue() << endl;
+        Player * winner = &getPlayers()[playerWithMaxScore].first;
+        winner->addPoint(this->point.getValue());
+        
         if (!gameEnded())
         {
-            std::cout << "RONDE SEKARANG : " << round << endl;
-            // TODO init new match
-            point = Point();
-            Deck<Card> deck;
-            Deck<Ability *> deckAbility;
-            this->cardDeck = deck;
-            this->abilityDeck = deckAbility;
-            dealToTable();
-            dealToPlayers();
+            initNewMatch(true);
         }
-        initNewMatch(true);
     }
 }
 

@@ -24,8 +24,6 @@ T getHighest(T * buffer, int size) {
 template <class T>
 // signature for vector
 T getHighest(vector<T> buffer) {
-    cout << "heallo" << endl;
-    cout << "buffer size : " << buffer.size() << endl;
     return getHighest(buffer.data(), buffer.size());
 };
 
