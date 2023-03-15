@@ -1,3 +1,6 @@
+#ifndef IO_HPP
+#define IO_HPP
+
 // #include "../Game/Game.hpp"
 #include "../Exception/exception.h"
 // #include "../Player/Player.hpp"
@@ -32,19 +35,21 @@ class IO {
         
         /* main menu */
         string mainMenu();  
-        vector<string> inputPlayerName(Game& game);
+        vector<string> inputPlayerName();
         string turnInput(const Player&);
         
         /* success message function*/
         void printAbilitySuccess(Player player, vector<string> resPlayer = {}, vector<string> reversed = {});
-        void printAbilitySuccess(const Player&, const Point&); 
+        void printAbilitySuccess(const Player&, const Point&);  
         void printActionSuccess(const Player& ,const Point&, int );
 
         /* select function */
-        vector<Player>& selectPlayer(const Player& , const vector<pair<Player&, bool>>& ) const;
+        vector<Player*> selectPlayer(const Player& , const vector<pair<Player&, bool>>& ) const;
         int selectCard(string);
 
         /* Special for Abilityless*/
         void printAbilityless(string nick = "");
 
 };
+
+#endif

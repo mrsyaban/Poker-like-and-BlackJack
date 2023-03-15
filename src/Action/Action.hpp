@@ -1,8 +1,11 @@
 #ifndef ACTION_HPP
 #define ACTION_HPP
 
-#include "../Game/Game.hpp"
-#include "../IO/IO.hpp"
+// #include "../Game/Game.hpp"
+// #include "../IO/IO.hpp"
+
+class Game;
+class IO;
 
 /* Abstract class Action */
 class Action {

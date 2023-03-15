@@ -89,7 +89,7 @@ string IO::mainMenu(){
     return command; 
 }
 
-vector<string> IO::inputPlayerName(Game& game){
+vector<string> IO::inputPlayerName(){
     string inputNick;
     vector<string> res;
     cout << wordColor << "Please enter player name :" << resetColor << endl;
@@ -123,7 +123,7 @@ void IO::printTable(Table table){
     cout << lineColor << "==============================" << resetColor << endl;
 }
 
-void IO::printAbilitySuccess(Player player, vector<string> resPlayer = {}, vector<string> reversed = {}){
+void IO::printAbilitySuccess(Player player, vector<string> resPlayer, vector<string> reversed){
     string type = player.getAbility()->getType(); 
     cout << abilColor;
     // Re-Roll
@@ -231,23 +231,22 @@ void printPlayer(string nick, const vector<pair<Player&, bool>>& listPlayer){
     }
 }
 
-vector<Player>& IO::selectPlayer(const Player& player, const vector<pair<Player&, bool>>& listPlayer) const{
+vector<Player*> IO::selectPlayer(const Player& player, const vector<pair<Player&, bool>>& listPlayer) const{
     string type = player.getAbility()->getType(); 
     string player1, player2;
-    vector<Player> resPlayers;
     playerException err;
 
+    vector<Player*> resPlayers;
     cout << abilColor;
     if (type == "Swap"){
         cout << "Go ahead and pick the player whose card you want to swap!" << endl;
         printPlayer(player.getNickname(), listPlayer);
         cout << "\033[5m" << "Player's Name 1 >>> " << resetColor; cin >> player1;
-        cout << abilColor;
         cout << "\033[5m" << "Player's Name 2 >>> " << resetColor; cin >> player2;
 
         for (auto p_itr = listPlayer.begin(); p_itr != listPlayer.end(); p_itr++) {
             if (p_itr->first.getNickname() == player1 || p_itr->first.getNickname() == player2){
-                resPlayers.push_back(p_itr->first);
+                resPlayers.push_back(&(p_itr->first));
             }
         }
 
@@ -263,7 +262,7 @@ vector<Player>& IO::selectPlayer(const Player& player, const vector<pair<Player&
         
         for (auto p_itr = listPlayer.begin(); p_itr != listPlayer.end(); p_itr++) {
             if (p_itr->first.getNickname() == player1){
-                resPlayers.push_back(p_itr->first);
+                resPlayers.push_back(&(p_itr->first));
             }
         }
 
@@ -274,7 +273,7 @@ vector<Player>& IO::selectPlayer(const Player& player, const vector<pair<Player&
         
         for (auto p_itr = listPlayer.begin(); p_itr != listPlayer.end(); p_itr++) {
             if (p_itr->first.getNickname() == player1 || p_itr->first.getNickname() == player2){
-                resPlayers.push_back(p_itr->first);
+                resPlayers.push_back(&(p_itr->first));
             }
         }
     }
@@ -283,7 +282,7 @@ vector<Player>& IO::selectPlayer(const Player& player, const vector<pair<Player&
     return resPlayers;
 }
 
-void IO::printAbilityless(string nick = ""){
+void IO::printAbilityless(string nick){
     cout << abilColor;
     if (nick == ""){
         cout << "Oops, " << nick << "'s Ability Card has been used before :(" << endl;

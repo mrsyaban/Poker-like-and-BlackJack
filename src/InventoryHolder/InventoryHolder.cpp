@@ -1,4 +1,4 @@
-// #include "InventoryHolder.hpp"
+#include "InventoryHolder.hpp"
 // #include <iostream>
 // using namespace std;
 
@@ -98,3 +98,6 @@
 // // template class InventoryHolder<SwapCard>;
 // // template class InventoryHolder<Switch>;
 // // template class InventoryHolder<Abilityless>;
+
+template class InventoryHolder<Card>;
+template class InventoryHolder<Ability*>;

@@ -1,4 +1,6 @@
 #include "Player.hpp"
+#include "../Ability/Ability.hpp"
+#include "../InventoryHolder/InventoryHolder.hpp"
 
 /* default constructor*/
 Player::Player(string nick) : nickName(nick) {

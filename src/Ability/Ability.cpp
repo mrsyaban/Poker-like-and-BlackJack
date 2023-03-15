@@ -14,6 +14,12 @@ Ability::Ability(string type)
     this->type = type;
 }
 
+string Ability::getType() const
+{
+    return type;
+}
+
+
 /* Getter */
 bool Ability::getAvail() const
 {
@@ -30,13 +36,13 @@ void Ability::setAvail(bool avail)
 ReRoll::ReRoll() : Ability("Reroll") {}
 
 void ReRoll::Execute(Game& g) {
-    Player * owner = &((g.getPlayers().begin() + g.getCurrentPlayer())->first);
-    owner->deleteall();
-    owner->add(g.getCardDeck());
-    owner->add(g.getCardDeck());
+    Player& owner = ((g.getPlayers().begin() + g.getCurrentPlayer())->first);
+    owner.deleteall();
+    owner.add(g.getCardDeck());
+    owner.add(g.getCardDeck());
 
     IO io;
-    io.printAbilitySuccess(*owner);
+    io.printAbilitySuccess(owner);
 }
 
 /* Quadruple Ability */
@@ -83,9 +89,9 @@ void SwapCard::Execute(Game& g) {
     Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
 
     // select Player
-    vector<Player>& listPlayer = io.selectPlayer(owner, g.getPlayers());
-    Player& player1 = listPlayer[0];
-    Player& player2 = listPlayer[1];
+    vector<Player *> listPlayer = io.selectPlayer(owner, g.getPlayers());
+    Player& player1 = *listPlayer[0];
+    Player& player2 = *listPlayer[1];
 
     // select Card
     int cardPlayer1 = io.selectCard(player1.getNickname());
@@ -112,13 +118,13 @@ void Switch::Execute(Game& g) {
     IO io;
     Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
     
-    vector<Player>& target = io.selectPlayer(owner, g.getPlayers());
-    Player& other = target[0];
+    vector<Player*> target = io.selectPlayer(owner, g.getPlayers());
+    Player& other = *target[0];
 
     owner.exchange(other);
     owner.exchange(other);
 
-    vector<string> output = {target[0].getNickname()};
+    vector<string> output = {target[0]->getNickname()};
     io.printAbilitySuccess(owner, output);
 }
 
@@ -130,8 +136,8 @@ void Abilityless::Execute(Game& g) {
     Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
     
     /* Select Player */
-    vector<Player>& inputPlayer = io.selectPlayer(owner, g.getPlayers());
-    Player& playerChosen = inputPlayer[0]; 
+    vector<Player*> inputPlayer = io.selectPlayer(owner, g.getPlayers());
+    Player& playerChosen = *inputPlayer[0]; 
 
     bool allAvail = true;
     int n = g.getPlayers().size(), i = 0;

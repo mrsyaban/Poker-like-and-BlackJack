@@ -25,22 +25,22 @@ Deck<Card>::Deck() {
 }
 
 template <>
-Deck<Ability>::Deck() {
-    vector<Ability> tempDeck;
+Deck<Ability*>::Deck() {
+    vector<Ability*> tempDeck;
 
-    ReRoll reRoll;
+    ReRoll * reRoll = new ReRoll();
     tempDeck.push_back(reRoll);
-    Quadruple quadruple;
+    Quadruple * quadruple = new Quadruple();
     tempDeck.push_back(quadruple);
-    Quarter quarter;
+    Quarter * quarter = new Quarter();
     tempDeck.push_back(quarter);
-    ReverseDirection reverseDirection;
+    ReverseDirection * reverseDirection = new ReverseDirection();
     tempDeck.push_back(reverseDirection);
-    SwapCard swapCard;
+    SwapCard * swapCard = new SwapCard();
     tempDeck.push_back(swapCard);
-    Switch tukar;
+    Switch * tukar = new Switch();
     tempDeck.push_back(tukar);
-    Abilityless abilityless;
+    Abilityless * abilityless = new Abilityless();
     tempDeck.push_back(abilityless);
 
     this->deleteall();
@@ -58,6 +58,6 @@ void Deck<Card>::getInfo() const {
 }
 
 template <>
-void Deck<Ability>::getInfo() const {
+void Deck<Ability*>::getInfo() const {
     cout << "This is Ability Deck" << endl;
 }

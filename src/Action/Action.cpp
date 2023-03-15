@@ -1,4 +1,7 @@
 #include "Action.hpp"
+#include "../Game/Game.hpp"
+#include "../IO/IO.hpp"
+#include "../Player/Player.hpp"
 
 /* Next Action */
 Next::Next() {}

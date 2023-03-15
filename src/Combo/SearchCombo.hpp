@@ -19,7 +19,7 @@ class SearchCombo {
 
     public:
         SearchCombo(); // ctor
-        SearchCombo(Player player, Table<Card> table); // constructor
+        SearchCombo(Player player, Table table); // constructor
         ~SearchCombo(); // destructor
 
         /* Getter */
@@ -34,8 +34,8 @@ class SearchCombo {
 
         vector<Card> getComboCards() const; // Combo Cards getter
 
-        vector<Card> sortCards(); // Sorting cards by number and color
-        vector<Card> sortCombo(); // Sorting combo by number and color
+        void sortCards(); // Sorting cards by number and color
+        void sortCombo(); // Sorting combo by number and color
         
         void highCard(); 
         void pair();

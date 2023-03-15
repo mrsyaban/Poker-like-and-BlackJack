@@ -47,10 +47,10 @@ vector<Card> SearchCombo::getComboCards() const {
 }
 
 
-vector<Card> SearchCombo::sortCards() {
-    for (int i = 0; i < this->cards.size() - 1; i++) {
+void SearchCombo::sortCards() {
+    for (unsigned int i = 0; i < this->cards.size() - 1; i++) {
         int maxIndex = i;
-        for (int j = i + 1; j < this->cards.size(); j++) {
+        for (unsigned int j = i + 1; j < this->cards.size(); j++) {
             if (this->cards[j].getNumber() > this->cards[maxIndex].getNumber() || (this->cards[j].getNumber() == this->cards[maxIndex].getNumber() && this->cards[j].getColor() > this->cards[maxIndex].getColor())) {
                 maxIndex = j;
             }
@@ -61,10 +61,10 @@ vector<Card> SearchCombo::sortCards() {
     }
 }
 
-vector<Card> SearchCombo::sortCombo() {
-    for (int i = 0; i < this->cards.size() - 1; i++) {
+void SearchCombo::sortCombo() {
+    for (unsigned int i = 0; i < this->cards.size() - 1; i++) {
         int maxIndex = i;
-        for (int j = i + 1; j < this->getComboCards().size(); j++) {
+        for (unsigned int j = i + 1; j < this->getComboCards().size(); j++) {
             if (this->getComboCards()[j].getNumber() > this->getComboCards()[maxIndex].getNumber() || (this->getComboCards()[j].getNumber() == this->getComboCards()[maxIndex].getNumber() && this->getComboCards()[j].getColor() > this->getComboCards()[maxIndex].getColor())) {
                 maxIndex = j;
             }
@@ -86,7 +86,7 @@ void SearchCombo::highCard() {
 
 void SearchCombo::pair() {
     int max = 0;
-    int i = 0;
+    unsigned int i = 0;
 
     vector<Card> temp;
 
@@ -117,7 +117,7 @@ void SearchCombo::twoPair() {
     vector<Card> pairs, temp;
 
     int count[14] = {0};
-    for (int i = 0; i < this->cards.size(); i++) {
+    for (unsigned int i = 0; i < this->cards.size(); i++) {
         count[this->cards[i].getNumber()]++;
     }
 
@@ -149,7 +149,7 @@ void SearchCombo::twoPair() {
 
 void SearchCombo::threeOfAKind() {
     int max = 0;
-    int i = 0, countThree = 0;
+    unsigned int i = 0, countThree = 0;
 
     vector<Card> temp, three;
 
@@ -183,7 +183,7 @@ void SearchCombo::threeOfAKind() {
 
 void SearchCombo::straight() {
     int max = 0;
-    int i = 0;
+    unsigned int i = 0;
     int countStraight = 0;
 
     vector<Card> temp, straight;
@@ -236,7 +236,7 @@ void SearchCombo::straight() {
 
 void SearchCombo::flush() {
     int max = 0, count = 0;
-    int j = 0, i = 0;
+    unsigned int j = 0, i = 0;
     vector<Card> temp, flushCards;
     vector<bool> flush;
 
@@ -295,7 +295,7 @@ void SearchCombo::fullHouse() {
     vector<Card> copyCards = this->cards;
     vector<Card> temp, three, pair;
 
-    for (int i = 0; i < copyCards.size() - 2; i++) { // Detecting three of a kind
+    for (unsigned int i = 0; i < copyCards.size() - 2; i++) { // Detecting three of a kind
         if (this->cards[i] == this->cards[i+1] && this->cards[i] == this->cards[i+2]) {
             three.insert(three.end(), this->cards[i]);
             three.insert(three.end(), this->cards[i+1]);
@@ -304,7 +304,7 @@ void SearchCombo::fullHouse() {
 
             copyCards.erase(copyCards.begin() + i, copyCards.begin() + i + 3);
 
-            for (int j = 0; j < copyCards.size(); j++) { // Then detecting pair
+            for (unsigned int j = 0; j < copyCards.size(); j++) { // Then detecting pair
                 if (cards[j] == cards[j+1]) {
                     pair.insert(pair.end(), this->cards[j]);
                     pair.insert(pair.end(), this->cards[j+1]);
@@ -343,7 +343,7 @@ void SearchCombo::fullHouse() {
 
 void SearchCombo::fourOfKind() {
     int max = 0, countFour = 0;
-    int i = 0;
+    unsigned int i = 0;
 
     vector<Card> temp, four;
 
@@ -389,7 +389,7 @@ void SearchCombo::fourOfKind() {
 
 void SearchCombo::straightFlush() {
     int max = 0;
-    int i = 0;
+    unsigned int i = 0;
 
     vector<Card> temp, straight;
 

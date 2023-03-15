@@ -28,8 +28,8 @@ Deck<Card>& Game::getCardDeck(){
     return this->cardDeck;
 }
 
-Deck<Ability>& Game::getAbilityDeck(){
-    return this->abilityDeck;
+Deck<Ability*>& Game::getAbilityDeck(){
+    return (this->abilityDeck);
 }
 
 Table& Game::getTable(){
@@ -69,7 +69,7 @@ void Game::decCurrentPlayer() {
 
 void Game::addPlayer(){
     IO io;
-    vector<string> inputNick = io.inputPlayerName(*this);
+    vector<string> inputNick = io.inputPlayerName();
     for (auto itr=inputNick.begin(); itr != inputNick.end(); itr++){
         Player player(*itr);
         pair<Player&, bool> element(player, false);
@@ -89,14 +89,14 @@ void Game::dealToPlayers() {
 
 void Game::dealAbilityToPlayers() {
     for (auto p_itr = getPlayers().begin(); p_itr != getPlayers().end(); p_itr++) {
-        p_itr->first.setAbility(this->abilityDeck.getTopItems());
+        p_itr->first.setAbility(*(getAbilityDeck().getTopItems()));
         this->abilityDeck.getItems().erase(this->abilityDeck.getTopItemsIterator());
     }
 }
 
 bool Game::gameEnded() {
     for (auto p_itr = getPlayers().begin(); p_itr != getPlayers().end(); p_itr++) {
-        if (p_itr->first.getPoint() >= 4294967296) {
+        if (p_itr->first.getPoint() >= 4294967296.00) {
             return true;
         }
     }
@@ -116,7 +116,7 @@ void Game::start() {
         while (!gameEnded()) {
             point = Point();
             Deck<Card> deck;
-            Deck<Ability> deckAbility;
+            Deck<Ability*> deckAbility;
             this->cardDeck = deck;
             this->abilityDeck = deckAbility;
             dealToTable();

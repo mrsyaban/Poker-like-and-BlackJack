@@ -1,0 +1,35 @@
+In file included from src/Game/../Deck/Deck.hpp:7:0,
+                 from src/Game/Game.hpp:5,
+                 from src/Game/Game.cpp:2:
+src/Game/../Deck/../InventoryHolder/InventoryHolder.hpp: In instantiation of 'T& InventoryHolder<T>::getTopItems() [with T = Ability*]':
+src/Game/Game.cpp:92:63:   required from here
+src/Game/../Deck/../InventoryHolder/InventoryHolder.hpp:57:26: error: invalid initialization of reference of type 'Ability*&' from expression of type 'std::vector<Ability*, std::allocator<Ability*> >'
+             return this->items;
+                    ~~~~~~^~~~~
+src/IO/IO.cpp:126:104: error: default argument given for parameter 2 of 'void IO::printAbilitySuccess(Player, std::vector<std::__cxx11::basic_string<char> >, std::vector<std::__cxx11::basic_string<char> >)' [-fpermissive]
+ void IO::printAbilitySuccess(Player player, vector<string> resPlayer = {}, vector<string> reversed = {}){
+                                                                                                        ^
+In file included from src/IO/IO.cpp:1:0:
+src/IO/IO.hpp:42:14: note: previous specification in 'void IO::printAbilitySuccess(Player, std::vector<std::__cxx11::basic_string<char> >, std::vector<std::__cxx11::basic_string<char> >)' here
+         void printAbilitySuccess(Player player, vector<string> resPlayer = {}, vector<string> reversed = {});
+              ^~~~~~~~~~~~~~~~~~~
+src/IO/IO.cpp:126:104: error: default argument given for parameter 3 of 'void IO::printAbilitySuccess(Player, std::vector<std::__cxx11::basic_string<char> >, std::vector<std::__cxx11::basic_string<char> >)' [-fpermissive]
+ void IO::printAbilitySuccess(Player player, vector<string> resPlayer = {}, vector<string> reversed = {}){
+                                                                                                        ^
+In file included from src/IO/IO.cpp:1:0:
+src/IO/IO.hpp:42:14: note: previous specification in 'void IO::printAbilitySuccess(Player, std::vector<std::__cxx11::basic_string<char> >, std::vector<std::__cxx11::basic_string
+                                                                               g<char> >)' here
+         void printAbilitySuccess(Player player, vector<string> resPlayer = {}, vector<string> reversed = {});
+              ^~~~~~~~~~~~~~~~~~~
+src/IO/IO.cpp: In member function 'std::vector<Player>& IO::selectPlayer(const Player&, const std::vector<std::pair<Player&, bool> >&) const':
+src/IO/IO.cpp:237:20: warning: reference to local variable 'resPlayers' returned [-Wreturn-local-addr]
+     vector<Player> resPlayers;
+                    ^~~~~~~~~~
+src/IO/IO.cpp: At global scope:
+src/IO/IO.cpp:286:43: error: default argument given for parameter 1 of 'void IO::printAbilityless(std::__cxx11::string)' [-fpermissive]
+ void IO::printAbilityless(string nick = ""){
+                                           ^
+In file included from src/IO/IO.cpp:1:0:
+src/IO/IO.hpp:51:14: note: previous specification in 'void IO::printAbilityless(std::__cxx11::string)' here
+         void printAbilityless(string nick = "");
+              ^~~~~~~~~~~~~~~~

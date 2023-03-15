@@ -2,39 +2,38 @@
 #define _INVENTORYHOLDER_HPP_
 
 #include "../Card/Card.hpp"
-// #include "../Ability/Ability.hpp"
+#include "../Ability/Ability.hpp"
 #include <vector>
 #include <algorithm>
 #include <iostream>
 using namespace std;
 
-template <typename T>
+template <class T>
 class InventoryHolder
 {
     protected:
         vector<T> items;
 
     public:
-        InventoryHolder();
+        InventoryHolder(){};
         ~InventoryHolder()
         {
             while (!this->items.empty())
             {
                 this->items.pop_back();
             }
-            cout << "vector cards telah dikosongkan" << endl;
         }
 
         InventoryHolder(const InventoryHolder& other) {
             this->items = other.items;
         }
 
-        InventoryHolder<T>& operator+(const T& other){
+        InventoryHolder<T>& operator+(const T other){
             items.push_back(other);
             return *this;
         }
 
-        InventoryHolder<T>& operator-(const T& other){
+        InventoryHolder<T>& operator-(const T other){
             auto itr = this->items.begin();
             while (!(*itr == other)) {
                 itr++;
@@ -54,7 +53,7 @@ class InventoryHolder
         }
 
         T& getTopItems() {
-            return this->items;
+            return *(this->items.begin());
         }
 
         typename vector<T>::iterator getTopItemsIterator() {
@@ -77,7 +76,7 @@ class InventoryHolder
         }   
 
         void deleteall() {
-            this->items.deleteall();
+            this->items.clear();
         }
 
         void puttoback() {
@@ -88,7 +87,7 @@ class InventoryHolder
 };
 
 // template<>
-// InventoryHolder<Ability>& InventoryHolder<Ability>::operator-(const Ability& other){
+// InventoryHolder<Ability*>& InventoryHolder<Ability>::operator-(const Ability& other){
 //     auto itr = this->items.begin();
 //     while (itr->getType() != other.getType()) {
 //         itr++;

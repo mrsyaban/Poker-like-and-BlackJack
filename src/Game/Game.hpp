@@ -5,18 +5,18 @@
 #include "../Deck/Deck.hpp"
 #include "../Point/Point.hpp"
 #include "../Table/Table.hpp"
-// #include "../Player/Player.hpp"
-// #include "../Ability/Ability.hpp"
-// #include "../IO/IO.hpp"
+#include "../Player/Player.hpp"
+#include "../Ability/Ability.hpp"
+#include "../IO/IO.hpp"
 
 #include <iostream>
 #include <map>
 #include <string>
 using namespace std;
 
-class IO;
-class Ability;
-class Player;
+// class IO;
+// class Ability;
+// class Player;
 // class Table;
 
 /* Mapping command to int */
@@ -37,7 +37,7 @@ class Game {
     private:
         vector<pair<Player&, bool>> players; // idenya player bisa diakses lewat map, int adalah urutan player
         Deck<Card> cardDeck;
-        Deck<Ability> abilityDeck;
+        Deck<Ability*> abilityDeck;
         Table table;
         Point point;
         bool isReversed;
@@ -54,7 +54,7 @@ class Game {
         /* The returned reference may be altered */
         vector<pair<Player&, bool>>& getPlayers();
         Deck<Card>& getCardDeck();
-        Deck<Ability>& getAbilityDeck();
+        Deck<Ability*>& getAbilityDeck();
         Table& getTable();
         Point& getPoint();
         bool& getReverseInfo();
@@ -70,7 +70,7 @@ class Game {
         void initNewMatch();
 
         void start();
-        
+
         void nextPlayer();
         
         void nextTurn();
