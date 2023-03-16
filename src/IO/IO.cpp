@@ -266,13 +266,19 @@ int IO::selectCard(string playersNick){
 }
 
 void printPlayer(string nick, const vector<pair<Player&, bool>>& listPlayer){
-    int i = 0;
-    while (i <= 6){
-        if (nick != listPlayer[i].first.getNickname()){
-            cout << i+1 << ". " << listPlayer[i].first.getNickname() << endl;
+    int i = 1;
+    for (auto couple: listPlayer){
+        if (couple.first.getNickname()!=nick){
+            cout << i << ". " << couple.first.getNickname() << endl;
+            i++;
         }
-        i++;
     }
+    // while (i <= 6){
+    //     if (nick != listPlayer[i].first.getNickname()){
+    //         cout << i+1 << ". " << listPlayer[i].first.getNickname() << endl;
+    //     }
+    //     i++;
+    // }
 }
 
 vector<Player*> IO::selectPlayer(const Player& player, const vector<pair<Player&, bool>>& listPlayer) const{
