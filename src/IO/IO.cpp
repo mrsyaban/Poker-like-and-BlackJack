@@ -162,8 +162,8 @@ void IO::printTable(Table table, Point point){
         cout << resetColor;
     }
     cout << "\n\n";
-    cout << lineColor << "==============================" << endl << endl;
-    cout << "Current Points : " <<  point.getValue() << resetColor << endl << endl; 
+    cout << lineColor << "==============================" << endl;
+    cout << wordColor << "Game Points : " <<  point.getValue() << resetColor << endl << endl; 
 
 }
 
@@ -394,7 +394,7 @@ pair<vector<Card>, vector<Ability*>> IO::inputFile(){
     cout << endl;
     string filePath = "test/" + fileName;
     ifstream infile(filePath);
-    inputException err;
+    FileException err;
 
     if (!infile){
         throw err;
@@ -417,9 +417,17 @@ pair<vector<Card>, vector<Ability*>> IO::inputFile(){
                     card.setColor(stringToColor.at(code[1]));
                     mainDeck.push_back(card);
                     count++;
-
+                } else if (code.length() ==  3){
+                    Card card(CardColor(1), 0);
+                    card.setNumber((code[0] - '0')*10 + (code[1] - '0'));
+                    card.setColor(stringToColor.at(code[2]));
+                    mainDeck.push_back(card);
+                    count++;
+                } else {
+                    throw err;
+                }
             // 7 other word for ability deck
-            } else if (count <59){
+            } else if (count <=59){
                 if (code.length() == 2){
                     abilityDeck.push_back(stringToAbility(code));
                     count++;
@@ -436,7 +444,6 @@ pair<vector<Card>, vector<Ability*>> IO::inputFile(){
     if (count < 59){
         throw err;
     }
-    }    
     pair<vector<Card>, vector<Ability*>> ret(mainDeck, abilityDeck);
     return ret;
 }
