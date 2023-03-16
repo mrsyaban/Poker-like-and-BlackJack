@@ -119,7 +119,7 @@ string IO::mainMenu(){
     
     string command;
     cout << inputColor; cin >> command; cout <<  resetColor;
-    if (!(command == "1" || command == "0")){
+    if (!(command == "1" || command == "2")){
         NumberInputException err;
         throw err;
     }
@@ -215,8 +215,8 @@ void IO::printAbilitySuccess(Player player, vector<string> resPlayer, vector<str
         cout << player.getNickname() << " successfully performed SWITCH!" << endl;
         cout << "both of your cards has been switched with " << resPlayer[0] << endl;
         cout << "your current cards are : " 
-        << player.getItems()[0].getNumber() << "-" << player.getItems()[0].getColor() << " & "
-        << player.getItems()[1].getNumber() << "-" << player.getItems()[1].getColor() << endl;
+        << player.getItems()[0].getNumber() << "-" << cardToString.at(player.getItems()[0].getColor()) << " & "
+        << player.getItems()[1].getNumber() << "-" << cardToString.at(player.getItems()[1].getColor()) << endl;
     
     // Abiilityless
     } else if (type == "Abilityless"){
@@ -237,7 +237,7 @@ void IO::printAbilitySuccess(Player player, vector<string> resPlayer, vector<str
         cout << "Turn order for next round: ";
         for (auto itr = reversed.begin(); itr != reversed.end(); itr++){
             cout << *itr;
-            if (itr != resPlayer.end()-1){
+            if (itr != resPlayer.end()-2){
                 cout << " - ";
             }
         }
@@ -310,7 +310,7 @@ void printPlayer(string nick, const vector<pair<Player&, bool>>& listPlayer){
     // }
 }
 
-vector<Player*> IO::selectPlayer(const Player& player, const vector<pair<Player&, bool>>& listPlayer) const{
+vector<Player*> IO::selectPlayer(const Player& player, const vector<pair<Player&, bool>>& listPlayer, string currentPlayer) const{
     string type = player.getAbility()->getType(); 
     string player1, player2;
     PlayerException err;
@@ -320,8 +320,9 @@ vector<Player*> IO::selectPlayer(const Player& player, const vector<pair<Player&
     if (type == "Swap"){
         cout << "Go ahead and pick the player whose card you want to swap!" << endl;
         printPlayer(player.getNickname(), listPlayer);
-        cout << "\033[5m" << "Player's Name 1 >>> " << resetColor; cin >> player1;
-        cout << "\033[5m" << "Player's Name 2 >>> " << resetColor; cin >> player2;
+        cout << "\033[5;32m"<< "Player's Name 1 >>> " << inputColor; cin >> player1;
+        cout << "\033[5;32m" << "Player's Name 2 >>> " << inputColor; cin >> player2;
+        cout << resetColor;
 
         for (auto p_itr = listPlayer.begin(); p_itr != listPlayer.end(); p_itr++) {
             if (p_itr->first.getNickname() == player1 || p_itr->first.getNickname() == player2){
@@ -338,6 +339,10 @@ vector<Player*> IO::selectPlayer(const Player& player, const vector<pair<Player&
             throw err;
         }
 
+        if (player1 == currentPlayer || player2 == currentPlayer) {
+            throw err;
+        }
+
     } else if (type == "Switch"){
         cout << "Go ahead and pick the player whose card you want to swap! " << endl;
         printPlayer(player.getNickname(), listPlayer);
@@ -347,6 +352,14 @@ vector<Player*> IO::selectPlayer(const Player& player, const vector<pair<Player&
             if (p_itr->first.getNickname() == player1){
                 resPlayers.push_back(&(p_itr->first));
             }
+        }
+
+        if (resPlayers.size() < 1) {
+            throw err;
+        }
+
+        if (player1 == currentPlayer) {
+            throw err;
         }
 
     } else if (type == "Abilityless"){
@@ -359,6 +372,10 @@ vector<Player*> IO::selectPlayer(const Player& player, const vector<pair<Player&
                 resPlayers.push_back(&(p_itr->first));
             }
         }
+
+        if (player1 == currentPlayer) {
+            throw err;
+        }
     }
     
     cout << resetColor;
@@ -367,7 +384,7 @@ vector<Player*> IO::selectPlayer(const Player& player, const vector<pair<Player&
 
 void IO::printAbilityless(string nick){
     cout << abilColor;
-    if (nick == ""){
+    if (nick != ""){
         cout << "Oops, " << nick << "'s Ability Card has been used before :(" << endl;
         cout << "Aww, what a shame, the use of this card was all for nothing" << endl;
     } else {
@@ -405,8 +422,9 @@ void IO::printEndMatch(Player winner, Point poin){
     cout << wordColor << "           WINNER             " << resetColor << endl;
     cout << lineColor << "==============================" << resetColor << endl;
     cout << wordColor << winner.getNickname() << " : " << winner.getPoint().getValue() - poin.getValue() 
-    << " + " << "\033[1;34m " <<  poin.getValue() << wordColor << " = " << winner.getPoint().getValue() << endl; 
+    << " +" << "\033[1;34m " <<  poin.getValue() << wordColor << " = " << winner.getPoint().getValue() << endl; 
     cout << resetColor;
+    cout << endl;
 }
 
 void IO::printEndGame(const vector<pair<Player&, bool>>& listPlayer){

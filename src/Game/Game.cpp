@@ -129,7 +129,6 @@ void Game::initNewMatch()
     // share all the cards to players and table
     dealToTable();
     dealToPlayers();
-    cout << this->cardDeck.getTopItems().getNumber() << this->cardDeck.getTopItems().getColor() ;
 
     // print table
     io.printTable(table, point);
@@ -166,9 +165,10 @@ void Game::dealAbilityToPlayers()
     for (auto p_itr = getPlayers().begin(); p_itr != getPlayers().end(); p_itr++)
     {
         p_itr->first.setAbility(*(getAbilityDeck().getTopItems()));
-        cout << "Player " << p_itr->first.getNickname() << " get ability " << p_itr->first.getAbility()->getType() << endl << endl;
+        cout << "Player " << p_itr->first.getNickname() << " get ability " << p_itr->first.getAbility()->getType() << endl;
         this->abilityDeck.getItems().erase(this->abilityDeck.getTopItemsIterator());
     }
+    cout << endl;
 }
 
 bool Game::gameEnded()
@@ -356,6 +356,7 @@ void Game::nextTurn()
     {
         // udah jalan semua, set playerTurn = 0, nextRound
         playerTurn = 0;
+        cout << endl;
         nextRound();
     }
 }
@@ -370,7 +371,6 @@ void Game::nextRound()
         io.printTable(table, point);
         if (this->getRound() == 2)
         {
-            cout << "here mamen\n";
             dealAbilityToPlayers();
         }
 
