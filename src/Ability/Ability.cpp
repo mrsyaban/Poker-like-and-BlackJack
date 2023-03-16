@@ -178,7 +178,7 @@ void SwapCard::Execute(Game& g) {
     bool playerSelected = false;
     while (!playerSelected) {
         try {
-            listPlayer = io.selectPlayer(owner, g.getPlayers());
+            listPlayer = io.selectPlayer(owner, g.getPlayers(), g.getPlayers()[g.getCurrentPlayer()].first.getNickname());
             playerSelected = true;
         } catch(PlayerException& e) {
             cout << e.what() << endl;
@@ -233,7 +233,7 @@ void Switch::Execute(Game& g) {
     bool playerSelected = false;
     while (!playerSelected) {
         try {
-            target = io.selectPlayer(owner, g.getPlayers());
+            target = io.selectPlayer(owner, g.getPlayers(), g.getPlayers()[g.getCurrentPlayer()].first.getNickname());
             playerSelected = true;
         } catch(PlayerException& e) {
             cout << e.what() << endl;
@@ -266,6 +266,7 @@ void Abilityless::Execute(Game& g) {
         throw e;
         return;
     }
+    
     IO io;
     // Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
 
@@ -277,14 +278,14 @@ void Abilityless::Execute(Game& g) {
     bool playerSelected = false;
     while (!playerSelected) {
         try {
-            inputPlayer = io.selectPlayer(owner, g.getPlayers());
+            inputPlayer = io.selectPlayer(owner, g.getPlayers(), g.getPlayers()[g.getCurrentPlayer()].first.getNickname());
             playerSelected = true;
         } catch(PlayerException& e) {
             cout << e.what() << endl;
             continue;
         }
     }
-    Player& playerChosen = *inputPlayer[0]; 
+    Player& playerChosen = *inputPlayer[0];
 
     bool allAvail = true;
     int n = g.getPlayers().size(), i = 0;
@@ -298,21 +299,24 @@ void Abilityless::Execute(Game& g) {
     }
 
     // at least one player's ability available
-    if (allAvail) {
+    if (!allAvail) {
+        vector<string> nick = {playerChosen.getNickname()};
         // Ability success
         if (playerChosen.getAbility()->getAvail()) {
             playerChosen.getAbility()->setAvail(false);
-            io.printAbilitySuccess(owner);
+            io.printAbilitySuccess(owner, nick);
             owner.setAbilityAvailability(false);
         
         // chosen player's Ability Card has been used
         } else {
             io.printAbilityless(playerChosen.getNickname());
+            owner.setAbilityAvailability(false);
         }
     
     // All ability non available
     } else {
         g.getPlayers()[g.getCurrentPlayer()].first.getAbility()->setAvail(false);
-        io.printAbilityless();
+        io.printAbilityless("");
+        owner.setAbilityAvailability(false);
     }
 }
