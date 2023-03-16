@@ -52,7 +52,7 @@ void Ability::setAvail(bool avail)
 }
 
 /* Re-roll Ability */
-ReRoll::ReRoll() : Ability("Reroll") {}
+ReRoll::ReRoll() : Ability("Re-Roll") {}
 
 void ReRoll::Execute(Game& g) {
     try {
