@@ -24,7 +24,7 @@ vector<Card>& BlackjackPlayer::getCards(){
     return this->getItems();
 }
 
-void BlackjackPlayer::addPoint(int win){
+void BlackjackPlayer::addPoint(long long win){
     int cur = getPoint().getValue();    
     this->handPoint.setValue(cur+win);
 }
@@ -118,6 +118,7 @@ void Blackjack::start(){
             io.printBust();
         } else if (player->getTotalCard() == 21) {
             io.printStrike();
+            player->addPoint(this->pricePool.getValue());
         } else {
             while(getTotalCard() < player->getTotalCard() && getTotalCard() <= 21) {
                 hit();
@@ -125,10 +126,13 @@ void Blackjack::start(){
                 io.printBJ(this->dealer, this->pricePool);
             }
 
+            this->dealer.openCard();
+            this->dealer.openCard();
+
             io.printEndBJ(player->getTotalCard(), getTotalCard());
 
             if (getTotalCard() > 21) {
-
+                player->addPoint(this->pricePool.getValue());
             } else {
                 if (getTotalCard() < player->getTotalCard()) {
                     player->addPoint(this->pricePool.getValue());
