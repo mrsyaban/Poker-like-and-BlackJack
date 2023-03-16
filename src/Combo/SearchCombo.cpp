@@ -77,19 +77,52 @@ void SearchCombo::sortCards()
 }
 
 void SearchCombo::sortCards2() {
-    for (unsigned int i = 0; i < this->cards.size() - 1; i++) {
-        int min_idx = i;
-        for (unsigned int j = i + 1; j < this->cards.size(); j++) {
-            // compare the colors of the cards
-            if (cards[j].getColor() < cards[min_idx].getColor()) {
-                min_idx = j;
-            }
-            // if the colors are the same, compare the numbers of the cards
-            else if (cards[j].getNumber() < cards[min_idx].getNumber() && cards[j].getColor() == cards[min_idx].getColor()) {
-                min_idx = j;
+    int n = cards.size();
+
+    // Sort the cards by type using selection sort
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < n; j++) {
+            if (cards[j].getColor() < cards[minIndex].getColor()) {
+                minIndex = j;
             }
         }
-        swap(cards[i], cards[min_idx]);
+        if (minIndex != i) {
+            swap(cards[i], cards[minIndex]);
+        }
+    }
+
+    // Sort the cards by number within each getColor() using selection sort
+    int startIndex = 0;
+    for (int i = 1; i < n; i++) {
+        if (cards[i].getColor() != cards[startIndex].getColor()) {
+            // Sort the cards with the same getColor() using selection sort
+            for (int j = startIndex; j < i - 1; j++) {
+                int minIndex = j;
+                for (int k = j + 1; k < i; k++) {
+                    if (cards[k].getNumber() < cards[minIndex].getNumber()) {
+                        minIndex = k;
+                    }
+                }
+                if (minIndex != j) {
+                    swap(cards[j], cards[minIndex]);
+                }
+            }
+            startIndex = i;
+        }
+    }
+
+    // Sort the cards with the same getColor() as the last group
+    for (int j = startIndex; j < n - 1; j++) {
+        int minIndex = j;
+        for (int k = j + 1; k < n; k++) {
+            if (cards[k].getNumber() < cards[minIndex].getNumber()) {
+                minIndex = k;
+            }
+        }
+        if (minIndex != j) {
+            swap(cards[j], cards[minIndex]);
+        }
     }
 }
 
@@ -107,6 +140,7 @@ void SearchCombo::highCard()
 
 void SearchCombo::pair()
 {
+    this->sortCards();
     double max = 0;
     unsigned int i = 0;
 
@@ -136,6 +170,7 @@ void SearchCombo::pair()
 
 void SearchCombo::twoPair()
 {
+    this->sortCards();
     double max = 0;
     int countPair = 0;
 
@@ -179,6 +214,7 @@ void SearchCombo::twoPair()
 
 void SearchCombo::threeOfAKind()
 {
+    this->sortCards();
     double max = 0;
     unsigned int i = 1, countThree = 0;
 
@@ -247,6 +283,7 @@ void SearchCombo::straight()
 
 void SearchCombo::flush()
 {
+    this->sortCards();
     double max = 0;
     int count = 0;
     unsigned int j = 0, i = 0;
@@ -316,6 +353,7 @@ void SearchCombo::flush()
 
 void SearchCombo::fullHouse()
 {
+    this->sortCards();
     double max = 0;
     int countThree = 0, countPair = 0;
 
@@ -377,6 +415,7 @@ void SearchCombo::fullHouse()
 
 void SearchCombo::fourOfKind()
 {
+    this->sortCards();
     double max = 0;
     int countFour = 0;
     unsigned int i = 0;
@@ -428,6 +467,7 @@ void SearchCombo::fourOfKind()
 
 void SearchCombo::straightFlush()
 {
+    this->sortCards2();
     double max = 0;
     unsigned int i = 0;
     Combo c;
