@@ -41,7 +41,7 @@ void Point::Quarter(){
     this->value *= 0.25;
 }
 
-void Point::Add(int val){
+void Point::Add(long long val){
     if (this->value > 4294967296) return; // max point
     this->value += val;
 }

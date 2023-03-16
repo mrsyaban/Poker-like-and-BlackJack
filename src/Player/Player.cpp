@@ -80,5 +80,7 @@ void Player::dealToPlayer(InventoryHolder<Card>& deck) {
 
 /* Utility Function*/
 void Player::addPoint(long long point){
+    cout << this->handPoint.getValue() << endl;
     this->handPoint.Add(point);
+    cout << this->handPoint.getValue() << endl;
 }

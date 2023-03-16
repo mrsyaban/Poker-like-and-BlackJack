@@ -374,6 +374,7 @@ void Game::nextRound()
 
         // add points to the winner
         Player * winner = &getPlayers()[playerWithMaxScore].first;
+        cout << this->point.getValue() << endl;
         winner->addPoint(this->point.getValue());
         io.printEndMatch(*winner, this->point);
         

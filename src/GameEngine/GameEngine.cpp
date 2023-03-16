@@ -23,15 +23,16 @@ void GameEngine::start() {
             std::cout << e.what() << endl;
         }
     }
-
+    
     while(mainMenu != "0"){
         if (mainMenu == "1"){
             g.start();
         } else {
             b.start();
         }
+        io.mainMenuTitle();
+        mainMenu = io.mainMenu();
     }
-
     
     io.printThankYou();
 }

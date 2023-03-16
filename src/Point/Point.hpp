@@ -19,7 +19,7 @@ class Point {
         void Quadruple();
         void Quarter();
 
-        void Add(int);
+        void Add(long long);
 };
 
 #endif
