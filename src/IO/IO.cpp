@@ -26,13 +26,15 @@ string IO::turnInput(const Player& player){
         cout << resetColor;
     }
     cout << enterColor << "] ";
-    if (player.getAbility()->getAvail()){
-        cout << "\033[1m\033[32m";
-        
-    } else {
-        cout << "\033[1m\033[31m";
+    if (player.getAbility() != nullptr){
+        if (player.getAbility()->getAvail()){
+            cout << "\033[1m\033[32m";
+            
+        } else {
+            cout << "\033[1m\033[31m";
+        }
+        cout << player.getAbility()->getType();
     }
-    cout << player.getAbility()->getType();
     cout << enterColor <<  ") >>> ";
     cout << inputColor; cin >>  input;cout <<  resetColor;
 
