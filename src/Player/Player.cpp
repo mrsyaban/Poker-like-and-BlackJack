@@ -68,6 +68,10 @@ void Player::setAbility(Ability& ability){
     handAbility = &ability;
 }
 
+void Player::setAbilityAvailability(bool status) {
+    handAbility->setAvail(status);
+}
+
 void Player::dealToPlayer(InventoryHolder<Card>& deck) {
     this->deleteall();
     this->add(deck);

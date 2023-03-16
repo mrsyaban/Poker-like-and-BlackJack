@@ -37,6 +37,7 @@ class Player : public InventoryHolder<Card> {
         /* Setter */
         void setHighestCombo(Combo);
         void setAbility(Ability&);
+        void setAbilityAvailability(bool);
         void dealToPlayer(InventoryHolder<Card>&);
 
         /* Utility Function*/
