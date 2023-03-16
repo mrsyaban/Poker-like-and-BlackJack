@@ -17,13 +17,13 @@ using namespace std;
 // }
 
 int main() {
-    Card card1(Green,8);
-    Card card2(Blue,2);
-    Card card3(Green,2);
-    Card card4(Red,9);
-    Card card5(Blue,6);
-    Card card6(Yellow,4);
-    Card card7(Red,11);
+    Card card1(Green,13);
+    Card card2(Blue,12);
+    Card card3(Yellow,13);
+    Card card4(Red,12);
+    Card card5(Yellow,11);
+    Card card6(Red,10);
+    Card card7(Yellow,9);
 
     vector<Card> cards;
     cards.push_back(card1);
@@ -36,11 +36,9 @@ int main() {
 
     SearchCombo sCombo;
     sCombo.setCards(cards);
-    sCombo.sortCards2();
-    sCombo.checkCombo();
+    sCombo.sortCards();
 
     Combo combs;
-    combs = sCombo.getHighestCombo();
 
     for (auto x : sCombo.getCards()) {
         if (x.getColor() == 0) {
@@ -53,6 +51,12 @@ int main() {
             cout << x.getNumber() << " Red"  << endl;
         } 
     }
+
+    sCombo.checkCombo();
+    combs = sCombo.getRecords()[sCombo.getRecords().size()-1];
+
+
+    cout << "\n\nCombo :\n";
 
     for (auto x : combs.getCombo()) {
         if (x.getColor() == 0) {
