@@ -78,7 +78,7 @@ void Game::incCurrentPlayer()
 void Game::decCurrentPlayer()
 {
     currentPlayer--;
-    currentPlayer %= 7;
+    currentPlayer = (currentPlayer % 7 + 7) % 7;
 }
 
 void Game::initNewMatch(bool isRandom)
@@ -162,7 +162,7 @@ bool Game::gameEnded()
 {
     for (auto p_itr = getPlayers().begin(); p_itr != getPlayers().end(); p_itr++)
     {
-        if (p_itr->first.getPoint().getValue() >= 4294967296)
+        if (p_itr->first.getPoint().getValue() >= 4294967296.00)
         {
             return true;
         }
@@ -389,15 +389,17 @@ void Game::nextRound()
 // return vector sisa urutan eksekusi saat ini (setelah reverse)
 vector<string> Game::getRemainingReversedPlayer()
 {
-    vector<string> res;
+    vector<string> res = {};
     int i = currentPlayer - 1;
-    while (i % 7 != currentPlayer)
+    i = (i%7+7)%7;
+    while (i != currentPlayer)
     {
         if (players[i].second % 2 != round % 2)
         {
             res.push_back(players[i].first.getNickname());
         }
         i--;
+        i = (i%7+7)%7;
     }
     return res;
 }
@@ -405,13 +407,19 @@ vector<string> Game::getRemainingReversedPlayer()
 // return vector buat urutan eksekusi ronde berikutnya (setelah reverse)
 vector<string> Game::getReversedPlayer()
 {
-    vector<string> res;
+    vector<string> res = {};
     int i = currentPlayer - 1;
-    while (i % 7 != currentPlayer)
+    i = (i%7+7)%7;
+    cout << "i " << i << endl;
+    while (i != currentPlayer)
     {
+        cout << i << endl;
+        cout << players[i].first.getNickname() << endl;
         res.push_back(players[i].first.getNickname());
         i--;
+        i = (i%7+7)%7;
     }
+    res.push_back(players[currentPlayer].first.getNickname());
     return res;
 }
 

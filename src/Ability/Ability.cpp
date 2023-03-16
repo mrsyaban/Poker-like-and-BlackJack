@@ -128,7 +128,8 @@ void ReverseDirection::Execute(Game &g)
     g.setReverseInfo(true);
 
     IO io;
-    Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
+    // Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
+    Player& owner = (g.getPlayers()[g.getCurrentPlayer()].first);
     io.printAbilitySuccess(owner, g.getRemainingReversedPlayer(), g.getReversedPlayer());
 }
 

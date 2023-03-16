@@ -29,14 +29,14 @@ void Point::Half(){
 }
 
 void Point::Double(){
-    if (this->value > 4294967296) {
+    if (this->value > 4294967296.00) {
         return;
     }  // max point
     this->value *= 2;
 }
 
 void Point::Quadruple(){
-    if (this->value > 4294967296) {
+    if (this->value > 4294967296.00) {
         return;
     } // max point
     this->value *= 4;
@@ -50,7 +50,7 @@ void Point::Quarter(){
 }
 
 void Point::Add(long val){
-    if (this->value > 17179869184) {
+    if (this->value > 17179869184.00) {
         return;
     } // max point
     this->value = this->value + val;
