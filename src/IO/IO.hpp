@@ -43,6 +43,7 @@ class IO {
         void printThankYou();
         void printTable(Table, Point);
         void printEndGame(const vector<pair<Player&, bool>>&);
+        // void printEndMatch()
         
         /* main menu */
         string mainMenu();  
