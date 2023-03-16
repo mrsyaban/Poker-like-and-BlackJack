@@ -150,7 +150,6 @@ void SearchCombo::pair()
     {
         if (this->cards[i].getNumber() == this->cards[i + 1].getNumber())
         {
-            cout << "Masuk" << endl;
             max = this->cards[i + 1].value() + 1.39;
 
             temp.push_back(this->cards[i]);
@@ -161,13 +160,11 @@ void SearchCombo::pair()
 
     if (temp.size() >= 2)
     {
-        cout << "Dapat pair" << endl;
         pair.push_back(temp[temp.size()-1]);
         pair.push_back(temp[temp.size()-2]);
         c.setScore(max);
         c.setCombo(pair);
         records.push_back(c);
-        cout << "udah" << endl;
     }
 
     // this->sortCombo();
@@ -176,51 +173,6 @@ void SearchCombo::pair()
 void SearchCombo::twoPair()
 {
     this->sortCards();
-    // double max = 0;
-    // int countPair = 0;
-
-    // vector<Card> pairs, temp;
-    // Combo c;
-
-    // int count[13] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
-    // for (unsigned int i = 0; i < this->cards.size(); i++)
-    // {
-    //     cout << "Masuk tuper" << endl;
-    //     count[this->cards[i].getNumber()]++;
-    // }
-
-    // for (int i = 0; i <= 12; i++)
-    // {
-    //     if (count[i] == 2)
-    //     {
-    //         pairs.push_back(this->cards[i]);
-    //         pairs.push_back(this->cards[i + 1]);
-    //         countPair++;
-    //         cout << "Masuk tuper 2" << endl;
-    //     }
-    // }
-    // if (countPair >= 2)
-    // {
-    //     temp.push_back(pairs[pairs.size() - 4]);
-    //     temp.push_back(pairs[pairs.size() - 3]);
-    //     temp.push_back(pairs[pairs.size() - 2]);
-    //     temp.push_back(pairs[pairs.size() - 1]);
-    //     cout << "dapat tuper 1" << endl;
-
-    //     max = temp[temp.size() - 1].value() + temp[temp.size() - 3].value() + 4.14;
-    //     cout << "dapat tuper" << endl;
-    // }
-
-    // if (temp.size() > 1)
-    // {
-    //     cout << "dapat tuper 2" << endl;
-    //     c.setCombo(temp);
-    //     c.setScore(max);
-    //     records.push_back(c);
-    // }
-
-    // this->sortCombo();
-
     double max = 0;
     unsigned int i = 0;
 
@@ -230,7 +182,6 @@ void SearchCombo::twoPair()
     {
         if (this->cards[i].getNumber() == this->cards[i + 1].getNumber())
         {
-            cout << "Masuk" << endl;
             max = this->cards[i + 1].value() + 1.39;
 
             temp.push_back(this->cards[i]);
@@ -241,7 +192,6 @@ void SearchCombo::twoPair()
 
     if (temp.size() >= 4)
     {
-        cout << "Dapat pair" << endl;
         pair.push_back(temp[temp.size()-1]);
         pair.push_back(temp[temp.size()-2]);
         pair.push_back(temp[temp.size()-3]);
@@ -249,7 +199,6 @@ void SearchCombo::twoPair()
         c.setScore(max);
         c.setCombo(pair);
         records.push_back(c);
-        cout << "udah" << endl;
     }
 }
 
@@ -279,9 +228,7 @@ void SearchCombo::threeOfAKind()
     if (countThree >= 1)
     {
         c.setCombo(three);
-        max += c.getCombo()[c.getCombo().size() - 1].value() + 8.22;
-
-        cout << "dapat triper" << endl;
+        max = c.getCombo()[c.getCombo().size() - 1].value() + 8.22;
         c.setScore(max);
         this->records.push_back(c);
     }
@@ -291,7 +238,6 @@ void SearchCombo::straight()
 {
     this->sortCards();
     double max = 0;
-    int i = 0,  countStraight = 0;
 
     vector<Card> straight, temp;
     Combo c;
@@ -304,14 +250,14 @@ void SearchCombo::straight()
 
     for (int i = 12; i >= 4; i--) {
         if (count[i] >= 1 && count[i-1] >= 1 && count[i-2] >= 1 && count[i-3] >= 1 && count[i-4] >= 1) {
-            int max = this->cards.size()-1;
+            int maksindeks = this->cards.size()-1;
             int found = 0;
             while (found != 5) {
-                if (this->cards[max].getNumber() == i-found+1) {
-                    straight.push_back(this->cards[max]);
+                if (this->cards[maksindeks].getNumber() == i-found+1) {
+                    straight.push_back(this->cards[maksindeks]);
                     found++;
                 }
-                max--;
+                maksindeks--;
             }
             break;
         }
@@ -320,10 +266,7 @@ void SearchCombo::straight()
     if (straight.size() > 1)
     {
         c.setCombo(straight);
-
-        max += c.getCombo()[4].value();
-
-        cout << "dapat streit" << endl;
+        max = c.getCombo()[4].value();
         max += 12.3;
         c.setScore(max);
         this->records.push_back(c);
@@ -332,116 +275,120 @@ void SearchCombo::straight()
 
 void SearchCombo::flush()
 {
-    this->sortCards();
+    this->sortCards2();
     double max = 0;
-    int count = 0;
-    unsigned int j = 0, i = 0;
-    vector<Card> temp, flushCards;
-    vector<bool> flush;
 
+    vector<Card> flush, temp;
     Combo c;
 
-    for (auto x : flush)
+    int count[4] = {0, 0, 0, 0};
+    for (unsigned int i = 0; i < this->cards.size(); i++)
     {
-        x = false;
+        count[this->cards[i].getColor()]++;
     }
 
-    while (i < this->cards.size())
-    {
-        while (j < this->cards.size() && j > i)
-        {
-            if (this->cards[i].getColor() == this->cards[j].getColor())
-            {
-                flush[i] = true;
-                flush[j] = true;
-                count += 1;
+    for (int i = 3; i >= 0; i--) {
+        if (count[i] >= 5) {
+            int found = 0;
+            int maksindeks = this->cards.size()-1;
+            while (found != 5) {
+                if (this->cards[maksindeks].getColor() == i) {
+                    flush.push_back(this->cards[maksindeks]);
+                    found++;
+                }
+                maksindeks--;
             }
-            j++;
+            break;
         }
-        i++;
     }
 
-    if (count >= 5)
+    if (flush.size() > 1)
     {
-        for (i = 0; i < this->cards.size(); i++)
-        {
-            if (flush[i] == true)
-            {
-                flushCards.push_back(this->cards[i]);
-            }
-        }
+        c.setCombo(flush);
 
-        temp.push_back(flushCards[flushCards.size() - 5]);
-        temp.push_back(flushCards[flushCards.size() - 4]);
-        temp.push_back(flushCards[flushCards.size() - 3]);
-        temp.push_back(flushCards[flushCards.size() - 2]);
-        temp.push_back(flushCards[flushCards.size() - 1]);
-
-        
-
-        // for (auto x : this->getComboCards()) {
-        //     max += x.value();
-        // }
-
-        max += c.getCombo()[c.getCombo().size() - 1].value();
-
-        max += 18.15;
-
-        
-    }
-
-    if (temp.size() > 1)
-    {
-        c.setCombo(temp);
+        max = c.getCombo()[0].value();
+        max += 12.3;
         c.setScore(max);
-        records.push_back(c);
+        this->records.push_back(c);
     }
-
-    // this->sortCombo();
 }
 
 void SearchCombo::fullHouse()
 {
-    this->sortCards2();
+    this->sortCards();
     double max = 0;
-    int countThree = 0, countPair = 0;
+    bool thereIs3OfAKind, thereIsAPair;
 
     vector<Card> copyCards = this->cards;
     vector<Card> temp, three, pair;
     Combo c;
 
-    for (unsigned int i = 0; i < copyCards.size() - 2; i++)
-    { // Detecting three of a kind
-        if (this->cards[i] == this->cards[i + 1] && this->cards[i] == this->cards[i + 2])
-        {
-            three.insert(three.end(), this->cards[i]);
-            three.insert(three.end(), this->cards[i + 1]);
-            three.insert(three.end(), this->cards[i + 2]);
-            countThree++;
+    int count[13] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    for (unsigned int i = 0; i < this->cards.size(); i++)
+    {
+        count[this->cards[i].getNumber()-1]++;
+    }
 
-            cout << "dapat fullHouse" << endl;
+    for (int i = 12; i >= 0; i--) {
+        if (count[i] >= 3) {
+            thereIs3OfAKind = true;
+        } else if (count[i] >= 2) {
+            thereIsAPair = true;
+        }
 
-            copyCards.erase(copyCards.begin() + i, copyCards.begin() + i + 3);
+        if (thereIs3OfAKind && thereIsAPair) {
+            break;
+        }
+    }
 
-            for (unsigned int j = 0; j < copyCards.size(); j++)
-            { // Then detecting pair
-                if (cards[j] == cards[j + 1])
-                {
-                    pair.insert(pair.end(), this->cards[j]);
-                    pair.insert(pair.end(), this->cards[j + 1]);
-                    countPair++;
+    if (thereIs3OfAKind && thereIsAPair) {
+        while (thereIs3OfAKind) {
+            for (int i = 12; i >= 0; i--) {
+                int found = 0;
+                int maksindeks = this->cards.size()-1;
+                if (count[i] >= 3) {
+                    while (found != 3) {
+                        if (this->cards[maksindeks].getNumber() == i+1) {
+                            cout << this->cards[maksindeks].getNumber();
+                            three.push_back(this->cards[maksindeks]);
+                            found++;
+                        }
+                        maksindeks--;
+                    }
+                    thereIs3OfAKind = false;
+                    count[i] = 0;
+                    break;
+                }
+            }
+        }
+
+        while (thereIsAPair) {
+            for (int i = 12; i >= 0; i--) {
+                int found = 0;
+                int maksindeks = this->cards.size()-1;
+                if (count[i] >= 2) {
+                    while (found != 2) {
+                        if (this->cards[maksindeks].getNumber() == i+1) {
+                            pair.push_back(this->cards[maksindeks]);
+                            found++;
+                        }
+                        maksindeks--;
+                    }
+                    thereIsAPair = false;
+                    count[i] = 0;
+                    break;
                 }
             }
         }
     }
 
-    if (countPair >= 1 && countThree >= 1)
+    if (pair.size() >= 1 && three.size() >= 1)
     {
-        temp.push_back(three[three.size() - 3]);
-        temp.push_back(three[three.size() - 2]);
-        temp.push_back(three[three.size() - 1]);
-        temp.push_back(pair[pair.size() - 2]);
-        temp.push_back(pair[pair.size() - 1]);
+        temp.push_back(three[0]);
+        temp.push_back(three[1]);
+        temp.push_back(three[2]);
+        temp.push_back(pair[0]);
+        temp.push_back(pair[1]);
 
         c.setCombo(temp);
 
@@ -449,7 +396,7 @@ void SearchCombo::fullHouse()
         //     max += x.value();
         // }
 
-        max += c.getCombo()[c.getCombo().size() - 1].value();
+        max = c.getCombo()[0].value();
 
         max += 24.04;
 
@@ -460,8 +407,6 @@ void SearchCombo::fullHouse()
     {
         records.push_back(c);
     }
-
-    // this->sortCombo();
 }
 
 void SearchCombo::fourOfKind()
@@ -497,11 +442,7 @@ void SearchCombo::fourOfKind()
 
         c.setCombo(temp);
 
-        // for (auto x : this->combo) {
-        //     max += x.value();
-        // }
-
-        max += c.getCombo()[c.getCombo().size() - 1].value();
+        max = c.getCombo()[c.getCombo().size() - 2].value() + c.getCombo()[c.getCombo().size() - 5].value();
 
         max += 30.67;
 
@@ -513,7 +454,6 @@ void SearchCombo::fourOfKind()
         records.push_back(c);
     }
 
-    // this->sortCombo();
 }
 
 void SearchCombo::straightFlush()
@@ -559,7 +499,7 @@ void SearchCombo::straightFlush()
         //     max += x.value();
         // }
 
-        max += straight[4].value();
+        max = straight[4].value();
 
         max += 36.05;
 
@@ -571,7 +511,6 @@ void SearchCombo::straightFlush()
         records.push_back(c);
     }
 
-    // this->sortCombo();
 }
 
 void SearchCombo::checkCombo()

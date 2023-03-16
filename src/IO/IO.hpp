@@ -45,7 +45,8 @@ class IO {
         void printEndGame(const vector<pair<Player&, bool>>&);
         void printEndMatch(Player, Point);
         
-        /* menu */
+        /* main menu */
+        void mainMenuTitle();
         string mainMenu();  
         vector<string> inputPlayerName();
         string turnInput(const Player&, int);

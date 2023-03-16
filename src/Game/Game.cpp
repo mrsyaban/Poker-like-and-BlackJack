@@ -188,17 +188,20 @@ void Game::start()
 {
     // init menu 
     IO io;
-    string mainMenu;
+    string mainMenu = "";
     io.splashScreen();
+    io.mainMenuTitle();
 
     // read input
-    try
-    {
-        mainMenu = io.mainMenu();
-    }
-    catch (BaseException &e)
-    {
-        std::cout << e.what() << endl;
+    while (mainMenu == "") {
+        try
+        {
+            mainMenu = io.mainMenu();
+        }
+        catch (BaseException &e)
+        {
+            std::cout << e.what() << endl;
+        }
     }
 
     while (mainMenu == "1")
