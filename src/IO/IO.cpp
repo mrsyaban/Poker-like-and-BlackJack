@@ -6,7 +6,7 @@ using namespace std;
 string IO::turnInput(const Player& player){
     string input;
     cout << enterColor;
-    cout << player.getNickname() << "'s turn (";
+    cout << player.getNickname() << "'s turn ([";
     for (int i=0; i<2; i++){
         cout << enterColor;
         int color = player.getCard(i).getColor();
@@ -25,6 +25,14 @@ string IO::turnInput(const Player& player){
         }
         cout << resetColor;
     }
+    cout << enterColor << "] ";
+    if (player.getAbility()->getAvail()){
+        cout << "\033[1m\033[32m";
+        
+    } else {
+        cout << "\033[1m\033[31m";
+    }
+    cout << player.getAbility()->getType();
     cout << enterColor <<  ") >>> ";
     cout << inputColor; cin >>  input;cout <<  resetColor;
 
