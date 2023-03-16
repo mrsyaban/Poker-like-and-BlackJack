@@ -35,6 +35,7 @@ class SearchCombo {
 
         void sortCards(); // Sorting cards by number and color
         void sortCards2(); // Sorting combo by number and color
+        bool compareCards(Card, Card);
         
         void highCard(); 
         void pair();
