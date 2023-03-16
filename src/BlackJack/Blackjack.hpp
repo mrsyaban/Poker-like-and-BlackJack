@@ -51,6 +51,7 @@ class BlackjackPlayer : private Player {
         void hit(InventoryHolder&);
         vector<Card>& getCards();
         void addPoint(int);
+        void resetCard();
 };
 
 class Blackjack {

@@ -188,46 +188,25 @@ void Game::start()
 {
     // init menu 
     IO io;
-    string mainMenu = "";
-    io.splashScreen();
-    io.mainMenuTitle();
 
-    // read input
-    while (mainMenu == "") {
-        try
-        {
-            mainMenu = io.mainMenu();
-        }
-        catch (BaseException &e)
-        {
-            std::cout << e.what() << endl;
-        }
-    }
+    /** 
+        * Initialize all needed attributes 
+        * On first start only
+    */
+    addPlayer(); // create player
+    isReversed = false; // set reverse info to false
+    currentPlayer = 0; // set current player to 0
 
-    while (mainMenu == "1")
+
+    /* Every time get into new match */
+    initNewMatch();
+    
+    while (!gameEnded())
     {
-        /** 
-         * Initialize all needed attributes 
-         * On first start only
-        */
-        addPlayer(); // create player
-        isReversed = false; // set reverse info to false
-        currentPlayer = 0; // set current player to 0
-
-
-        /* Every time get into new match */
-        initNewMatch();
-        
-        while (!gameEnded())
-        {
-            /* Run game until someone wins */
-            nextTurn();
-        }
-        // print winner
-        mainMenu = io.mainMenu();
+        /* Run game until someone wins */
+        nextTurn();
     }
 
-    io.printThankYou();
 }
 
 void Game::startBlackJack() {

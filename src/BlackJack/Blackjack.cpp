@@ -29,6 +29,9 @@ void BlackjackPlayer::addPoint(int win){
     this->handPoint.setValue(cur+win);
 }
 
+void BlackjackPlayer::resetCard(){
+    this->deleteall();
+}
 
 Blackjack::Blackjack() {
     Point poin(0);
@@ -81,53 +84,73 @@ void Blackjack::start(){
         }
         this->setPrice(bet);
 
+        this->bjPlayer[0].resetCard();
         hit();
         hit();
         this->dealer.openCard();
 
-        BlackjackPlayer& player = this->bjPlayer[0];
-        player.hit(this->deck);
-        player.hit(this->deck);
+        BlackjackPlayer* player = &this->bjPlayer[0];
+        player->hit(this->deck);
+        player->hit(this->deck);
 
         // minta input hit atau stand
         io.printBJ(this->dealer, this->pricePool);
 
-        while(player.getTotalCard() < 21 && !stand){
+        while(player->getTotalCard() < 21 && !stand){
             string command = "";
             while (command == "") {
                 try {
-                    command = io.inputBJ(player.getCards(), player.getTotalCard());
+                    command = io.inputBJ(player->getCards(), player->getTotalCard());
                 } catch (BaseException& e) {
                     cout << e.what() << endl;
                 }
             }
 
             if (command == "HIT"){
-                player.hit(this->deck);
+                player->hit(this->deck);
                 io.printBJ(this->dealer, this->pricePool);
             } else {
                 stand = true;
             }
         }
 
-        if (player.getTotalCard() > 21) {
+        if (player->getTotalCard() > 21) {
             io.printBust();
-        } else if (player.getTotalCard() == 21) {
+        } else if (player->getTotalCard() == 21) {
             io.printStrike();
         } else {
-            while(getTotalCard() < player.getTotalCard() && getTotalCard() <= 21) {
+            while(getTotalCard() < player->getTotalCard() && getTotalCard() <= 21) {
                 hit();
                 this->dealer.openCard();
                 io.printBJ(this->dealer, this->pricePool);
             }
 
-            io.printEndBJ(player.getTotalCard(), getTotalCard());
+            io.printEndBJ(player->getTotalCard(), getTotalCard());
 
-            if (getTotalCard() < player.getTotalCard()) {
-                player.addPoint(this->pricePool.getValue());
-            } else if (getTotalCard() == player.getTotalCard()) {
-                player.addPoint(this->pricePool.getValue()/2);
+            if (getTotalCard() > 21) {
+
+            } else {
+                if (getTotalCard() < player->getTotalCard()) {
+                    player->addPoint(this->pricePool.getValue());
+                } else if (getTotalCard() == player->getTotalCard()) {
+                    player->addPoint(this->pricePool.getValue()/2);
+                }
             }
+        }
+
+        string lanjut = "";
+        while (lanjut == "") {
+            try {
+                lanjut = io.printPlayAgain();
+            } catch (BaseException& e) {
+                cout << e.what() << endl;
+            }
+        }
+        
+        if (lanjut == "1") {
+            end = false;
+        } else {
+            end = true;
         }
     }
 

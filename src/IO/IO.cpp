@@ -627,7 +627,7 @@ string IO::printPlayAgain(){
     cout << lineColor << "==============================" << resetColor << "\n\n";
     cout << wordColor << "1. Play Again" << endl;
     cout << wordColor << "2. Back to Main Menu" << endl << endl;
-    cout << lineColor << "Enter your Choice >>> " << endl << inputColor; cin >> input;
+    cout << lineColor << "Enter your Choice >>> " << inputColor; cin >> input;
     
     if (!(input == "1" || input == "2")){
         NumberInputException err;
