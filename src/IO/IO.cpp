@@ -432,8 +432,9 @@ void IO::printEndGame(const vector<pair<Player&, bool>>& listPlayer){
     cout << wordColor;
     cout << "Game Over!" << resetColor << endl; 
     cout << lineColor << "==============================" << resetColor << endl;
-    cout << wordColor << "│          LEADERBOARD       │" << resetColor << endl;
+    cout << wordColor << "│          FINAL SCORE        │" << resetColor << endl;
     cout << lineColor << "==============================" << resetColor << endl;
+    vector<pair<string, long long>> tempSort;
 
     for (int i=0; i<7; i++){
         cout << lineColor << "│" << resetColor;
