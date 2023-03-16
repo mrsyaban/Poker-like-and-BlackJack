@@ -64,7 +64,7 @@ class IO {
 
         /* input File*/
         pair<vector<Card>, vector<Ability*>> inputFile();
-        Ability* stringToAbility(string code);
+        Ability* stringToAbility(string);
 
 };
 

@@ -81,7 +81,7 @@ void Game::decCurrentPlayer()
     currentPlayer = (currentPlayer % 7 + 7) % 7;
 }
 
-void Game::initNewMatch(bool isRandom)
+void Game::initNewMatch()
 {
     /* Create new match*/
     IO io;
@@ -90,8 +90,21 @@ void Game::initNewMatch(bool isRandom)
     round = 1;
     playerTurn = 0;
     point = Point(); // default point : 64
+    
+    
+    string dealMenu = "";
+    while(!(dealMenu != "1" || dealMenu != "2")){
+        try
+        {
+            dealMenu = io.dealMenu();
+        }
+        catch(BaseException& e)
+        {
+            std::cout << e.what() << '\n';
+        }
+    }
 
-    if (isRandom){
+    if (dealMenu == "2"){
         Deck<Card> deck; // create new randomized card deck
         Deck<Ability*> deckAbility; // create new randomized ability deck
         this->cardDeck = deck; // assign to cardDeck
@@ -198,9 +211,10 @@ void Game::start()
         isReversed = false; // set reverse info to false
         currentPlayer = 0; // set current player to 0
 
-        /* Every time get into new match */
-        initNewMatch(true); // create table, card deck, ability deck, deal card to table and player
 
+        /* Every time get into new match */
+        initNewMatch();
+        
         while (!gameEnded())
         {
             /* Run game until someone wins */
@@ -381,7 +395,7 @@ void Game::nextRound()
         
         if (!gameEnded())
         {
-            initNewMatch(true);
+            initNewMatch();
         }
     }
 }

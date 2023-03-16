@@ -27,7 +27,12 @@ void Ability::checkAbilityError(Game& g)
         AbilityNotAvailableException e;
         throw e;
     } else {
-        if (g.getPlayers()[g.getCurrentPlayer()].first.getAbility()->getType() !=  this->getType()) {
+        Player& playerOnTurn = ((g.getPlayers().begin() + g.getCurrentPlayer())->first);
+        if (g.getRound() < 2) {
+            AbilityNotHaveException e;
+            throw e;
+        }
+        if (playerOnTurn.getAbility()->getType() !=  this->getType()) {
             AbilityNotHaveException e;
             throw e;
         }
@@ -47,7 +52,7 @@ void Ability::setAvail(bool avail)
 }
 
 /* Re-roll Ability */
-ReRoll::ReRoll() : Ability("Reroll") {}
+ReRoll::ReRoll() : Ability("Re-Roll") {}
 
 void ReRoll::Execute(Game& g) {
     try {
