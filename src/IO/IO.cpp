@@ -43,7 +43,7 @@ string IO::turnInput(const Player& player){
     };
 
     if (find(validString.begin(), validString.end(), input) == validString.end()){
-        inputException err;
+        InputException err;
         throw err;
     }
 
@@ -297,7 +297,7 @@ void printPlayer(string nick, const vector<pair<Player&, bool>>& listPlayer){
 vector<Player*> IO::selectPlayer(const Player& player, const vector<pair<Player&, bool>>& listPlayer) const{
     string type = player.getAbility()->getType(); 
     string player1, player2;
-    playerException err;
+    PlayerException err;
 
     vector<Player*> resPlayers;
     cout << abilColor;
@@ -311,6 +311,10 @@ vector<Player*> IO::selectPlayer(const Player& player, const vector<pair<Player&
             if (p_itr->first.getNickname() == player1 || p_itr->first.getNickname() == player2){
                 resPlayers.push_back(&(p_itr->first));
             }
+        }
+
+        if (resPlayers.size() < 2) {
+            throw err;
         }
 
         // Exception
@@ -490,7 +494,7 @@ Ability* IO::stringToAbility(string code){
         return abilityless;
 
     } else {
-        inputException err;
+        InputException err;
         throw err;
     }
 }

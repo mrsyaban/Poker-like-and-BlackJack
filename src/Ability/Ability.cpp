@@ -165,9 +165,19 @@ void SwapCard::Execute(Game& g) {
     // Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
 
     Player& owner = (g.getPlayers()[g.getCurrentPlayer()].first);
-
+    vector<Player *> listPlayer;
     // select Player
-    vector<Player *> listPlayer = io.selectPlayer(owner, g.getPlayers());
+    bool playerSelected = false;
+    while (!playerSelected) {
+        try {
+            listPlayer = io.selectPlayer(owner, g.getPlayers());
+            playerSelected = true;
+        } catch(PlayerException& e) {
+            cout << e.what() << endl;
+            continue;
+        }
+    }
+
     Player& player1 = *listPlayer[0];
     Player& player2 = *listPlayer[1];
 

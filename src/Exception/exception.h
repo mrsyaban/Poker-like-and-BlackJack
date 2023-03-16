@@ -32,15 +32,16 @@ class AbilityException : public BaseException
     }
 };
 
-class playerException : public BaseException
+class PlayerException : public BaseException
 {
-    const char *what() const throw()
-    {
-        return "\033[1;31mPlayers input name not valid!\033[0m";
-    }
+    public:
+        const char *what() const throw()
+        {
+            return "\033[1;31mPlayers input name not valid!\033[0m";
+        }
 };
 
-class inputException : public BaseException
+class InputException : public BaseException
 {
     const char *what() const throw()
     {
@@ -48,7 +49,7 @@ class inputException : public BaseException
     }
 };
 
-class abilitylessException : public BaseException
+class AbilitylessException : public BaseException
 {
     const char *what() const throw()
     {
