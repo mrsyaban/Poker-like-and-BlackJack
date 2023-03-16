@@ -428,6 +428,10 @@ void IO::printEndMatch(Player winner, Point poin){
     cout << endl;
 }
 
+bool compare(const pair<string, long long>& a, const pair<string, long long>& b) {
+    return a.second > b.second;
+}
+
 void IO::printEndGame(const vector<pair<Player&, bool>>& listPlayer){
     cout << wordColor;
     cout << "Game Over!" << resetColor << endl; 
@@ -435,13 +439,18 @@ void IO::printEndGame(const vector<pair<Player&, bool>>& listPlayer){
     cout << wordColor << "│          FINAL SCORE        │" << resetColor << endl;
     cout << lineColor << "==============================" << resetColor << endl;
     vector<pair<string, long long>> tempSort;
+    for (int i=0; i < 7; i++){
+        pair<string, long long> tempp(listPlayer[i].first.getNickname(), listPlayer[i].first.getPoint().getValue());
+        tempSort.push_back(tempp);
+    }
+    sort(tempSort.begin(), tempSort.end(), compare);
 
     for (int i=0; i<7; i++){
         cout << lineColor << "│" << resetColor;
         cout << wordColor << i+1 << "." << resetColor;
         cout << lineColor << "│" << resetColor;
-        cout << wordColor; printHelper(listPlayer[i].first.getNickname()); cout << resetColor;
-        cout << wordColor; printHelper(listPlayer[i].first.getPoint().getValue()); cout << resetColor;
+        cout << wordColor; printHelper(tempSort[i].first); cout << resetColor;
+        cout << wordColor; printHelper(tempSort[i].second); cout << resetColor;
         cout << lineColor << "│" << resetColor << endl;
     }
     cout << lineColor << "==============================" << resetColor << endl;
