@@ -37,7 +37,7 @@ string IO::turnInput(const Player& player){
         "QUADRUPLE",
         "QUARTER",
         "REVERSE",
-        "SWAP CARD",
+        "SWAPCARD",
         "SWITCH",
         "ABILITYLESS"
     };
@@ -266,12 +266,12 @@ int IO::selectCard(string playersNick){
 }
 
 void printPlayer(string nick, const vector<pair<Player&, bool>>& listPlayer){
-    int i=1;
-    for (auto p: listPlayer){
-        if (nick != p.first.getNickname()){
-            cout << i << ". " << listPlayer[i].first.getNickname() << endl;
-            i++;
+    int i = 0;
+    while (i <= 6){
+        if (nick != listPlayer[i].first.getNickname()){
+            cout << i+1 << ". " << listPlayer[i].first.getNickname() << endl;
         }
+        i++;
     }
 }
 
