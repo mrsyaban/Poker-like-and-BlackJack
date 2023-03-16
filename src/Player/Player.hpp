@@ -41,7 +41,7 @@ class Player : public InventoryHolder<Card> {
         void dealToPlayer(InventoryHolder<Card>&);
 
         /* Utility Function*/
-        void addPoint(long);
+        void addPoint(long long);
 
 };
 

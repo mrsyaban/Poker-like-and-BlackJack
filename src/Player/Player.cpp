@@ -79,6 +79,6 @@ void Player::dealToPlayer(InventoryHolder<Card>& deck) {
 }
 
 /* Utility Function*/
-void Player::addPoint(long point){
+void Player::addPoint(long long point){
     this->handPoint.Add(point);
 }
