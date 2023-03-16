@@ -226,7 +226,19 @@ void Switch::Execute(Game& g) {
 
     Player& owner = (g.getPlayers()[g.getCurrentPlayer()].first);
     
-    vector<Player*> target = io.selectPlayer(owner, g.getPlayers());
+    vector<Player *> target;
+    // select Player
+    bool playerSelected = false;
+    while (!playerSelected) {
+        try {
+            target = io.selectPlayer(owner, g.getPlayers());
+            playerSelected = true;
+        } catch(PlayerException& e) {
+            cout << e.what() << endl;
+            continue;
+        }
+    }
+    
     Player& other = *target[0];
 
     owner.exchange(other);
@@ -258,7 +270,18 @@ void Abilityless::Execute(Game& g) {
     Player& owner = (g.getPlayers()[g.getCurrentPlayer()].first);
     
     /* Select Player */
-    vector<Player*> inputPlayer = io.selectPlayer(owner, g.getPlayers());
+    vector<Player *> inputPlayer;
+    // select Player
+    bool playerSelected = false;
+    while (!playerSelected) {
+        try {
+            inputPlayer = io.selectPlayer(owner, g.getPlayers());
+            playerSelected = true;
+        } catch(PlayerException& e) {
+            cout << e.what() << endl;
+            continue;
+        }
+    }
     Player& playerChosen = *inputPlayer[0]; 
 
     bool allAvail = true;
