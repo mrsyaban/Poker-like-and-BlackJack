@@ -15,8 +15,10 @@ class Player : public InventoryHolder<Card> {
     private:
         const string nickName;
         Ability* handAbility;
-        Point handPoint;
         Combo highestCombo;
+    
+    protected:
+        Point handPoint;
 
     public:
         Player(string); // ctor
@@ -29,7 +31,7 @@ class Player : public InventoryHolder<Card> {
         /* Accessor */
         string getNickname() const;
         Ability* getAbility() const;
-        Point getPoint() const;
+        virtual Point getPoint() const;
         Combo getHighestCombo() const;
         void getInfo() const;
         Card getCard(int) const;

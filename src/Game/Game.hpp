@@ -9,6 +9,7 @@
 #include "../Ability/Ability.hpp"
 #include "../Action/Action.hpp"
 #include "../IO/IO.hpp"
+#include "../GameEngine/GameEngine.hpp"
 
 #include <iostream>
 #include <map>

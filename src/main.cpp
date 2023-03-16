@@ -1,6 +1,7 @@
-#include "Game/Game.hpp"
+#include "GameEngine/GameEngine.hpp"
+#include "IO/IO.hpp"
 
 int main(){
-    Game g;
+    GameEngine g;
     g.start();
 }
