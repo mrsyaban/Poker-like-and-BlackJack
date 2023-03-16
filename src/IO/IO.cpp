@@ -240,6 +240,7 @@ void IO::printAbilitySuccess(Player player, vector<string> resPlayer, vector<str
         }
         cout << endl;
     }
+    cout << endl;
     cout << resetColor;
 }
 

@@ -227,6 +227,10 @@ void Game::start()
     io.printThankYou();
 }
 
+void Game::startBlackJack() {
+
+}
+
 void Game::nextPlayer()
 {
     /* Go to next player (based on direction) */

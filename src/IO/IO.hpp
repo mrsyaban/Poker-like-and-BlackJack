@@ -45,11 +45,11 @@ class IO {
         void printEndGame(const vector<pair<Player&, bool>>&);
         void printEndMatch(Player, Point);
         
-        /* main menu */
+        /* menu */
         string mainMenu();  
         vector<string> inputPlayerName();
         string turnInput(const Player&, int);
-        string dealMenu();
+        string dealMenu();    
         
         /* success message function*/
         void printAbilitySuccess(Player player, vector<string> resPlayer = {}, vector<string> reversed = {});

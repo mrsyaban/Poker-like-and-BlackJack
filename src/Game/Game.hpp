@@ -17,7 +17,7 @@ using namespace std;
 
 // class IO;
 // class Ability;
-// class Player;
+// class Player;     
 // class Table;
 
 /* Mapping command to int */
@@ -72,6 +72,7 @@ public:
     void initNewMatch();
 
     void start();
+    void startBlackJack();
     void nextPlayer();
     void nextTurn();
     void nextRound();
