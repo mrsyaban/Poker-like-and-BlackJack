@@ -363,6 +363,7 @@ void Game::nextRound()
         io.printTable(table, point);
         if (this->getRound() == 2)
         {
+            cout << "here mamen\n";
             dealAbilityToPlayers();
         }
 

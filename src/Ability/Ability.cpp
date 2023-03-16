@@ -23,7 +23,7 @@ string Ability::getType() const
 /* Util */
 void Ability::checkAbilityError(Game& g) 
 {
-    if (!available) {
+    if (!g.getPlayers()[g.getCurrentPlayer()].first.getAbility()->getAvail()) {
         AbilityNotAvailableException e;
         throw e;
     } else {
@@ -98,7 +98,9 @@ void Quadruple::Execute(Game &g){
     Player& owner = ((g.getPlayers().begin() + g.getCurrentPlayer())->first);
     IO io;
     io.printAbilitySuccess(owner, g.getPoint());
+    cout << owner.getAbility()->getAvail() << endl;
     owner.setAbilityAvailability(false);
+    cout << owner.getAbility()->getAvail() << endl;
 }
 
 /* Quarter Ability */

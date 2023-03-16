@@ -69,7 +69,7 @@ void Player::setAbility(Ability& ability){
 }
 
 void Player::setAbilityAvailability(bool status) {
-    this->handAbility->setAvail(status);
+    handAbility->setAvail(status);
 }
 
 void Player::dealToPlayer(InventoryHolder<Card>& deck) {
