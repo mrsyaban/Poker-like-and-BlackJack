@@ -410,7 +410,7 @@ void printHelper(string nick){
     }
 }
 
-void printHelper(int poin){
+void printHelper(long long poin){
     int rest = 12 - to_string(poin).length();
     cout << poin;
     for (int i=0; i<rest; i++){
@@ -432,8 +432,9 @@ void IO::printEndGame(const vector<pair<Player&, bool>>& listPlayer){
     cout << wordColor;
     cout << "Game Over!" << resetColor << endl; 
     cout << lineColor << "==============================" << resetColor << endl;
-    cout << wordColor << "│          LEADERBOARD       │" << resetColor << endl;
+    cout << wordColor << "│          FINAL SCORE        │" << resetColor << endl;
     cout << lineColor << "==============================" << resetColor << endl;
+    vector<pair<string, long long>> tempSort;
 
     for (int i=0; i<7; i++){
         cout << lineColor << "│" << resetColor;
