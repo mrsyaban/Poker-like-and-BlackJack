@@ -397,6 +397,14 @@ void printHelper(int poin){
     
 }
 
+void IO::printEndMatch(Player winner, Point poin){
+    cout << wordColor << "           WINNER             " << resetColor << endl;
+    cout << lineColor << "==============================" << resetColor << endl;
+    cout << wordColor << winner.getNickname() << " : " << winner.getPoint().getValue() - poin.getValue() 
+    << " + " << "\033[1;34m " <<  poin.getValue() << wordColor << " = " << winner.getPoint().getValue() << endl; 
+    cout << resetColor;
+}
+
 void IO::printEndGame(const vector<pair<Player&, bool>>& listPlayer){
     cout << wordColor;
     cout << "Game Over!" << resetColor << endl; 
