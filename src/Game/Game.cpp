@@ -223,7 +223,7 @@ void Game::start()
             /* Run game until someone wins */
             nextTurn();
         }
-        // TODO : print winner
+        // print winner
         mainMenu = io.mainMenu();
     }
 
@@ -354,7 +354,6 @@ void Game::nextTurn()
     }
     else
     {
-        // udah jalan semua, set playerTurn = 0, nextRound
         playerTurn = 0;
         cout << endl;
         nextRound();
@@ -430,11 +429,8 @@ vector<string> Game::getReversedPlayer()
     vector<string> res = {};
     int i = currentPlayer - 1;
     i = (i%7+7)%7;
-    cout << "i " << i << endl;
     while (i != currentPlayer)
     {
-        cout << i << endl;
-        cout << players[i].first.getNickname() << endl;
         res.push_back(players[i].first.getNickname());
         i--;
         i = (i%7+7)%7;

@@ -3,12 +3,10 @@
 
 #include "../InventoryHolder/InventoryHolder.hpp"
 #include "../Card/Card.hpp"
-// #include "../Ability/Ability.hpp"
 #include "../Point/Point.hpp"
 #include "../Combo/Combo.hpp"
 #include <string>
 
-// class Combo;
 class Ability;
 
 class Player : public InventoryHolder<Card> {

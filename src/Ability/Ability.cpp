@@ -1,5 +1,4 @@
 #include <iostream>
-// #include <vector>
 #include "Ability.hpp"
 #include "../Game/Game.hpp"
 #include "../Ability/Ability.hpp"
@@ -100,9 +99,7 @@ void Quadruple::Execute(Game &g){
     Player& owner = ((g.getPlayers().begin() + g.getCurrentPlayer())->first);
     IO io;
     io.printAbilitySuccess(owner, g.getPoint());
-    cout << owner.getAbility()->getAvail() << endl;
     owner.setAbilityAvailability(false);
-    cout << owner.getAbility()->getAvail() << endl;
 }
 
 /* Quarter Ability */
@@ -148,7 +145,6 @@ void ReverseDirection::Execute(Game &g)
     g.setReverseInfo(true);
 
     IO io;
-    // Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
     Player& owner = (g.getPlayers()[g.getCurrentPlayer()].first);
     io.printAbilitySuccess(owner, g.getRemainingReversedPlayer(), g.getReversedPlayer());
     owner.setAbilityAvailability(false);
@@ -170,7 +166,6 @@ void SwapCard::Execute(Game& g) {
         return;
     }
     IO io;
-    // Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
 
     Player& owner = (g.getPlayers()[g.getCurrentPlayer()].first);
     vector<Player *> listPlayer;
@@ -235,7 +230,6 @@ void Switch::Execute(Game& g) {
         return;
     }
     IO io;
-    // Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
 
     Player& owner = (g.getPlayers()[g.getCurrentPlayer()].first);
     
@@ -279,7 +273,6 @@ void Abilityless::Execute(Game& g) {
     }
     
     IO io;
-    // Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
 
     Player& owner = (g.getPlayers()[g.getCurrentPlayer()].first);
     

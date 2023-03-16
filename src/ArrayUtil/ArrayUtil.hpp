@@ -14,7 +14,6 @@ T getHighest(T * buffer, int size) {
     } else if (size == 2) {
         return buffer[0] > buffer[1] ? buffer[0] : buffer[1];
     } else {
-        // cout << "size : " << size << endl;
         T left = getHighest(buffer, size / 2);
         T right = getHighest(buffer + size / 2, size - size / 2);
         return left > right ? left : right;

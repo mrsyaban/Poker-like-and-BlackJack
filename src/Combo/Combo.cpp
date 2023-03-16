@@ -5,11 +5,6 @@ using namespace std;
 
 Combo::Combo() : score(0) {}
 
-// Combo::Combo(SearchCombo combo) {
-//     this->combo = combo.getComboCards();
-//     this->score = 0;
-// }
-
 Combo::~Combo() {}
 
 double Combo::value() const {return this->score;}
