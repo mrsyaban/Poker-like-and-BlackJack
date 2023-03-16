@@ -381,7 +381,10 @@ void Game::nextRound()
         if (!gameEnded())
         {
             initNewMatch();
+        } else {
+            io.printEndGame(getPlayers());
         }
+        
     }
 }
 

@@ -410,7 +410,7 @@ void printHelper(string nick){
     }
 }
 
-void printHelper(int poin){
+void printHelper(long long poin){
     int rest = 12 - to_string(poin).length();
     cout << poin;
     for (int i=0; i<rest; i++){
