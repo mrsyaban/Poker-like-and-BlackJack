@@ -25,20 +25,6 @@ void Combo::setCombo(Combo other) {
 
 void Combo::setCombo(vector<Card> combo) {this->combo = combo;}
 
-void Combo::sortCombo() {
-    for (unsigned int i = 0; i < this->combo.size() - 1; i++) {
-        int maxIndex = i;
-        for (unsigned int j = i + 1; j < this->combo.size(); j++) {
-            if (this->combo[j].getNumber() > this->combo[maxIndex].getNumber() || (this->combo[j].getNumber() == this->combo[maxIndex].getNumber() && this->combo[j].getColor() > this->combo[maxIndex].getColor())) {
-                maxIndex = j;
-            }
-        }
-        Card temp = this->combo[i];
-        this->combo[i] = this->combo[maxIndex];
-        this->combo[maxIndex] = temp;
-    }
-}
-
 bool Combo::operator<(const Combo& other) {
     if (this->value() < other.value()) {
         return true;

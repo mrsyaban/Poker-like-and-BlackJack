@@ -27,8 +27,6 @@ class Combo : public ObjectWithValue<double> {
         void setCombo(Combo); // Combo Setter
         void setCombo(vector<Card>); // Combo Setter
 
-        void sortCombo(); // Sorting combo by number and color
-
         bool operator<(const Combo& other);
         bool operator>(const Combo& other);
         bool operator==(const Combo& other);
