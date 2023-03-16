@@ -17,13 +17,13 @@ using namespace std;
 // }
 
 int main() {
-    Card card1(Green,3);
-    Card card2(Green,3);
-    Card card3(Green,3);
-    Card card4(Green,3);
-    Card card5(Blue,3);
-    Card card6(Yellow,3);
-    Card card7(Red,3);
+    Card card1(Green,8);
+    Card card2(Blue,2);
+    Card card3(Green,2);
+    Card card4(Red,9);
+    Card card5(Blue,6);
+    Card card6(Yellow,4);
+    Card card7(Red,11);
 
     vector<Card> cards;
     cards.push_back(card1);
@@ -36,14 +36,34 @@ int main() {
 
     SearchCombo sCombo;
     sCombo.setCards(cards);
-    sCombo.sortCards();
+    sCombo.sortCards2();
     sCombo.checkCombo();
 
     Combo combs;
     combs = sCombo.getHighestCombo();
 
+    for (auto x : sCombo.getCards()) {
+        if (x.getColor() == 0) {
+            cout << x.getNumber() << " Green"  << endl;
+        } else if (x.getColor() == 1) {
+            cout << x.getNumber() << " Blue"  << endl;
+        } else if (x.getColor() == 2) {
+            cout << x.getNumber() << " Yellow"  << endl;
+        } else {
+            cout << x.getNumber() << " Red"  << endl;
+        } 
+    }
+
     for (auto x : combs.getCombo()) {
-        cout << x.getNumber() << " " << x.getColor() << endl;
+        if (x.getColor() == 0) {
+            cout << x.getNumber() << " Green"  << endl;
+        } else if (x.getColor() == 1) {
+            cout << x.getNumber() << " Blue"  << endl;
+        } else if (x.getColor() == 2) {
+            cout << x.getNumber() << " Yellow"  << endl;
+        } else {
+            cout << x.getNumber() << " Red"  << endl;
+        }
     }
 
     return 0;
