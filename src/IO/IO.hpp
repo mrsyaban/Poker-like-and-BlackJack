@@ -46,6 +46,7 @@ class IO {
         void printEndMatch(Player, Point);
         
         /* main menu */
+        void mainMenuTitle();
         string mainMenu();  
         vector<string> inputPlayerName();
         string turnInput(const Player&, int);

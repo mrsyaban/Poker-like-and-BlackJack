@@ -105,12 +105,15 @@ void IO::splashScreen(){
     cout << splash << endl;
 }
 
-string IO::mainMenu(){
+void IO::mainMenuTitle() {
     cout << lineColor << "==============================" << resetColor << endl;
     cout << wordColor << "           MAIN MENU          " << resetColor << endl;
     cout << lineColor << "==============================" << resetColor << endl;
     cout << wordColor << " 1. Start " << endl;
     cout << wordColor << " 2. Exit" << endl;
+}
+
+string IO::mainMenu(){
     cout << endl;
     cout << enterColor << "Enter Command >>> "; 
     
@@ -210,10 +213,10 @@ void IO::printAbilitySuccess(Player player, vector<string> resPlayer, vector<str
     // Switch
     } else if (type == "Switch"){
         cout << player.getNickname() << " successfully performed SWITCH!" << endl;
-        cout << "both of your cards has been switched with " << resPlayer[0];
+        cout << "both of your cards has been switched with " << resPlayer[0] << endl;
         cout << "your current cards are : " 
         << player.getItems()[0].getNumber() << "-" << player.getItems()[0].getColor() << " & "
-        << player.getItems()[1].getNumber() << "-" << player.getItems()[1].getColor();
+        << player.getItems()[1].getNumber() << "-" << player.getItems()[1].getColor() << endl;
     
     // Abiilityless
     } else if (type == "Abilityless"){
