@@ -284,7 +284,7 @@ void Game::nextTurn()
             {
                 try
                 {
-                    string action_cmd = io.turnInput(((this->players.begin() + this->currentPlayer)->first));
+                    string action_cmd = io.turnInput(((this->players.begin() + this->currentPlayer)->first), round);
                     command = inputToCommand.at(action_cmd);
                 }
                 catch (BaseException &e)

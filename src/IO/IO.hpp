@@ -48,7 +48,7 @@ class IO {
         /* main menu */
         string mainMenu();  
         vector<string> inputPlayerName();
-        string turnInput(const Player&);
+        string turnInput(const Player&, int);
         string dealMenu();
         
         /* success message function*/
