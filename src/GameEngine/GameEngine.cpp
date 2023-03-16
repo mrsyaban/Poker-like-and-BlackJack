@@ -23,7 +23,7 @@ void GameEngine::start() {
             std::cout << e.what() << endl;
         }
     }
-    
+
     while(mainMenu != "0"){
         if (mainMenu == "1"){
             g.start();
@@ -31,7 +31,15 @@ void GameEngine::start() {
             b.start();
         }
         io.mainMenuTitle();
-        mainMenu = io.mainMenu();
+        mainMenu = "";
+        while (mainMenu == "") {
+            try {
+                mainMenu = io.mainMenu();
+
+            } catch (BaseException& e) {
+                cout << e.what() << endl;
+            }
+        }
     }
     
     io.printThankYou();
