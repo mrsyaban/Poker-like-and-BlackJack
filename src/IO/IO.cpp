@@ -561,6 +561,87 @@ void IO::printBJ(Table dealer, Point price){
     cout << wordColor << "Price Pool : " <<  price.getValue() << resetColor << endl << endl; 
 }
 
+int IO::inputBet(int poin){
+    string input="";
+    cout << lineColor << "==============================" << resetColor << endl;
+    cout << wordColor << "            BETTING           " << resetColor << endl;
+    cout << lineColor << "==============================" << resetColor << "\n\n";
+    cout << enterColor << "Insert your bet (" << poin << ") >>> " << resetColor; cin >> input;
+    cout << resetColor;
+    InputException err;
+    for(unsigned int i=0; i<input.length(); i++){
+        if (input[i] - '0' > 9){
+            throw err;
+        }
+    }
+
+    int realInput = stoi(input);
+    if (0 < realInput && realInput > poin){
+        throw err;
+    }
+    cout << endl;
+    return realInput;
+}
+
+string IO::inputBJ(vector<Card> playerCards, int total){
+    cout << wordColor << "           YOUR CARD          " << resetColor << endl;
+    cout << lineColor << "==============================" << resetColor << "\n\n";
+    int i = 1;
+    cout << wordColor;
+    string command;
+    for (auto card: playerCards){
+        cout << i << ". " << getBJValue.at(cardToBJCard.at(card.getNumber())) << endl;
+        i++;
+    }
+    cout << lineColor << "==============================" << resetColor << endl;
+    cout << wordColor << "           " << total  << resetColor << endl << endl; 
+    cout << enterColor << "Enter Action >>> " << resetColor << inputColor; cin >> command; cout << resetColor;
+    
+    if (!(command == "HIT" || command == "STAND")){
+        InputException err;
+        throw err;
+    }
+    return command;
+}
+
+void IO::printEndBJ(int poinPlayer, int poinDealer ){
+    if (poinDealer > 21) {
+        cout << wordColor << "Yeay! You Win!" << endl;
+    } else {
+        if (poinPlayer > poinDealer){
+            cout << wordColor << "Yeay! You Win!" << endl;
+        } else if (poinPlayer == poinDealer){
+            cout << wordColor << "Draw!" << endl;
+        } else {
+            cout << wordColor << "Oops! You Lose!" << endl;
+        }
+    }
+    cout << resetColor;
+}
+
+void IO::printStrike(){
+    cout << abilColor << "BLACKJACK!!!" <<  wordColor <<  "YOU WIN!" << resetColor << endl; 
+}
+void IO::printBust(){
+    cout << actnColor << "BUST!" << wordColor << "You Lose!" << resetColor << endl;
+}
+
+string IO::printPlayAgain(){
+    string input = "";
+    cout << lineColor << "==============================" << resetColor << endl;
+    cout << wordColor << "          BLACKJACK           " << resetColor << endl;
+    cout << lineColor << "==============================" << resetColor << "\n\n";
+    cout << wordColor << "1. Play Again" << endl;
+    cout << wordColor << "2. Back to Main Menu" << endl << endl;
+    cout << lineColor << "Enter your Choice >>> " << endl << inputColor; cin >> input;
+    
+    if (!(input == "1" || input == "2")){
+        NumberInputException err;
+        throw err;
+    }
+
+    return input;
+}
 
 void IO::printThankYou(){
     cout << wordColor;

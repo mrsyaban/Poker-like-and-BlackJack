@@ -71,8 +71,13 @@ class IO {
         Ability* stringToAbility(string);
 
         /* Blackjack */
-        void printBJ(Table, Point );
-        
+        void printBJ(Table, Point);
+        string inputBJ(vector<Card>, int);
+        int inputBet(int);
+        void printEndBJ(int, int);
+        void printStrike();
+        void printBust();
+        string printPlayAgain();
 };
 
 #endif

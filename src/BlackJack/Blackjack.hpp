@@ -49,6 +49,8 @@ class BlackjackPlayer : private Player {
         Point getPoint();
         int getTotalCard();
         void hit(InventoryHolder&);
+        vector<Card>& getCards();
+        void addPoint(int);
 };
 
 class Blackjack {
@@ -64,6 +66,8 @@ class Blackjack {
         Blackjack();
         void start();
         void hit();
+        void setPrice(int);
+        int getTotalCard();
 };
 
 #endif
