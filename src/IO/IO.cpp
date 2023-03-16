@@ -3,7 +3,7 @@
 #include "../Game/Game.hpp"
 using namespace std;
 
-string IO::turnInput(const Player& player){
+string IO::turnInput(const Player& player, int round){
     string input;
     cout << enterColor;
     cout << player.getNickname() << "'s turn ([";
@@ -25,8 +25,9 @@ string IO::turnInput(const Player& player){
         }
         cout << resetColor;
     }
-    cout << enterColor << "] ";
-    if (player.getAbility() != nullptr){
+    cout << enterColor << "]";
+    if(round>1){
+        cout << " ";
         if (player.getAbility()->getAvail()){
             cout << "\033[1m\033[32m";
             
@@ -34,6 +35,7 @@ string IO::turnInput(const Player& player){
             cout << "\033[1m\033[31m";
         }
         cout << player.getAbility()->getType();
+        cout << resetColor;
     }
     cout << enterColor <<  ") >>> ";
     cout << inputColor; cin >>  input;cout <<  resetColor;
@@ -393,6 +395,14 @@ void printHelper(int poin){
         cout << " ";
     }
     
+}
+
+void IO::printEndMatch(Player winner, Point poin){
+    cout << wordColor << "           WINNER             " << resetColor << endl;
+    cout << lineColor << "==============================" << resetColor << endl;
+    cout << wordColor << winner.getNickname() << " : " << winner.getPoint().getValue() - poin.getValue() 
+    << " + " << "\033[1;34m " <<  poin.getValue() << wordColor << " = " << winner.getPoint().getValue() << endl; 
+    cout << resetColor;
 }
 
 void IO::printEndGame(const vector<pair<Player&, bool>>& listPlayer){

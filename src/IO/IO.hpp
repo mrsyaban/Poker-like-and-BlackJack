@@ -43,12 +43,12 @@ class IO {
         void printThankYou();
         void printTable(Table, Point);
         void printEndGame(const vector<pair<Player&, bool>>&);
-        // void printEndMatch()
+        void printEndMatch(Player, Point);
         
         /* main menu */
         string mainMenu();  
         vector<string> inputPlayerName();
-        string turnInput(const Player&);
+        string turnInput(const Player&, int);
         string dealMenu();
         
         /* success message function*/

@@ -284,7 +284,7 @@ void Game::nextTurn()
             {
                 try
                 {
-                    string action_cmd = io.turnInput(((this->players.begin() + this->currentPlayer)->first));
+                    string action_cmd = io.turnInput(((this->players.begin() + this->currentPlayer)->first), round);
                     command = inputToCommand.at(action_cmd);
                 }
                 catch (BaseException &e)
@@ -371,7 +371,6 @@ void Game::nextRound()
     }
     else
     {
-        cout << "Match ended, proceed to the next match" << endl;
         double maxScore = 0;
         int playerWithMaxScore = 0;
         int playerCtr = -1;
@@ -389,10 +388,9 @@ void Game::nextRound()
         }
 
         // add points to the winner
-        cout << "The winner of this match is " << getPlayers()[playerWithMaxScore].first.getNickname() << endl;
-        cout << "Score gained : " << this->point.getValue() << endl;
         Player * winner = &getPlayers()[playerWithMaxScore].first;
         winner->addPoint(this->point.getValue());
+        io.printEndMatch(*winner, this->point);
         
         if (!gameEnded())
         {
