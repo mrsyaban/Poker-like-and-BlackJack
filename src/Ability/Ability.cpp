@@ -74,6 +74,7 @@ void ReRoll::Execute(Game& g) {
 
     IO io;
     io.printAbilitySuccess(owner);
+    owner.setAbilityAvailability(false);
 }
 
 /* Quadruple Ability */
@@ -97,6 +98,7 @@ void Quadruple::Execute(Game &g){
     Player& owner = ((g.getPlayers().begin() + g.getCurrentPlayer())->first);
     IO io;
     io.printAbilitySuccess(owner, g.getPoint());
+    owner.setAbilityAvailability(false);
 }
 
 /* Quarter Ability */
@@ -120,6 +122,7 @@ void Quarter::Execute(Game &g){
     Player& owner = ((g.getPlayers().begin() + g.getCurrentPlayer())->first);
     IO io;
     io.printAbilitySuccess(owner, g.getPoint());
+    owner.setAbilityAvailability(false);
 }
 
 /* Reverse Direction Ability */
@@ -144,6 +147,7 @@ void ReverseDirection::Execute(Game &g)
     // Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
     Player& owner = (g.getPlayers()[g.getCurrentPlayer()].first);
     io.printAbilitySuccess(owner, g.getRemainingReversedPlayer(), g.getReversedPlayer());
+    owner.setAbilityAvailability(false);
 }
 
 /* Swap Card Ability */
@@ -187,6 +191,7 @@ void SwapCard::Execute(Game& g) {
     // print successfull message
     vector<string> output = {player1.getNickname(), player2.getNickname()};
     io.printAbilitySuccess(owner, output);
+    owner.setAbilityAvailability(false);
 }
 
 /* Switch Card Ability */
@@ -217,6 +222,7 @@ void Switch::Execute(Game& g) {
 
     vector<string> output = {target[0]->getNickname()};
     io.printAbilitySuccess(owner, output);
+    owner.setAbilityAvailability(false);
 }
 
 /* Abilityless Ability */
@@ -260,6 +266,7 @@ void Abilityless::Execute(Game& g) {
         if (playerChosen.getAbility()->getAvail()) {
             playerChosen.getAbility()->setAvail(false);
             io.printAbilitySuccess(owner);
+            owner.setAbilityAvailability(false);
         
         // chosen player's Ability Card has been used
         } else {
