@@ -10,10 +10,11 @@ class BaseException {
 
 class NumberInputException : public BaseException
 {
-    const char *what() const throw()
-    {
-        return "\033[1;31mInput number not valid!\033[0m";
-    }
+    public:
+        const char *what() const throw()
+        {
+            return "\033[1;31mInput number not valid!\033[0m";
+        }
 };
 
 class FileException : public BaseException
@@ -43,18 +44,20 @@ class PlayerException : public BaseException
 
 class InputException : public BaseException
 {
-    const char *what() const throw()
-    {
-        return "\033[1;31mInput not valid!\033[0m";
-    }
+    public:
+        const char *what() const throw()
+        {
+            return "\033[1;31mInput not valid!\033[0m";
+        }
 };
 
 class AbilitylessException : public BaseException
 {
-    const char *what() const throw()
-    {
-        return "\033[1;31mInput not valid!\033[0m";
-    }
+    public:
+        const char *what() const throw()
+        {
+            return "\033[1;31mInput not valid!\033[0m";
+        }
 };
 
 class AbilityNotAvailableException : public BaseException
