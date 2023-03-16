@@ -304,12 +304,6 @@ void printPlayer(string nick, const vector<pair<Player&, bool>>& listPlayer){
             i++;
         }
     }
-    // while (i <= 6){
-    //     if (nick != listPlayer[i].first.getNickname()){
-    //         cout << i+1 << ". " << listPlayer[i].first.getNickname() << endl;
-    //     }
-    //     i++;
-    // }
 }
 
 vector<Player*> IO::selectPlayer(const Player& player, const vector<pair<Player&, bool>>& listPlayer, string currentPlayer) const{

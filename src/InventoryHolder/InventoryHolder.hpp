@@ -86,13 +86,4 @@ class InventoryHolder
         }
 };
 
-// template<>
-// InventoryHolder<Ability*>& InventoryHolder<Ability>::operator-(const Ability& other){
-//     auto itr = this->items.begin();
-//     while (itr->getType() != other.getType()) {
-//         itr++;
-//     }
-//     items.erase(itr);
-// }
-
 #endif

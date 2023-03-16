@@ -15,11 +15,6 @@
 #include <string>
 using namespace std;
 
-// class IO;
-// class Ability;
-// class Player;     
-// class Table;
-
 /* Mapping command to int */
 const map<string, int> inputToCommand = {
     {"NEXT", 1},
@@ -50,7 +45,6 @@ private:
 public:
     Game(); // init all needed objects, init status player false;
     ~Game();
-    // initNewMatch()
 
     /* Accessor, may only be called by class that act directly in the game */
     /* The returned reference may be altered */

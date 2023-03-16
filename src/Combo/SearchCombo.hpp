@@ -31,8 +31,6 @@ class SearchCombo {
         void setCards(vector<Card>); // Cards Setter
         void setRecords(vector<Combo>); // Records Setter
 
-        //vector<Card> getComboCards(); // Combo Cards getter
-
         void sortCards(); // Sorting cards by number and color
         void sortCards2(); // Sorting combo by number and color
         bool compareCards(Card, Card);
@@ -48,10 +46,6 @@ class SearchCombo {
         void straightFlush();
 
         void checkCombo();
-
-        // bool operator<(const Combo& other);
-        // bool operator>(const Combo& other);
-        // bool operator==(const Combo& other);
 
         Combo getHighestCombo();
 };

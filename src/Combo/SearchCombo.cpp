@@ -40,28 +40,8 @@ void SearchCombo::setRecords(vector<Combo> records)
     this->records = records;
 }
 
-// vector<Card> SearchCombo::getComboCards() {
-//     return this->combo.getCombo();
-// }
-
 void SearchCombo::sortCards()
 {
-    // for (unsigned int i = 0; i < this->cards.size() - 1; i++)
-    // {
-    //     int maxIndex = i;
-    //     for (unsigned int j = i + 1; j < this->cards.size(); j++)
-    //     {
-    //         if (this->cards[j].getNumber() > this->cards[maxIndex].getNumber() || (this->cards[j].getNumber() == this->cards[maxIndex].getNumber() && this->cards[j].getColor() > this->cards[maxIndex].getColor()))
-    //         {
-    //             maxIndex = j;
-    //         }
-    //     }
-
-    //     Card temp = this->cards[i];
-    //     this->cards[i] = this->cards[maxIndex];
-    //     this->cards[maxIndex] = temp;
-    // }
-
     for (unsigned i = 0; i < this->cards.size(); i++) {
         int min_idx = i;
         for (unsigned j = i + 1; j < this->cards.size(); j++) {
@@ -69,7 +49,6 @@ void SearchCombo::sortCards()
                 min_idx = j;
             }
         }
-        // swap(this->cards[i], this->cards[min_idx]);
         Card temp = this->cards[i];
         this->cards[i] = this->cards[min_idx];
         this->cards[min_idx] = temp;
@@ -166,8 +145,6 @@ void SearchCombo::pair()
         c.setCombo(pair);
         records.push_back(c);
     }
-
-    // this->sortCombo();
 }
 
 void SearchCombo::twoPair()
@@ -349,7 +326,6 @@ void SearchCombo::fullHouse()
                 if (count[i] >= 3) {
                     while (found != 3) {
                         if (this->cards[maksindeks].getNumber() == i+1) {
-                            cout << this->cards[maksindeks].getNumber();
                             three.push_back(this->cards[maksindeks]);
                             found++;
                         }
@@ -391,10 +367,6 @@ void SearchCombo::fullHouse()
         temp.push_back(pair[1]);
 
         c.setCombo(temp);
-
-        // for (auto x : this->getComboCards()) {
-        //     max += x.value();
-        // }
 
         max = c.getCombo()[0].value();
 
@@ -494,10 +466,6 @@ void SearchCombo::straightFlush()
     if (straight.size() >= 5)
     {
         c.setCombo(straight);
-
-        // for (auto x : this->combo) {
-        //     max += x.value();
-        // }
 
         max = straight[4].value();
 

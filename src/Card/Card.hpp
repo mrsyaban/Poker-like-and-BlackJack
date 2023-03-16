@@ -30,7 +30,6 @@ const map<CardColor, string> cardToString = {
 class Card : public ObjectWithValue<double> {
     private:
         pair<CardColor, int> cardInfo;
-        // TO BE ASKED : map for mapping card color to int, instead of implicit def. from enum (?)
     public:
         Card(CardColor, int); 
         Card(const Card&); //cctor

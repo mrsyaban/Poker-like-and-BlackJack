@@ -1,9 +1,7 @@
 #ifndef IO_HPP
 #define IO_HPP
 
-// #include "../Game/Game.hpp"
 #include "../Exception/exception.h"
-// #include "../Player/Player.hpp"
 #include "../Table/Table.hpp"
 #include <vector>
 #include <iostream>
