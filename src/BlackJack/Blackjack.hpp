@@ -8,6 +8,7 @@
 #include "../Table/Table.hpp"
 #include "../Point/Point.hpp"
 #include "../IO/IO.hpp"
+#include <vector>
 
 
 const map<int, string> cardToBJCard = {
@@ -43,10 +44,8 @@ const map<string, int> getBJValue = {
 };
 
 class BlackjackPlayer : private Player {
-    private:
-        bool bust;
-
     public:
+        BlackjackPlayer(string);
         Point getPoint();
         int getTotalCard();
         void hit(InventoryHolder&);
@@ -57,7 +56,7 @@ class Blackjack {
         Table dealer;
         Point pricePool;
         Deck<Card> deck;
-        BlackJackPlayer bjPlayer;
+        vector<BlackjackPlayer> bjPlayer;
 
     protected:
 
@@ -65,7 +64,6 @@ class Blackjack {
         Blackjack();
         void start();
         void hit();
-
 };
 
 #endif

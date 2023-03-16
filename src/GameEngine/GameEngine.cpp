@@ -5,6 +5,7 @@ using namespace std;
 void GameEngine::start() {
     //input pilih game
     Game g;
+    Blackjack b;
     
-    g.start();
+    b.start();
 }

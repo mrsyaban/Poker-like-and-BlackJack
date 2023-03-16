@@ -5,6 +5,7 @@
 #include "../Exception/exception.h"
 // #include "../Player/Player.hpp"
 #include "../Table/Table.hpp"
+
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -15,6 +16,7 @@ using namespace std;
 
 class Player;
 class Game;
+class Blackjack;
 class Point;
 
 const map<char, CardColor> stringToColor = {
@@ -32,7 +34,7 @@ class IO {
         string resetColor = "\033[0m";
         string wordColor = "\033[1;36m";
         string inputColor = "\033[1;36m";
-        string enterColor = "\033[5;33m";
+        string enterColor = "\033[5;1;33m";
         string abilColor = "\033[1;32m";
         string actnColor = "\033[1;34m";
 
@@ -58,7 +60,7 @@ class IO {
         void printActionSuccess(const Player& ,const Point&, int );
 
         /* select function */
-        vector<Player*> selectPlayer(const Player& , const vector<pair<Player&, bool>>& , string currentPlayer) const;
+        vector<Player*> selectPlayer(const Player& , const vector<pair<Player&, bool>>&, string ) const;
         int selectCard(string);
 
         /* Special for Abilityless*/
@@ -68,6 +70,9 @@ class IO {
         pair<vector<Card>, vector<Ability*>> inputFile();
         Ability* stringToAbility(string);
 
+        /* Blackjack */
+        void printBJ(Table, Point );
+        
 };
 
 #endif

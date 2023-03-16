@@ -2,6 +2,10 @@
 #include <iostream>
 using namespace std;
 
+BlackjackPlayer::BlackjackPlayer(string nick): Player(nick) {
+    // nothing
+}
+
 Point BlackjackPlayer::getPoint(){
     return this->handPoint;
 }
@@ -16,9 +20,10 @@ int BlackjackPlayer::getTotalCard(){
 }
 
 Blackjack::Blackjack() {
-    this->dealer = Table();
     Point poin(0);
     this->pricePool = poin;
+    BlackjackPlayer player("");
+    this->bjPlayer.push_back(player);
 }
 
 void BlackjackPlayer::hit(InventoryHolder& deck) {
@@ -30,24 +35,32 @@ void Blackjack::hit() {
 }
 
 void Blackjack::start(){
+    IO io;
     Deck<Card> deck;
+    Table dealer;
+    bool stand = false;
+
+    this->dealer = dealer;
     this->deck = deck;
     
     hit();
     hit();
     this->dealer.openCard();
 
-    this->bjPlayer.hit(this->deck);
-    this->bjPlayer.hit(this->deck);
+    auto player = this->bjPlayer.begin();
+    player->hit(this->deck);
+    player->hit(this->deck);
 
     // minta input hit atau stand
+    io.printBJ(this->dealer, this->pricePool);
 
-    while(bjPlayer.getTotalCard() < 21){
+    while(player->getTotalCard() < 21 && !stand){
         string command;
         // hit
         if (command == "1"){
             hit();
         } else {
+            stand = true;
             // buat while dealer sampe bust/melebihi kartu player
         }
     }

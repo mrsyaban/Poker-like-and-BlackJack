@@ -109,8 +109,9 @@ void IO::mainMenuTitle() {
     cout << lineColor << "==============================" << resetColor << endl;
     cout << wordColor << "           MAIN MENU          " << resetColor << endl;
     cout << lineColor << "==============================" << resetColor << endl;
-    cout << wordColor << " 1. Start " << endl;
-    cout << wordColor << " 2. Exit" << endl;
+    cout << wordColor << " 0. Exit " << endl;
+    cout << wordColor << " 1. Candy Kingdom" << endl;
+    cout << wordColor << " 2. Blackjack" << endl;
 }
 
 string IO::mainMenu(){
@@ -119,7 +120,7 @@ string IO::mainMenu(){
     
     string command;
     cout << inputColor; cin >> command; cout <<  resetColor;
-    if (!(command == "1" || command == "2")){
+    if (!(command == "0" || command == "1" || command == "2")){
         NumberInputException err;
         throw err;
     }
@@ -540,6 +541,20 @@ Ability* IO::stringToAbility(string code){
         throw err;
     }
 }
+
+/* Black Jack*/
+void IO::printBJ(Table dealer, Point price){
+    cout << wordColor << "            DEALER             " << resetColor << endl;
+    cout << lineColor << "==============================" << resetColor << "\n\n";
+    for (int i=0; i<dealer.getNeff(); i++){
+        cout << "  " << getBJValue.at(cardToBJCard.at(dealer.getItems()[i].getNumber())) << "  ";
+        cout << resetColor;
+    }
+    cout << "\n\n";
+    cout << lineColor << "==============================" << endl;
+    cout << wordColor << "Price Pool : " <<  price.getValue() << resetColor << endl << endl; 
+}
+
 
 void IO::printThankYou(){
     cout << wordColor;

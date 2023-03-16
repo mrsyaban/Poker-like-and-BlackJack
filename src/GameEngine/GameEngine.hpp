@@ -2,7 +2,7 @@
 #define GAMEENGINE_HPP
 
 #include "../Game/Game.hpp"
-// #include "../BlackJack/Blackjack.hpp"
+#include "../Blackjack/Blackjack.hpp"
 #include "../IO/IO.hpp"
 
 class GameEngine {
