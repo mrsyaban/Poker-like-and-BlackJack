@@ -93,7 +93,7 @@ void Game::initNewMatch()
     
     
     string dealMenu = "";
-    while(!(dealMenu != "1" || dealMenu != "2")){
+    while(!(dealMenu == "1" || dealMenu == "2")){
         try
         {
             dealMenu = io.dealMenu();

@@ -97,8 +97,8 @@ string IO::mainMenu(){
     cout << lineColor << "==============================" << resetColor << endl;
     cout << wordColor << "           MAIN MENU          " << resetColor << endl;
     cout << lineColor << "==============================" << resetColor << endl;
-    cout << wordColor << " 0. Exit " << endl;
-    cout << wordColor << " 1. Start" << endl;
+    cout << wordColor << " 1. Start " << endl;
+    cout << wordColor << " 2. Exit" << endl;
     cout << endl;
     cout << enterColor << "Enter Command >>> "; 
     
@@ -131,13 +131,26 @@ string IO::dealMenu(){
     return command; 
 }
 
+bool isValid(string nick, vector<string> listNick){
+    for (auto nickName: listNick){
+        if (nick == nickName){
+            cout << "\033[1;31mName has been taken!\033[0m" << endl;
+            return false;
+        }
+    }
+    return true;
+}
+
 vector<string> IO::inputPlayerName(){
     string inputNick;
     vector<string> res;
     cout << wordColor << "Please enter player name :" << resetColor << endl;
     cout << lineColor << "==============================" << resetColor << endl;
     for (int i=1; i<=7; i++) {
-        cout << enterColor<< "Player " << i <<" >>> "; cout << inputColor; cin >> inputNick;
+        do{
+            cout << enterColor<< "Player " << i <<" >>> "; cout << inputColor; cin >> inputNick;
+        } while(!isValid(inputNick, res));
+        
         res.push_back(inputNick);
         cout << resetColor << endl;
     }
@@ -162,8 +175,8 @@ void IO::printTable(Table table, Point point){
         cout << resetColor;
     }
     cout << "\n\n";
-    cout << lineColor << "==============================" << endl << endl;
-    cout << "Current Points : " <<  point.getValue() << resetColor << endl << endl; 
+    cout << lineColor << "==============================" << endl;
+    cout << wordColor << "Game Points : " <<  point.getValue() << resetColor << endl << endl; 
 
 }
 
@@ -394,7 +407,7 @@ pair<vector<Card>, vector<Ability*>> IO::inputFile(){
     cout << endl;
     string filePath = "test/" + fileName;
     ifstream infile(filePath);
-    inputException err;
+    FileException err;
 
     if (!infile){
         throw err;
@@ -417,9 +430,17 @@ pair<vector<Card>, vector<Ability*>> IO::inputFile(){
                     card.setColor(stringToColor.at(code[1]));
                     mainDeck.push_back(card);
                     count++;
-
+                } else if (code.length() ==  3){
+                    Card card(CardColor(1), 0);
+                    card.setNumber((code[0] - '0')*10 + (code[1] - '0'));
+                    card.setColor(stringToColor.at(code[2]));
+                    mainDeck.push_back(card);
+                    count++;
+                } else {
+                    throw err;
+                }
             // 7 other word for ability deck
-            } else if (count <59){
+            } else if (count <=59){
                 if (code.length() == 2){
                     abilityDeck.push_back(stringToAbility(code));
                     count++;
@@ -436,7 +457,6 @@ pair<vector<Card>, vector<Ability*>> IO::inputFile(){
     if (count < 59){
         throw err;
     }
-    }    
     pair<vector<Card>, vector<Ability*>> ret(mainDeck, abilityDeck);
     return ret;
 }
