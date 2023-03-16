@@ -189,10 +189,21 @@ void SwapCard::Execute(Game& g) {
     Player& player1 = *listPlayer[0];
     Player& player2 = *listPlayer[1];
 
-    // select Card
-    int cardPlayer1 = io.selectCard(player1.getNickname());
-    int cardPlayer2 = io.selectCard(player2.getNickname());
+    bool check = false;
+    int cardPlayer1, cardPlayer2;
 
+    while (!check) {
+        try {
+            // select Card
+            cardPlayer1 = io.selectCard(player1.getNickname());
+            cardPlayer2 = io.selectCard(player2.getNickname());
+            check = true;
+        } catch(NumberInputException& e) {
+            cout << e.what() << endl;
+            continue;
+        }
+    }
+    
     // swap
     if (cardPlayer1 == 1) {
         player1.puttoback();

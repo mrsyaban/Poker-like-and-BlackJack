@@ -1,3 +1,4 @@
+#include <string>
 #include "IO.hpp"
 #include "../Player/Player.hpp"
 #include "../Game/Game.hpp"
@@ -279,7 +280,7 @@ void IO::printActionSuccess(const Player& player, const Point& poin, int type){
 }
 
 int IO::selectCard(string playersNick){
-    int choice;
+    string choice;
     cout << abilColor;
 
     cout << "Pick which " << playersNick << "'s cards you want to swap!" << endl;
@@ -287,11 +288,12 @@ int IO::selectCard(string playersNick){
     cout << "2. Left" << endl;
     cout << "\033[5m" << "Your choice Number >>> " << resetColor; cin >> choice;
 
-    if (choice<1 || choice >2){
+    if (!(choice == "1" || choice == "2")){
         NumberInputException err;
         throw err;
     }
-    return choice;
+
+    return (int) choice[0];
 }
 
 void printPlayer(string nick, const vector<pair<Player&, bool>>& listPlayer){
@@ -374,6 +376,10 @@ vector<Player*> IO::selectPlayer(const Player& player, const vector<pair<Player&
         }
 
         if (player1 == currentPlayer) {
+            throw err;
+        }
+
+        if (resPlayers.size() < 1) {
             throw err;
         }
     }
