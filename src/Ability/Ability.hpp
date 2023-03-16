@@ -18,7 +18,8 @@ class Ability : public Action {
         bool available;
         string type;
     protected:
-        Player& selectPlayer(Game& g);
+        /* Util */
+        void checkAbilityError(Game& g);
     public:
         Ability(string);
         /* Execute, pass the game state to ability to act accordingly */

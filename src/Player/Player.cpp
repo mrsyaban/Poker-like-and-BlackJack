@@ -4,7 +4,8 @@
 
 /* default constructor*/
 Player::Player(string nick) : nickName(nick) {
-    this->handPoint = 0; // set point to zero
+    Point p(0);
+    this->handPoint = p; // set point to zero
 }
 
 /* Operator Overloading */
@@ -34,7 +35,7 @@ bool operator==(const Player& p1, const Player& p2){
 
 /* Accessor */
 
-int Player::getPoint() const{
+Point Player::getPoint() const{
     return handPoint;
 }
 
@@ -74,6 +75,6 @@ void Player::dealToPlayer(InventoryHolder<Card>& deck) {
 }
 
 /* Utility Function*/
-void Player::addPoint(int point){
-    this->handPoint += point;
+void Player::addPoint(long point){
+    this->handPoint.Add(point);
 }

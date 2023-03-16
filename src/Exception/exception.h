@@ -55,4 +55,22 @@ class abilitylessException : public BaseException
         return "\033[1;31mInput not valid!\033[0m";
     }
 };
+
+class AbilityNotAvailableException : public BaseException
+{
+    public :
+        const char *what() const throw()
+        {
+            return "\033[1;31mThis ability is inactive! You can't use it anymore.\033[0m";
+        }
+};
+
+class AbilityNotHaveException : public BaseException
+{
+    public:
+        const char *what() const throw()
+        {
+            return "\033[1;31mYou don't have this ability : \033[0m";
+        }
+};
 #endif

@@ -4,6 +4,7 @@
 #include "../Game/Game.hpp"
 #include "../Ability/Ability.hpp"
 #include "../IO/IO.hpp"
+#include "../Exception/exception.h"
 
 using namespace std;
 
@@ -19,6 +20,24 @@ string Ability::getType() const
     return type;
 }
 
+/* Util */
+void Ability::checkAbilityError(Game& g) 
+{
+    if (!available) {
+        AbilityNotAvailableException e;
+        throw e;
+    } else {
+        Player& playerOnTurn = ((g.getPlayers().begin() + g.getCurrentPlayer())->first);
+        if (g.getRound() < 2) {
+            AbilityNotHaveException e;
+            throw e;
+        }
+        if (playerOnTurn.getAbility()->getType() !=  this->getType()) {
+            AbilityNotHaveException e;
+            throw e;
+        }
+    }
+}
 
 /* Getter */
 bool Ability::getAvail() const
@@ -33,9 +52,21 @@ void Ability::setAvail(bool avail)
 }
 
 /* Re-roll Ability */
-ReRoll::ReRoll() : Ability("Reroll") {}
+ReRoll::ReRoll() : Ability("Re-Roll") {}
 
 void ReRoll::Execute(Game& g) {
+    try {
+        checkAbilityError(g);
+    } catch (AbilityNotAvailableException& e) {
+        cout << e.what() << endl;
+        throw e;
+        return;
+    } catch (AbilityNotHaveException& e) {
+        cout << e.what() << this->getType() << endl;
+        throw e;
+        return;
+    }
+
     Player& owner = ((g.getPlayers().begin() + g.getCurrentPlayer())->first);
     owner.deleteall();
     owner.add(g.getCardDeck());
@@ -49,6 +80,17 @@ void ReRoll::Execute(Game& g) {
 Quadruple::Quadruple() : Ability("Quadruple") {}
 
 void Quadruple::Execute(Game &g){
+    try {
+        checkAbilityError(g);
+    } catch (AbilityNotAvailableException& e) {
+        cout << e.what() << endl;
+        throw e;
+        return;
+    } catch (AbilityNotHaveException& e) {
+        cout << e.what() << this->getType() << endl;
+        throw e;
+        return;
+    }
     g.getPoint().Quadruple();
     
     // print success message
@@ -61,6 +103,17 @@ void Quadruple::Execute(Game &g){
 Quarter::Quarter() : Ability("Quarter") {}
 
 void Quarter::Execute(Game &g){
+    try {
+        checkAbilityError(g);
+    } catch (AbilityNotAvailableException& e) {
+        cout << e.what() << endl;
+        throw e;
+        return;
+    } catch (AbilityNotHaveException& e) {
+        cout << e.what() << this->getType() << endl;
+        throw e;
+        return;
+    }
     g.getPoint().Quarter();
     
     // print success message
@@ -74,10 +127,22 @@ ReverseDirection::ReverseDirection() : Ability("Reverse") {}
 
 void ReverseDirection::Execute(Game &g)
 {
+    try {
+        checkAbilityError(g);
+    } catch (AbilityNotAvailableException& e) {
+        cout << e.what() << endl;
+        throw e;
+        return;
+    } catch (AbilityNotHaveException& e) {
+        cout << e.what() << this->getType() << endl;
+        throw e;
+        return;
+    }
     g.setReverseInfo(true);
 
     IO io;
-    Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
+    // Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
+    Player& owner = (g.getPlayers()[g.getCurrentPlayer()].first);
     io.printAbilitySuccess(owner, g.getRemainingReversedPlayer(), g.getReversedPlayer());
 }
 
@@ -85,8 +150,21 @@ void ReverseDirection::Execute(Game &g)
 SwapCard::SwapCard(): Ability("Swap") {}
 
 void SwapCard::Execute(Game& g) {
+    try {
+        checkAbilityError(g);
+    } catch (AbilityNotAvailableException& e) {
+        cout << e.what() << endl;
+        throw e;
+        return;
+    } catch (AbilityNotHaveException& e) {
+        cout << e.what() << this->getType() << endl;
+        throw e;
+        return;
+    }
     IO io;
-    Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
+    // Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
+
+    Player& owner = (g.getPlayers()[g.getCurrentPlayer()].first);
 
     // select Player
     vector<Player *> listPlayer = io.selectPlayer(owner, g.getPlayers());
@@ -115,8 +193,21 @@ void SwapCard::Execute(Game& g) {
 Switch::Switch(): Ability("Switch") {}
 
 void Switch::Execute(Game& g) {
+    try {
+        checkAbilityError(g);
+    } catch (AbilityNotAvailableException& e) {
+        cout << e.what() << endl;
+        throw e;
+        return;
+    } catch (AbilityNotHaveException& e) {
+        cout << e.what() << this->getType() << endl;
+        throw e;
+        return;
+    }
     IO io;
-    Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
+    // Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
+
+    Player& owner = (g.getPlayers()[g.getCurrentPlayer()].first);
     
     vector<Player*> target = io.selectPlayer(owner, g.getPlayers());
     Player& other = *target[0];
@@ -132,8 +223,21 @@ void Switch::Execute(Game& g) {
 Abilityless::Abilityless(): Ability("Abilityless") {}
 
 void Abilityless::Execute(Game& g) {
+    try {
+        checkAbilityError(g);
+    } catch (AbilityNotAvailableException& e) {
+        cout << e.what() << endl;
+        throw e;
+        return;
+    } catch (AbilityNotHaveException& e) {
+        cout << e.what() << this->getType() << endl;
+        throw e;
+        return;
+    }
     IO io;
-    Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
+    // Player& owner = (g.getPlayers().begin() + g.getCurrentPlayer())->first;
+
+    Player& owner = (g.getPlayers()[g.getCurrentPlayer()].first);
     
     /* Select Player */
     vector<Player*> inputPlayer = io.selectPlayer(owner, g.getPlayers());

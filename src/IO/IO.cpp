@@ -9,9 +9,7 @@ string IO::turnInput(const Player& player){
     cout << player.getNickname() << "'s turn (";
     for (int i=0; i<2; i++){
         cout << enterColor;
-        cout << "woi" << endl;
         int color = player.getCard(i).getColor();
-        cout << "woi ajg" << endl;
         if (color == 0){
             cout << "\033[1m\033[32m";
         } else if (color == 1){
@@ -39,7 +37,7 @@ string IO::turnInput(const Player& player){
         "QUADRUPLE",
         "QUARTER",
         "REVERSE",
-        "SWAP CARD",
+        "SWAPCARD",
         "SWITCH",
         "ABILITYLESS"
     };
@@ -146,7 +144,7 @@ vector<string> IO::inputPlayerName(){
     return res;
 }
 
-void IO::printTable(Table table){
+void IO::printTable(Table table, Point point){
     cout << wordColor << "            TABLE             " << resetColor << endl;
     cout << lineColor << "==============================" << resetColor << "\n\n";
     for (int i=0; i<table.getNeff(); i++){
@@ -164,7 +162,9 @@ void IO::printTable(Table table){
         cout << resetColor;
     }
     cout << "\n\n";
-    cout << lineColor << "==============================" << resetColor << endl;
+    cout << lineColor << "==============================" << endl << endl;
+    cout << "Current Points : " <<  point.getValue() << resetColor << endl << endl; 
+
 }
 
 void IO::printAbilitySuccess(Player player, vector<string> resPlayer, vector<string> reversed){
@@ -266,12 +266,12 @@ int IO::selectCard(string playersNick){
 }
 
 void printPlayer(string nick, const vector<pair<Player&, bool>>& listPlayer){
-    int i=1;
-    for (auto p: listPlayer){
-        if (nick != p.first.getNickname()){
-            cout << i << ". " << listPlayer[i].first.getNickname() << endl;
-            i++;
+    int i = 0;
+    while (i <= 6){
+        if (nick != listPlayer[i].first.getNickname()){
+            cout << i+1 << ". " << listPlayer[i].first.getNickname() << endl;
         }
+        i++;
     }
 }
 
@@ -374,7 +374,7 @@ void IO::printEndGame(const vector<pair<Player&, bool>>& listPlayer){
         cout << wordColor << i+1 << "." << resetColor;
         cout << lineColor << "│" << resetColor;
         cout << wordColor; printHelper(listPlayer[i].first.getNickname()); cout << resetColor;
-        cout << wordColor; printHelper(listPlayer[i].first.getPoint()); cout << resetColor;
+        cout << wordColor; printHelper(listPlayer[i].first.getPoint().getValue()); cout << resetColor;
         cout << lineColor << "│" << resetColor << endl;
     }
     cout << lineColor << "==============================" << resetColor << endl;
@@ -430,7 +430,7 @@ pair<vector<Card>, vector<Ability*>> IO::inputFile(){
     if (count < 59){
         throw err;
     }
-    
+    }    
     pair<vector<Card>, vector<Ability*>> ret(mainDeck, abilityDeck);
     return ret;
 }

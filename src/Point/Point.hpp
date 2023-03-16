@@ -3,14 +3,14 @@
 
 class Point {
     private:
-        int value;
+        long value;
     public:
         Point(); // default ctor, value = 64
-        Point(int); // ctor
+        Point(long); // ctor
 
         // getter / setter (don't set value directly, use for resetting game point only)
         // use Add instead for adding value
-        int getValue() const;
+        long getValue() const;
         void setValue(int);
 
         /* value modification from player skills */
@@ -19,7 +19,7 @@ class Point {
         void Quadruple();
         void Quarter();
 
-        void Add(int);
+        void Add(long);
 };
 
 #endif

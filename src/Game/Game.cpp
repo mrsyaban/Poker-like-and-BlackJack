@@ -8,20 +8,20 @@ using namespace std;
 
 Game::Game()
 {
-    // this->gameStart = true;
-    // // ctor player
-    // for (int i = 1; i <= 7; i++) {
-    //     this->players.insert(pair<Player, int>(new Player(), i));
-    // }
-    // Point p(64);
-    // point = p;
+    // nothing
 }
 
 Game::~Game()
 {
+    // nothing
 }
 
-vector<pair<Player &, bool>> &Game::getPlayers()
+/** 
+ * Accessor, may only be called by class that act directly in the game and change the game state
+ * Return reference to the object, so it can be altered
+ * e.g. : Action, Ability, IO, etc.
+ */
+vector<pair<Player&, bool>> &Game::getPlayers()
 {
     return this->players;
 }
@@ -65,6 +65,8 @@ int &Game::getCurrentPlayer()
 {
     return this->currentPlayer;
 }
+/* End of Accessor */
+
 
 /* Setter */
 void Game::incCurrentPlayer()
@@ -76,26 +78,24 @@ void Game::incCurrentPlayer()
 void Game::decCurrentPlayer()
 {
     currentPlayer--;
-    currentPlayer %= 7;
+    currentPlayer = (currentPlayer % 7 + 7) % 7;
 }
 
 void Game::initNewMatch(bool isRandom)
 {
+    /* Create new match*/
     IO io;
 
-    // inisialisasi player
+    // init all needed objects
     round = 1;
     playerTurn = 0;
-    // table = Table();
+    point = Point(); // default point : 64
 
-    // this->currentPlayer = 0;
-
-    point = Point();
     if (isRandom){
-        Deck<Card> deck;
-        Deck<Ability *> deckAbility;
-        this->cardDeck = deck;
-        this->abilityDeck = deckAbility;
+        Deck<Card> deck; // create new randomized card deck
+        Deck<Ability*> deckAbility; // create new randomized ability deck
+        this->cardDeck = deck; // assign to cardDeck
+        this->abilityDeck = deckAbility; // assign to abilityDeck
     } else {
         bool success = false;
         while(!success){
@@ -113,13 +113,13 @@ void Game::initNewMatch(bool isRandom)
         }
     }
 
-    std::cout << "masokk ";
+    // share all the cards to players and table
     dealToTable();
     dealToPlayers();
     cout << this->cardDeck.getTopItems().getNumber() << this->cardDeck.getTopItems().getColor() ;
 
-    // this->table.openCard();
-    io.printTable(table);
+    // print table
+    io.printTable(table, point);
 }
 
 
@@ -153,6 +153,7 @@ void Game::dealAbilityToPlayers()
     for (auto p_itr = getPlayers().begin(); p_itr != getPlayers().end(); p_itr++)
     {
         p_itr->first.setAbility(*(getAbilityDeck().getTopItems()));
+        cout << "Player " << p_itr->first.getNickname() << " get ability " << p_itr->first.getAbility()->getType() << endl;
         this->abilityDeck.getItems().erase(this->abilityDeck.getTopItemsIterator());
     }
 }
@@ -161,7 +162,7 @@ bool Game::gameEnded()
 {
     for (auto p_itr = getPlayers().begin(); p_itr != getPlayers().end(); p_itr++)
     {
-        if (p_itr->first.getPoint() >= 4294967296.00)
+        if (p_itr->first.getPoint().getValue() >= 4294967296.00)
         {
             return true;
         }
@@ -172,9 +173,12 @@ bool Game::gameEnded()
 
 void Game::start()
 {
+    // init menu 
     IO io;
     string mainMenu;
     io.splashScreen();
+
+    // read input
     try
     {
         mainMenu = io.mainMenu();
@@ -185,54 +189,24 @@ void Game::start()
     }
 
     while (mainMenu == "1")
-    {   
-        // dealing card (random or input file)
-        string dealMenu;
-        try
-        {
-            dealMenu = io.dealMenu();
-        }
-        catch (BaseException &e)
-        {
-            std::cout << e.what() << endl;
-        }
+    {
+        /** 
+         * Initialize all needed attributes 
+         * On first start only
+        */
+        addPlayer(); // create player
+        isReversed = false; // set reverse info to false
+        currentPlayer = 0; // set current player to 0
 
-        if (dealMenu == "1"){
-            initNewMatch(false);
-        } else {
-            initNewMatch(true);
-        }
-
-        addPlayer();
-        isReversed = false;
-        currentPlayer = 0;
-        // // inisialisasi player
-        // addPlayer();
-        // round = 1;
-        // playerTurn = 0;
-        // isReversed = false;
-        // // table = Table();
-
-        // this->currentPlayer = 0;
-
-        // point = Point();
-        // Deck<Card> deck;
-        // Deck<Ability *> deckAbility;
-        // this->cardDeck = deck;
-        // this->abilityDeck = deckAbility;
-        // dealToTable();
-        // dealToPlayers();
-
-        // // this->table.openCard();
-        // io.printTable(table);
+        /* Every time get into new match */
+        initNewMatch(true); // create table, card deck, ability deck, deal card to table and player
 
         while (!gameEnded())
         {
-
+            /* Run game until someone wins */
             nextTurn();
         }
-
-        std::cout << "udah menang ----------" << endl;
+        // TODO : print winner
         mainMenu = io.mainMenu();
     }
 
@@ -241,6 +215,7 @@ void Game::start()
 
 void Game::nextPlayer()
 {
+    /* Go to next player (based on direction) */
     if (isReversed)
     {
         decCurrentPlayer();
@@ -253,39 +228,28 @@ void Game::nextPlayer()
 
 void Game::nextTurn()
 {
+    /**
+     * Next turn is the main function that will be called on each turn
+     * call this function until gameEnded() return true
+    */
 
+    // init io
     IO io;
 
     if (playerTurn != 7)
     {
-        std::cout << "a" << endl;
-        std::cout << "PLAYER TURN : " << playerTurn << endl;
-        // status player yang udah jalan adalah true  (1) untuk ronde ganjil (mod 2 == 1)
-        // status player yang udah jalan adalah false (0) untuk ronde genap  (mod 2 == 0)
+        /**
+         * Player status (check the definition of players : vector<pair<Player&, bool>>)
+         * Player that has played in the round is labelled true (1) for odd round (mod 2 == 1)
+         * Player that has played in the round is labelled false (0) for even round (mod 2 == 0)
+        */
         while (players[currentPlayer].second % 2 == round % 2)
         {
-            std::cout << "RONDE a : " << round << endl;
+            /* Go to next player until player that hasn't played found */
             nextPlayer();
         }
 
-        // TODO
-        int command = -1;
-        while (command == -1)
-        {
-            std::cout << "c" << endl;
-            std::cout << currentPlayer << endl;
-            try
-            {
-                command = inputToCommand.at(io.turnInput(((this->players.begin() + this->currentPlayer)->first).getNickname()));
-            }
-            catch (BaseException &e)
-            {
-                std::cout << e.what() << endl;
-            }
-            std::cout << "asda" << endl;
-        }
-
-        /* All possible command inputted */
+        /* All possible action */
         Next nxt;
         Half h;
         ReRoll rr;
@@ -297,64 +261,75 @@ void Game::nextTurn()
         Switch swt;
         Abilityless abl;
 
-        switch (command)
-        {
-        case 1:
-            // execute next
-            std::cout << "next" << endl;
-            nxt.Execute(*this);
-            break;
-        case 2:
-            std::cout << "half" << endl;
-            h.Execute(*this);
-            break;
-        case 3:
-            std::cout << "double" << endl;
-            std::cout << point.getValue() << endl;
-            d.Execute(*this);
-            std::cout << point.getValue() << endl;
-            break;
-        case 4:
-            std::cout << "reroll" << endl;
-            rr.Execute(*this);
-            break;
-        case 5:
-            std::cout << "quadruple" << endl;
-            qd.Execute(*this);
-            break;
-        case 6:
-            std::cout << "quarter" << endl;
-            qtr.Execute(*this);
-            break;
-        case 7:
-            std::cout << "reverse" << endl;
-            rv.Execute(*this);
-            break;
-        case 8:
-            std::cout << "swap card" << endl;
-            swp.Execute(*this);
-            break;
-        case 9:
-            std::cout << "switch" << endl;
-            swt.Execute(*this);
-            break;
-        case 10:
-            std::cout << "abilityless" << endl;
-            abl.Execute(*this);
-            break;
-        default:
-            break;
-        }
-        // currentPlayer jalan, manggil command (??)
+        bool proceed = false;
 
-        // setelah playernya jalan, statusnya ditoggle
+        while (!proceed) {
+            // init command
+            int command = -1;
+            while (command == -1)
+            {
+                try
+                {
+                    string action_cmd = io.turnInput(((this->players.begin() + this->currentPlayer)->first));
+                    command = inputToCommand.at(action_cmd);
+                }
+                catch (BaseException &e)
+                {
+                    std::cout << e.what() << endl;
+                }
+            }
+            try {
+                switch (command)
+                {
+                /* Execute command based on input */
+                    case 1:
+                        nxt.Execute(*this);
+                        break;
+                    case 2:
+                        h.Execute(*this);
+                        break;
+                    case 3:
+                        d.Execute(*this);
+                        break;
+                    case 4:
+                        rr.Execute(*this);
+                        break;
+                    case 5:
+                        qd.Execute(*this);
+                        break;
+                    case 6:
+                        qtr.Execute(*this);
+                        break;
+                    case 7:
+                        rv.Execute(*this);
+                        break;
+                    case 8:
+                        swp.Execute(*this);
+                        break;
+                    case 9:
+                        swt.Execute(*this);
+                        break;
+                    case 10:
+                        abl.Execute(*this);
+                        break;
+                    default:
+                        break;
+                }
+
+                proceed = true;
+            } catch (BaseException &e) {
+                continue;
+            }
+        }
+
+
+
+        // Toggle player status
         players[currentPlayer].second = !players[currentPlayer].second;
 
-        std::cout << "d" << endl;
+        // Prepare next player
         playerTurn++;
         nextPlayer();
-        std::cout << "PLAYERTURN : " << playerTurn << endl;
-        // nextRound();
     }
     else
     {
@@ -370,9 +345,8 @@ void Game::nextRound()
     if (this->round < 6)
     {
         round++;
-        std::cout << "RONDE : " << round << endl;
         this->table.openCard();
-        io.printTable(table);
+        io.printTable(table, point);
         if (this->getRound() == 2)
         {
             dealAbilityToPlayers();
@@ -382,12 +356,9 @@ void Game::nextRound()
     }
     else
     {
-        // TODO
-        // udah selesai 6 ronde, cari pemenang (??)
-        // find score and compare
-        std::cout << "ronde (harusnya udah 6) : " << round << endl;
+        cout << "Match ended, proceed to the next match" << endl;
         double maxScore = 0;
-        int playerWithMaxScore;
+        int playerWithMaxScore = 0;
         int playerCtr = -1;
 
         for (auto p_itr = getPlayers().begin(); p_itr != getPlayers().end(); p_itr++)
@@ -395,7 +366,6 @@ void Game::nextRound()
             playerCtr++;
             SearchCombo searchCombo(p_itr->first, this->getTable());
             p_itr->first.setHighestCombo(searchCombo.getHighestCombo());
-
             if (maxScore < p_itr->first.getHighestCombo().value())
             {
                 maxScore = p_itr->first.getHighestCombo().value();
@@ -404,36 +374,32 @@ void Game::nextRound()
         }
 
         // add points to the winner
-        Player &winner = (getPlayers().begin() + playerWithMaxScore)->first;
-        winner.addPoint(point.getValue());
+        cout << "The winner of this match is " << getPlayers()[playerWithMaxScore].first.getNickname() << endl;
+        cout << "Score gained : " << this->point.getValue() << endl;
+        Player * winner = &getPlayers()[playerWithMaxScore].first;
+        winner->addPoint(this->point.getValue());
+        
         if (!gameEnded())
         {
-            std::cout << "RONDE SEKARANG : " << round << endl;
-            // TODO init new match
-            point = Point();
-            Deck<Card> deck;
-            Deck<Ability *> deckAbility;
-            this->cardDeck = deck;
-            this->abilityDeck = deckAbility;
-            dealToTable();
-            dealToPlayers();
+            initNewMatch(true);
         }
-        initNewMatch(true);
     }
 }
 
 // return vector sisa urutan eksekusi saat ini (setelah reverse)
 vector<string> Game::getRemainingReversedPlayer()
 {
-    vector<string> res;
+    vector<string> res = {};
     int i = currentPlayer - 1;
-    while (i % 7 != currentPlayer)
+    i = (i%7+7)%7;
+    while (i != currentPlayer)
     {
         if (players[i].second % 2 != round % 2)
         {
             res.push_back(players[i].first.getNickname());
         }
         i--;
+        i = (i%7+7)%7;
     }
     return res;
 }
@@ -441,13 +407,19 @@ vector<string> Game::getRemainingReversedPlayer()
 // return vector buat urutan eksekusi ronde berikutnya (setelah reverse)
 vector<string> Game::getReversedPlayer()
 {
-    vector<string> res;
+    vector<string> res = {};
     int i = currentPlayer - 1;
-    while (i % 7 != currentPlayer)
+    i = (i%7+7)%7;
+    cout << "i " << i << endl;
+    while (i != currentPlayer)
     {
+        cout << i << endl;
+        cout << players[i].first.getNickname() << endl;
         res.push_back(players[i].first.getNickname());
         i--;
+        i = (i%7+7)%7;
     }
+    res.push_back(players[currentPlayer].first.getNickname());
     return res;
 }
 
