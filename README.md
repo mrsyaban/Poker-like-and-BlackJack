@@ -6,9 +6,12 @@
   </p>
 </div>
 
+<p align="center">
+    <img src="https://github.com/mrsyaban/Poker-like-and-BlackJack/blob/main/doc/splashscreen.JPG" width="600">
+</p>
+
 > Composed to fulfill Tubes 1 IF2210 Pemrograman Berorientasi Objek
 
-![screenshots](doc/splashscreen.JPG)
 
 ## Daftar Isi
 * [Deskripsi Program](#deskripsi-program)
