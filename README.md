@@ -1,5 +1,14 @@
-# Candy Kingdom's Card Competition
+<div align="center">
+  <h1 align="center">Candy Kingdom and Blackjack Game</h1>
 
+  <p align="center">
+    Poker-like game dan Blackjack game in one Program!
+  </p>
+</div>
+
+> Composed to fulfill Tubes 1 IF2210 Pemrograman Berorientasi Objek
+
+![screenshots](doc/splashscreen.JPG)
 
 ## Daftar Isi
 * [Deskripsi Program](#deskripsi-program)
@@ -11,7 +20,16 @@
 
 ## Deskripsi Program
 
-Dalam rangka merayakan pesta panen gula di kerajaan permen, akan diadakan kompetisi massal permainan kartu ala Kerajaan Permen. Ratu kerajaan permen ingin mencari pemain kartu terhebat di kerajaannya. Namun karena Ratu tidak bisa memantau permainan satu-persatu, kalian diminta untuk membuatkan sistem agar permainan dapat berjalan dengan adil. Bantulah ratu kerajaan permen untuk membuatkan permainan ala kerajaan permen.
+This Program have two game using Command Line Interface. The Main game is Candy Kingdom Cards Game, that is poker-like game but instead of using clubs, hearts, spades, and diamond this game use red, blue, green, and yellow as suits. This game also have an additional card that is Ability Card consist of 
+- Re-Roll
+- SwapCard
+- Switch
+- Quadruple
+- Quarter
+- Abilityless
+- Reverse
+
+the second game is blackjack, this game is like the original game.
 
 
 ## Anggota Kelompok
